@@ -1,0 +1,21 @@
+# Template definition file
+#
+# No blank lines allowed (for now).
+#
+# Column definitions:
+#   1. Template number
+#   2. Template file name
+#   3. Lambda_conv (multiplicative factor to correct wavelength units)
+#   4. Age of template model in Gyr (0 means template is always used)
+#   5. Template error amplitude (for INDIVIDUAL template fits)
+#   6. Comma/space separated list of template numbers to be combined
+#      with current template if combined fits are enabled.
+#
+# Sample entry:
+# 1 [path_to_file]/template1.sed    1.0 14.7 0.2 2,3,5
+1   templates/CWW+KIN/CWW_E_ext.sed    1.0 0 1.0   2,3,4,5,6
+2   templates/CWW+KIN/CWW_Im_ext.sed   1.0 0 1.0   3,4,5,6
+3   templates/CWW+KIN/CWW_Sbc_ext.sed  1.0 0 1.0   4,5,6
+4   templates/CWW+KIN/CWW_Scd_ext.sed  1.0 0 1.0   5,6
+5   templates/CWW+KIN/KIN_SB1_ext.sed  1.0 0 1.0   6
+6   templates/CWW+KIN/KIN_SB2_ext.sed  1.0 0 1.0   
