@@ -1,0 +1,9 @@
+This directory contains FILTER.RES files suitable for use with EAZY, FAST,
+InterRest, HyperZ, etc. Each filter response has been interpolated (conserving
+"flux" as in EAZY, FAST, InterRest) to R=300. I have verified that you get
+nearly identical results with EAZY when you use the full or R=300 interpolated
+response files.
+
+The FILTER.RES.latest.info file is not required by EAZY, but it is helpful to
+show you what filter number (first column), which you do need for EAZY,
+corresponds to the filter you're interested in.
