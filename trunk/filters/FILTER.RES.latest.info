@@ -182,3 +182,22 @@
 178  21057     80 COMBO17/C17_V.res     lambda_c= 5.3773e+03  AB-Vega=-0.017
 179  21138    114 COMBO17/C17_R.res     lambda_c= 6.4835e+03  AB-Vega= 0.183
 180  21253     99 COMBO17/C17_I.res     lambda_c= 8.5698e+03  AB-Vega= 0.483
+181  21353     39 Subaru_MB/IA427.dat     lambda_c= 4.2605e+03  AB-Vega=-0.161
+182  21393     42 Subaru_MB/IA445.dat     lambda_c= 4.4431e+03  AB-Vega=-0.141
+183  21436     28 Subaru_MB/IA464.dat     lambda_c= 4.6338e+03  AB-Vega=-0.167
+184  21465     32 Subaru_MB/IA484.dat     lambda_c= 4.8478e+03  AB-Vega=-0.037
+185  21498     34 Subaru_MB/IA505.dat     lambda_c= 5.0614e+03  AB-Vega=-0.077
+186  21533     35 Subaru_MB/IA527.dat     lambda_c= 5.2599e+03  AB-Vega=-0.035
+187  21569     40 Subaru_MB/IA550.dat     lambda_c= 5.4957e+03  AB-Vega= 0.006
+188  21610     42 Subaru_MB/IA574.dat     lambda_c= 5.7636e+03  AB-Vega= 0.054
+189  21653     39 Subaru_MB/IA598.dat     lambda_c= 6.0079e+03  AB-Vega= 0.101
+190  21693     33 Subaru_MB/IA624.dat     lambda_c= 6.2316e+03  AB-Vega= 0.142
+191  21727     35 Subaru_MB/IA651.dat     lambda_c= 6.4992e+03  AB-Vega= 0.236
+192  21763     39 Subaru_MB/IA679.dat     lambda_c= 6.7825e+03  AB-Vega= 0.245
+193  21803     33 Subaru_MB/IA709.dat     lambda_c= 7.0742e+03  AB-Vega= 0.287
+194  21837     32 Subaru_MB/IA738.dat     lambda_c= 7.3601e+03  AB-Vega= 0.334
+195  21870     28 Subaru_MB/IA768.dat     lambda_c= 7.6812e+03  AB-Vega= 0.387
+196  21899     32 Subaru_MB/IA797.dat     lambda_c= 7.9670e+03  AB-Vega= 0.432
+197  21932     25 Subaru_MB/IA827.dat     lambda_c= 8.2474e+03  AB-Vega= 0.475
+198  21958     58 Subaru_MB/IA856.dat     lambda_c= 8.5655e+03  AB-Vega= 0.534
+199  22017     26 Subaru_MB/IA907.dat     lambda_c= 9.0714e+03  AB-Vega= 0.497
