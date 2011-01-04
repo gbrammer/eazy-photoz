@@ -1,0 +1,47 @@
+------------------------------------------------------------
+1) EAZY template set from Brammer, van Dokkum & Coppi (2008)
+These templates reduce the input set of Grazian et al.
+(2006) templates to a subset of 5 "principal component"
+templates following the Blanton & Roweis (2007) algorithm. 
+An additional template is added to the 5 principal
+components to account for dusty galaxies that don't appear
+in semi-analyitic models. These should be use in
+"TEMPLATE_COMBOS a" mode.
+------------------------------------------------------------
+EAZY_v1.0/
+eazy_v1.0.spectra.param
+
+
+------------------------------------------------------------
+2) Blanton & Roweis (2007).  Included in the BR07 directory are
+the templates taken directly from their paper, and also versions
+extended into the mid-IR using Bruzual & Charlot (2003) models
+with exactly the parameters used in the BR07 paper.  The spectra.param
+files use these extended templates by default.
+------------------------------------------------------------
+BR07/
+br07_default.spectra.param
+br07_goods.spectra.param
+
+
+------------------------------------------------------------
+3) Coleman, Wu & Weedman (1980) + Kinney et al. (1996),
+extended by Arnouts et al.
+(http://www.oamp.fr/people/arnouts/LE_PHARE/)
+------------------------------------------------------------
+CWW+KIN/
+cww+kin.spectra.param
+
+
+------------------------------------------------------------
+4) Grid of single Pegase templates designed to match the 
+set described by Grazian et al. (2006).  "Pegase13" 
+contains the set of Constant-SFR models with additional
+dust reddening following the Calzetti (2000) law.  These
+should be used with "TEMPLATE_COMBOS 1" mode.
+------------------------------------------------------------
+PEGASE2.0/
+pegase.spectra.param
+pegase13.spectra.param
+
+

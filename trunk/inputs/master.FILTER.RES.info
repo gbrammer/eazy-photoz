@@ -1,0 +1,126 @@
+1  1: 1365 hst/ACS_update_sep07/wfc_f435w_t77.dat  obs_before_7-4-06+rebin-5A  lambda_c= 4.32780e+03  AB-Vega=-0.10
+2  1367: 1398 hst/ACS_update_sep07/wfc_f475w_t77.dat  obs_before_7-4-06+rebin-5A  lambda_c= 4.76400e+03  AB-Vega=-0.10
+3  2766: 1404 hst/ACS_update_sep07/wfc_f555w_t77.dat  obs_before_7-4-06+rebin-5A  lambda_c= 5.37237e+03  AB-Vega=-0.00
+4  4171: 1215 hst/ACS_update_sep07/wfc_f606w_t77.dat  obs_before_7-4-06+rebin-5A  lambda_c= 5.95792e+03  AB-Vega= 0.08
+5  5387: 1213 hst/ACS_update_sep07/wfc_f775w_t77.dat  obs_before_7-4-06+rebin-5A  lambda_c= 7.70566e+03  AB-Vega= 0.40
+6  6601:  717 hst/ACS_update_sep07/wfc_f814w_t77.dat  obs_before_7-4-06+rebin-5A  lambda_c= 8.08730e+03  AB-Vega= 0.44
+7  7319:  772 hst/ACS_update_sep07/wfc_f850lp_t77.dat  obs_before_7-4-06+rebin-5A  lambda_c= 9.05246e+03  AB-Vega= 0.54
+8  8092:  593 nicmos_f110w.dat  synphot-calcband  lambda_c= 1.13539e+04  AB-Vega= 0.73
+9  8686:  592 hst/nic3_f160w.dat  synphot-calcband  lambda_c= 1.60818e+04  AB-Vega= 1.34
+10  9279:  331 wfpc2_f300w.dat  synphot-calcband  lambda_c= 3.00270e+03  AB-Vega= 1.35
+11  9611:  213 wfpc2_f336w.dat  synphot-calcband  lambda_c= 3.34808e+03  AB-Vega= 1.16
+12  9825:  244 wfpc2_f450w.dat  synphot-calcband  lambda_c= 4.57481e+03  AB-Vega=-0.08
+13  10070:  237 wfpc2_f555w.dat  synphot-calcband  lambda_c= 5.46854e+03  AB-Vega=-0.00
+14  10308:  215 wfpc2_f606w.dat  synphot-calcband  lambda_c= 6.03513e+03  AB-Vega= 0.10
+15  10524:  186 wfpc2_f702w.dat  synphot-calcband  lambda_c= 6.94286e+03  AB-Vega= 0.27
+16  10711:  163 wfpc2_f814w.dat  synphot-calcband  lambda_c= 8.02345e+03  AB-Vega= 0.43
+17  10875:  710 wfpc2_f850lp.dat  synphot-calcband  lambda_c= 9.12467e+03  AB-Vega= 0.54
+18  11586:  505 IRAC/irac_tr1_2004-08-09.dat  3.6micron  lambda_c= 3.56343e+04  AB-Vega= 2.82
+19  12092:  427 IRAC/irac_tr2_2004-08-09.dat  4.5micron  lambda_c= 4.51101e+04  AB-Vega= 3.29
+20  12520:  370 IRAC/irac_tr3_2004-08-09.dat  5.8micron  lambda_c= 5.75934e+04  AB-Vega= 3.77
+21  12891:  421 IRAC/irac_tr4_2004-08-09.dat  8.0micron  lambda_c= 7.95950e+04  AB-Vega= 4.40
+22  13313:  178 mouldB_cfh7403.dat  DEEP2-VVDS+atm  lambda_c= 4.32184e+03  AB-Vega=-0.11
+23  13492:  233 mouldV_cfh7503.dat  DEEP2-VVDS+atm  lambda_c= 5.36476e+03  AB-Vega=-0.00
+24  13726:  277 mouldR_cfh7603.dat  DEEP2-VVDS+atm  lambda_c= 6.56317e+03  AB-Vega= 0.22
+25  14004:  319 mouldI_cfh7802.dat  DEEP2-VVDS+atm  lambda_c= 8.17919e+03  AB-Vega= 0.45
+26  14324:   38 IRIMJ  KPNO-NIR+atm  lambda_c= 1.23125e+04  AB-Vega= 0.90
+27  14363:   43 IRIMH  KPNO-NIR+atm  lambda_c= 1.64639e+04  AB-Vega= 1.39
+28  14407:   62 IRIMK  KPNO-NIR+atm  lambda_c= 2.21538e+04  AB-Vega= 1.91
+29  14470:   46 IRIMKPRIME  KPNO-NIR+atm  lambda_c= 2.16666e+04  AB-Vega= 1.87
+30  14517: 3334 SOFI_J.dat  ESO-NTT+atm  lambda_c= 1.23816e+04  AB-Vega= 0.91
+31  17852:  784 SOFI_Js.dat  ESO-NTT+atm  lambda_c= 1.24925e+04  AB-Vega= 0.94
+32  18637: 1492 SOFI_H.dat  ESO-NTT+atm  lambda_c= 1.64868e+04  AB-Vega= 1.40
+33  20130: 1098 SOFI_Ks.dat  ESO-NTT+atm  lambda_c= 2.16799e+04  AB-Vega= 1.87
+34  21229:  200 isaac_j.res  ESO_ETC+atm  lambda_c= 1.23791e+04  AB-Vega= 0.91
+35  21430:  200 isaac_js.res  ESO_ETC+atm  lambda_c= 1.24892e+04  AB-Vega= 0.94
+36  21631:  200 isaac_h.res  ESO_ETC+atm  lambda_c= 1.65174e+04  AB-Vega= 1.40
+37  21832:  200 isaac_ks.res  ESO_ETC+atm  lambda_c= 2.16813e+04  AB-Vega= 1.87
+38  22033:  291 WFI_u360specs.txt  ESO-2.2m-loiano+atm  lambda_c= 3.56471e+03  AB-Vega= 1.05
+39  22325: 1000 u35_rebin.dat  ESO-2.2m-MUSIC+atm  lambda_c= 3.58455e+03  AB-Vega= 0.95
+40  23326:  400 musyc/U_1030_tot.dat  from-musyc  lambda_c= 3.59264e+03  AB-Vega= 0.83
+41  23727:  400 musyc/U_1255_tot.dat  from-musyc  lambda_c= 3.72445e+03  AB-Vega= 0.57
+42  24128:  304 musyc/U_cdfs_tot.dat  from-musyc+ESO-DPS  lambda_c= 3.50664e+03  AB-Vega= 1.01
+43  24433:  400 musyc/U_hdfs_tot.dat  from-musyc  lambda_c= 3.72445e+03  AB-Vega= 0.57
+44  24834:  400 musyc/B_1030_tot.dat  from-musyc  lambda_c= 4.42785e+03  AB-Vega=-0.10
+45  25235:  400 musyc/B_1255_tot.dat  from-musyc  lambda_c= 4.43629e+03  AB-Vega=-0.10
+46  25636:  310 musyc/B_cdfs_tot.dat  from-musyc+ESO-DPS  lambda_c= 4.60011e+03  AB-Vega=-0.12
+47  25947:  400 musyc/B_hdfs_tot.dat  from-musyc  lambda_c= 4.42785e+03  AB-Vega=-0.10
+48  26348:  400 musyc/V_1030_tot.dat  from-musyc  lambda_c= 5.42803e+03  AB-Vega= 0.00
+49  26749:  400 musyc/V_1255_tot.dat  from-musyc  lambda_c= 5.42976e+03  AB-Vega= 0.00
+50  27150:  260 musyc/V_cdfs_tot.dat  from-musyc+ESO-DPS  lambda_c= 5.37888e+03  AB-Vega=-0.01
+51  27411:  400 musyc/V_hdfs_tot.dat  from-musyc  lambda_c= 5.42803e+03  AB-Vega= 0.00
+52  27812:  400 musyc/R_1030_tot.dat  from-musyc  lambda_c= 6.59215e+03  AB-Vega= 0.20
+53  28213:  400 musyc/R_1255_tot.dat  from-musyc  lambda_c= 6.59215e+03  AB-Vega= 0.20
+54  28614:  404 musyc/R_cdfs_tot.dat  from-musyc+ESO-DPS  lambda_c= 6.51642e+03  AB-Vega= 0.20
+55  29019:  400 musyc/R_hdfs_tot.dat  from-musyc  lambda_c= 6.59215e+03  AB-Vega= 0.20
+56  29420:  400 musyc/I_1030_tot.dat  from-musyc  lambda_c= 7.98778e+03  AB-Vega= 0.45
+57  29821:  400 musyc/I_1255_tot.dat  from-musyc  lambda_c= 7.99537e+03  AB-Vega= 0.45
+58  30222:  410 musyc/I_cdfs_tot.dat  from-musyc+ESO-DPS  lambda_c= 8.65867e+03  AB-Vega= 0.51
+59  30633:  400 musyc/I_hdfs_tot.dat  from-musyc  lambda_c= 8.06441e+03  AB-Vega= 0.46
+60  31034:  400 musyc/z_1030_tot.dat  from-musyc  lambda_c= 9.05618e+03  AB-Vega= 0.54
+61  31435:  400 musyc/z_1255_tot.dat  from-musyc  lambda_c= 9.05618e+03  AB-Vega= 0.54
+62  31836:  400 musyc/z_cdfs_tot.dat  from-musyc  lambda_c= 9.05618e+03  AB-Vega= 0.54
+63  32237:  400 musyc/z_hdfs_tot.dat  from-musyc  lambda_c= 9.05618e+03  AB-Vega= 0.54
+64  32638:   46 musyc/J_tot.dat  hdfs1-1030  lambda_c= 1.24611e+04  AB-Vega= 0.93
+65  32685:   76 musyc/H_tot.dat  hdfs1-1030  lambda_c= 1.63060e+04  AB-Vega= 1.38
+66  32762:  400 musyc/K_tot.dat  hdfs1-1030  lambda_c= 2.13334e+04  AB-Vega= 1.84
+67  33163:  140 musyc/Ja_tot.dat.2cols  hdfs2-1255  lambda_c= 1.24699e+04  AB-Vega= 0.94
+68  33304:  115 musyc/Ha_tot.dat.2cols  hdfs2-1255  lambda_c= 1.63663e+04  AB-Vega= 1.38
+69  33420:  148 musyc/Ka_tot.dat.2cols  hdfs2-1255  lambda_c= 2.15368e+04  AB-Vega= 1.86
+70  33569:  788 musyc/o3_hdfs_tot.dat  from-musyc  lambda_c= 4.99780e+03  AB-Vega=-0.08
+71  34358:  348 CFHT_filter_i.txt  COSMOS  lambda_c= 7.69597e+03  AB-Vega= 0.40
+72  34707:  265 CFHT_filter_u.txt  COSMOS  lambda_c= 3.84911e+03  AB-Vega= 0.33
+73  34973:   47 SDSS_filter_u.txt  COSMOS  lambda_c= 3.56179e+03  AB-Vega= 0.92
+74  35021:   75 SDSS_filter_r.txt  COSMOS  lambda_c= 6.18619e+03  AB-Vega= 0.15
+75  35097:   89 SDSS_filter_g.txt  COSMOS  lambda_c= 4.71887e+03  AB-Vega=-0.10
+76  35187:   89 SDSS_filter_i.txt  COSMOS  lambda_c= 7.50590e+03  AB-Vega= 0.37
+77  35277:  141 SDSS_filter_z.txt  COSMOS  lambda_c= 8.96149e+03  AB-Vega= 0.54
+78  35419:  190 SUBARU_filter_B.txt  COSMOS  lambda_c= 4.45833e+03  AB-Vega=-0.11
+79  35610:  186 SUBARU_filter_V.txt  COSMOS  lambda_c= 5.47783e+03  AB-Vega= 0.01
+80  35797:  190 SUBARU_filter_g.txt  COSMOS  lambda_c= 4.77707e+03  AB-Vega=-0.10
+81  35988:  189 SUBARU_filter_r.txt  COSMOS  lambda_c= 6.28871e+03  AB-Vega= 0.16
+82  36178:  218 SUBARU_filter_i.txt  COSMOS  lambda_c= 7.68388e+03  AB-Vega= 0.40
+83  36397:  198 SUBARU_filter_z.txt  COSMOS  lambda_c= 9.03688e+03  AB-Vega= 0.54
+84  36596:  541 SUBARU_filter_NB816.txt  COSMOS  lambda_c= 8.15100e+03  AB-Vega= 0.48
+85  37138: 1202 FLAMINGOS.BARR.J.MAN240.ColdWitness.txt  KPNO+atm  lambda_c= 1.24694e+04  AB-Vega= 0.94
+86  38341: 2602 FLAMINGOS.BARR.H.MAN109.ColdWitness.txt  KPNO+atm  lambda_c= 1.63577e+04  AB-Vega= 1.38
+87  40944: 1602 FLAMINGOS.BARR.Ks.MAN306A.ColdWitness.txt  KPNO-COSMOS+atm  lambda_c= 2.15598e+04  AB-Vega= 1.86
+88  42547:  128 megaprime/cfht_mega_u_cfh9301.dat  CFHT-LS+atm  lambda_c= 3.83543e+03  AB-Vega= 0.32
+89  42676:  237 megaprime/cfht_mega_g_cfh9401.dat  CFHT-LS+atm  lambda_c= 4.88827e+03  AB-Vega=-0.09
+90  42914:  272 megaprime/cfht_mega_r_cfh9601.dat  CFHT-LS+atm  lambda_c= 6.25551e+03  AB-Vega= 0.16
+91  43187:  288 megaprime/cfht_mega_i_cfh9701.dat  CFHT-LS+atm  lambda_c= 7.68801e+03  AB-Vega= 0.40
+92  43476:  293 megaprime/cfht_mega_z_cfh9801.dat  CFHT-LS+atm  lambda_c= 8.88443e+03  AB-Vega= 0.54
+93  43770:  500 fors1_u_bess.res  ESO_ETC-ms1054+atm  lambda_c= 3.68491e+03  AB-Vega= 0.74
+94  44271:  500 fors1_b_bess.res  ESO_ETC-ms1054+atm  lambda_c= 4.35306e+03  AB-Vega=-0.10
+95  44772:  500 fors1_v_bess.res  ESO_ETC-ms1054+atm  lambda_c= 5.53605e+03  AB-Vega= 0.02
+96  45273:  500 fors1_r_bess.res  ESO_ETC+atm  lambda_c= 6.55815e+03  AB-Vega= 0.20
+97  45774:  500 fors1_i_bess.res  ESO_ETC+atm  lambda_c= 7.88694e+03  AB-Vega= 0.43
+98  46275:  500 fors1_u_gunn.res  ESO_ETC+atm  lambda_c= 3.62170e+03  AB-Vega= 0.95
+99  46776:  500 fors1_g_gunn.res  ESO_ETC+atm  lambda_c= 5.09181e+03  AB-Vega=-0.04
+100  47277:  500 fors1_v_gunn.res  ESO_ETC+atm  lambda_c= 4.00741e+03  AB-Vega= 0.04
+101  47778:  500 fors1_r_gunn.res  ESO_ETC+atm  lambda_c= 6.52145e+03  AB-Vega= 0.22
+102  48279:  500 fors1_z_gunn.res  ESO_ETC+atm  lambda_c= 8.98935e+03  AB-Vega= 0.54
+103  48780:  500 ESO/vimos_u.res  ESO_ETC+atm  lambda_c= 3.75300e+03  AB-Vega= 0.45
+104  49281:  500 ESO/wfi_BB_B123_ESO878.res  ESO_ETC+atm  lambda_c= 4.60638e+03  AB-Vega=-0.09
+105  49782:  500 ESO/wfi_BB_U50_ESO877.res  ESO_ETC_u35+atm  lambda_c= 3.60969e+03  AB-Vega= 0.91
+106  50283:  526 wfi_U50_ESO877_exend3200.res  ESO_ETC_u35+atm  lambda_c= 3.60573e+03  AB-Vega= 0.91
+107  50810:  500 ESO/wfi_BB_U38_ESO841.res  ESO_ETC_u38_narrower_than_C17+atm  lambda_c= 3.68863e+03  AB-Vega= 0.74
+108  51311:  117 COMBO-17/epsi_U.dat  U38_from_C17_website+atm  lambda_c= 3.66409e+03  AB-Vega= 0.79
+109  51429: 1009 NOAO/steidel_Un_k1041bp_aug04.txt_ccd  kpno-mosaic+atm  lambda_c= 3.57969e+03  AB-Vega= 0.93
+110  52439:  759 NOAO/steidel_G_k1042bp_aug04.txt_ccd  kpno-mosaic+atm  lambda_c= 4.81367e+03  AB-Vega=-0.10
+111  53199: 1009 NOAO/steidel_Rs_k1043bp_aug04.txt_ccd  kpno-mosaic+atm  lambda_c= 6.94844e+03  AB-Vega= 0.29
+112  54209: 1402 gabasch_H_cosmos.txt  Gabasch-H-COSMOS+atm  lambda_c= 1.64458e+04  AB-Vega= 1.39
+113  55612:  273 CAPAK_v2/u_megaprime_sagem.res  cosmos-u  lambda_c= 3.82330e+03  AB-Vega= 0.32
+114  55886:  190 CAPAK_v2/B_subaru.res  cosmos-b  lambda_c= 4.45833e+03  AB-Vega=-0.11
+115  56077:  186 CAPAK_v2/V_subaru.res  cosmos-v  lambda_c= 5.47783e+03  AB-Vega= 0.01
+116  56264:  189 CAPAK_v2/r_subaru.res  cosmos-r  lambda_c= 6.28871e+03  AB-Vega= 0.16
+117  56454:  218 CAPAK_v2/i_subaru.res  cosmos-i  lambda_c= 7.68388e+03  AB-Vega= 0.40
+118  56673:  198 CAPAK_v2/z_subaru.res  cosmos-z  lambda_c= 9.03688e+03  AB-Vega= 0.54
+119  56872: 1158 CAPAK_v2/flamingos_Ks.res  cosmos-k  lambda_c= 2.15372e+04  AB-Vega= 1.86
+120  58031:   14 CAPAK/galex1500.res  GALEX-FUV  lambda_c= 1.53978e+03  AB-Vega= 2.21
+121  58046:   23 CAPAK/galex2500.res  GALEX-NUV  lambda_c= 2.31389e+03  AB-Vega= 1.71
+122  58070:  501 Medium_Band/j1.dat  NEWFIRM+atm  lambda_c= 1.04688e+04  AB-Vega= 0.66
+123  58572:  501 Medium_Band/j2.dat  NEWFIRM+atm  lambda_c= 1.19542e+04  AB-Vega= 0.86
+124  59074:  401 Medium_Band/j3.dat  NEWFIRM+atm  lambda_c= 1.27848e+04  AB-Vega= 0.98
+125  59476:  551 Medium_Band/h1.dat  NEWFIRM+atm  lambda_c= 1.56087e+04  AB-Vega= 1.32
+126  60028:  551 Medium_Band/h2.dat  NEWFIRM+atm  lambda_c= 1.70721e+04  AB-Vega= 1.45
