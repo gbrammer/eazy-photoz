@@ -11,10 +11,10 @@ Code tested under the following compilers/operating systems:
 	gcc 3.4.4 - Linux
 
 Description of input data: 
-    Input is an ASCII list of fluxes and errors for an arbitrary number of objects
-    from a photometric catalog. Also required are the filter passbands used for the
-    photometric observations, and a list of commonly-used filters is provided with
-    the code.
+    Input is an ASCII list of fluxes and errors for an arbitrary number of
+    objects from a photometric catalog. Also required are the filter passbands
+    used for the photometric observations, and a list of commonly-used filters
+    is provided with the code.
 
 Description of output data: 
     Photometric redshifts with confidence limits for all of the objects in the
@@ -30,13 +30,13 @@ Additional comments:
 	A user's manual is available at http://www.astro.yale.edu/eazy/
 	
 ================================================================================
-The AAS gives permission to anyone who wishes to use these subroutines
-to run their own calculations.  Permission to republish or reuse these
-routines should be directed to the Executive Officer of the AAS.
+The AAS gives permission to anyone who wishes to use these subroutines to run
+their own calculations. Permission to republish or reuse these routines should
+be directed to the Executive Officer of the AAS.
 
-Note that the AAS does not take responsibility for the content of the 
-source code.  Potential users should be wary of applying the code
-to conditions that the code was not written to model and the accuracy of
-the code may be affected when compiled and executed on different systems.
+Note that the AAS does not take responsibility for the content of the source
+code. Potential users should be wary of applying the code to conditions that the
+code was not written to model and the accuracy of the code may be affected when
+compiled and executed on different systems.
 ================================================================================
 

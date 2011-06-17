@@ -1,8 +1,8 @@
 #include "defs.h"
 
-/// Search through array 'probz' and find points that are less than 
+/// Search through array 'chi2' and find points that are less than 
 /// their N=2x'Ntest' nearest neighbors.
-void prior_findmin(double *probz, long NZ, long *mins, long *Nmin)
+void prior_findmin(double *chi2, long NZ, long *mins, long *Nmin)
 {
       long i,j;
       int Ntest,count,flag;
@@ -15,27 +15,27 @@ void prior_findmin(double *probz, long NZ, long *mins, long *Nmin)
       while (i<NZ-Ntest) {
             flag=0;
             for (j=i-Ntest;j<i;++j) 
-                  if (probz[j]<=probz[i]) ++flag;
+                  if (chi2[j]<=chi2[i]) ++flag;
             
             for (j=i+1;j<=i+Ntest;++j)
-                  if (probz[j]<=probz[i]) ++flag;
+                  if (chi2[j]<=chi2[i]) ++flag;
             
             if (flag==0) {
                   mins[count]=i;
-                  //printf("test %d %lf %ld\n",count,probz[i],mins[count]);
+                  //printf("test %d %lf %ld\n",count,chi2[i],mins[count]);
                   ++count;
-                  chimin=probz[i];
+                  chimin=chi2[i];
             }
             ++i;
       }
       
       //// check for minima at the edges
       flag=-1;
-      chimin2=probz[Ntest];
+      chimin2=chi2[Ntest];
       for (i=0;i<Ntest;++i) 
-            if (probz[i]<chimin2) {
+            if (chi2[i]<chimin2) {
                   flag=i;
-                  chimin2=probz[i];
+                  chimin2=chi2[i];
             }
       if (flag>-1) {
             mins[count]=flag;
@@ -43,11 +43,11 @@ void prior_findmin(double *probz, long NZ, long *mins, long *Nmin)
       }
 
       flag=-1;                  
-      chimin2=probz[NZ-Ntest-1];
+      chimin2=chi2[NZ-Ntest-1];
       for (i=NZ-Ntest;i<NZ;++i) 
-            if (probz[i]<chimin2) {
+            if (chi2[i]<chimin2) {
                   flag=i;
-                  chimin2=probz[i];
+                  chimin2=chi2[i];
             }
       if (flag>-1) {
             mins[count]=flag;
@@ -58,14 +58,14 @@ void prior_findmin(double *probz, long NZ, long *mins, long *Nmin)
             chimin=1.e30;
             mins[0]=0;
             for (i=0;i<Ntest;++i) 
-                  if (probz[i]<chimin) {
+                  if (chi2[i]<chimin) {
                     mins[0]=i;
-                    chimin=probz[i];
+                    chimin=chi2[i];
                   }
             for (i=NZ-Ntest;i<NZ;++i) 
-                  if (probz[i]<chimin) {
+                  if (chi2[i]<chimin) {
                     mins[0]=i;
-                    chimin=probz[i];
+                    chimin=chi2[i];
                   }
                   
             *Nmin=1;
@@ -218,96 +218,105 @@ void interpolate_prior(double **priorkz_first, double **priorkz_out, double *pri
     }
     
 }
-          
-void apply_prior(double **priorkz, double *priorzval, double *klim, 
-                     long nzp, long nkp,
-                 double *probz, double kflux, long *bestz, double *pzout)
+
+//// Multiply p(z) by a wiggle centered at z=1.61 to get rid of z=1.6 NMBS bump
+void tweak_z16_gauss (double *pz) {
+    long i,j; 
+    double tweak,c236,ctot,cfact;
+        
+    for (i=0;i<NZ-1;++i) {
+
+        ctot=0;
+        for (j=0;j<6;++j) ctot+=coeffs[i][j];
+        c236 = coeffs[i][1]+coeffs[i][2]+coeffs[i][5];
+        cfact = c236/ctot;
+        cfact = 1;
+
+        tweak = 1-0.99*exp(-1.*pow(ztry[i]-1.61,2)/pow(0.1,2))*cfact;
+        tweak += 0.05*exp(-1.*pow(ztry[i]-1.44,2)/pow(0.07,2))*cfact;
+        tweak += 0.05*exp(-1.*pow(ztry[i]-1.78,2)/pow(0.07,2))*cfact;
+
+        pz[i]*=tweak;
+    }
+    
+}
+
+//// Multiply X-band prior to observed p(z) [from chi2] and find where p(z) maximized
+void apply_prior(double **priorkz, long nzp, long nkp, long first_best,
+                 double *chi2, double kflux, long *bestz, double *pzout)
 {
 
-  //    long *mins,Nmin,j,chimin_i;
-      long i;
-      double maxprob,prob_i,kmag,norm;
+      long i,Kbinlo,Kbinhi;
+      double maxprob,kmag,norm,factor_lo,factor_hi;
       
       //// Handle negative fluxes in the prior band
-      //// by setting the magnitude to very low value
+      //// by setting the magnitude to very low value.  Shouldn't 
+      //// be necessary because neg fluxes here are handled in main.c.
       if (kflux>0) 
         kmag = PRIOR_ABZP-2.5*log10(kflux);
       else
         kmag = 40;
-
       // printf("kmag, kflux: %lf %lf\n",kmag,kflux);
 
-//      mins = malloc(sizeof(long)*nzp);
-      
-//      prior_findmin(probz,NZ,mins,&Nmin);
+      //// get K column
+      Kcolumn=0;
+      while (klim[Kcolumn]<kmag && Kcolumn<(nkp-1)) ++Kcolumn;
+      // printf("Kmag_col: %lf %lf\n",kmag,klim[Kcolumn]); exit(1);
+
+      /// Interpolate prior as function of mag
+      if (Kcolumn == 0) {
+                Kbinlo = 0;
+                Kbinhi = 1;
+                factor_lo = 1;
+                factor_hi = 0;
+      } else {
+                Kbinlo = Kcolumn-1;
+                Kbinhi = Kcolumn;
+                factor_lo = kmag-klim[Kbinlo];
+                factor_hi = klim[Kbinhi]-kmag;
+                factor_lo/=(klim[Kbinhi]-klim[Kbinlo]);
+                factor_hi/=(klim[Kbinhi]-klim[Kbinlo]);
+      }
+      //printf("interp prior: %lf %lf %lf\n",klim[Kbinlo],kmag,klim[Kbinhi]);
 
       ////// find minimum chisq
-/*      chimin=1.e30;
-      chimin_i=0;
-      for (i=0;i<Nmin;++i) if (probz[mins[i]]<chimin) {
-            chimin=probz[mins[i]];
-            chimin_i = mins[i];
-      }
-*/      
-      ///// force minima to be within 3-sigma contour
-/*      j=-1;
-      for (i=0;i<Nmin;++i) if (probz[mins[i]]<=chimin+9) mins[++j]=mins[i];
-      Nmin=j+1;
-*/
-
-      ///// Only adjust bestz if original zphot>1.5 (TURNED OFF)
-      //if (ztry[chimin_i]>1.5) *bestz=chimin_i; else {
-      
-            //// get K column
-            Kcolumn=0;
-            while (klim[Kcolumn]<kmag && Kcolumn<(nkp-1)) ++Kcolumn;
-            // printf("Kmag_col: %lf %lf\n",kmag,klim[Kcolumn]); exit(1);
-            
-            // for (i=0;i<nzp;++i) printf("prior: %lf %lf\n",priorzval[i],priorkz[Kcolumn][i]); exit(1);
-            
-/*            maxprob=-1;
-            for (i=0;i<Nmin;++i) {
-                  ///// scale chisq to min(chisq)=1
-                  // prob_i=exp(-1*probz[mins[i]]/chimin)*priorkz[Kcolumn][mins[i]];
-                  ///// Likelihood = exp(-1/2 * chisq)
-                  prob_i=exp(-0.5*probz[mins[i]]/CHI2_SCALE)*priorkz[Kcolumn][mins[i]];
-                  if (prob_i>maxprob) {
-                        maxprob=prob_i;
-                        *bestz=mins[i];
-                  }
-            }
-*/            
-      //}
-      
-      //// Don't force 3-sigma contour or that best is one of the original peaks
-      maxprob = -1;
-      for (i=0;i<NZ;++i) {
-      	prob_i = exp(-0.5*probz[i]/CHI2_SCALE)*priorkz[Kcolumn][i];
-      	if (prob_i>maxprob) {
-      		maxprob=prob_i;
-      		*bestz=i;
-      	}
-      }
-
+      // chimin=1.e30;
+      // chimin_i=0;
+      // for (i=0;i<NZ;++i) if (chi2[i]<chimin) {
+      //       chimin=chi2[i];
+      //       chimin_i = i;
+      // }
+      //// Have first_best = izbest from main.c
+                        
 	  //// Subtract the minimum chisq from whole array so maximum probability is 
       //// one and won't have problems with the probabilities being too small.
-      //// Then normalize integrated probability to equal 1.
-      //// 'pzout' is a probability, 'probz' is chisq
+      //// 'pzout' is a probability, 'chi2' is chisq
       norm = 0;
-      pzout[0] = exp(-0.5*(probz[0]-probz[*bestz])/CHI2_SCALE)*priorkz[Kcolumn][0];
+      pzout[0] = exp(-0.5*(chi2[0]-chi2[first_best])/CHI2_SCALE)*priorkz[Kcolumn][0];
+      //pzout[0] = exp(-0.5*(chi2[0]-chi2[*bestz])/CHI2_SCALE)*(priorkz[Kbinlo][0]*factor_lo+priorkz[Kbinhi][0]*factor_hi);
+      
+      ///////// Multiply by probabilities by (1+z)
+      pzout[0] *= (1+ztry[0]);
+      
+      maxprob = pzout[0];
+      
       for (i=1;i<NZ;++i) {
-        pzout[i] = exp(-0.5*(probz[i]-probz[*bestz])/CHI2_SCALE)*priorkz[Kcolumn][i];
-        norm+=(ztry[i]-ztry[i-1])*(pzout[i-1]+pzout[i]);
-      }
-      for (i=0;i<NZ;++i) pzout[i]/=norm/2.;
-      
-//      free(mins);
-}
-                  
-      
-      
+        //pzout[i] = exp(-0.5*(chi2[i]-chi2[*bestz])/CHI2_SCALE)*priorkz[Kcolumn][i];
+        pzout[i] = exp(-0.5*(chi2[i]-chi2[first_best])/CHI2_SCALE)*(priorkz[Kbinlo][i]*factor_lo+priorkz[Kbinhi][i]*factor_hi);
+        pzout[i] *= (1+ztry[i]);
 
+      }
+           
+      // tweak_z16_gauss(pzout);
       
+      norm = 0;
+      for (i=1;i<NZ;++i) {
+          if (pzout[i]>maxprob) {
+      		  maxprob=pzout[i];
+      		  *bestz=i;
+      	  }       
+          norm += (ztry[i]-ztry[i-1])*(pzout[i-1]+pzout[i]);        
+      }
+      for (i=0;i<NZ;++i) pzout[i] /= (norm/2.);  //// Normalize total probability to unity.
       
-            
-            
+}

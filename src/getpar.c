@@ -7,7 +7,7 @@ struct param_data {
      char comment[1024];
      };
 
-#define NKEY 41
+#define NKEY 47
 
 void assign_par(int i, char *arg) {
   switch (i) {
@@ -253,6 +253,51 @@ void assign_par(int i, char *arg) {
     }
     printf("BINARY_OUTPUT: %c\n",*arg);
     break;
+  case 41: 
+    strcpy(REST_FILTERS,arg);
+    printf("REST_FILTERS: %s\n",REST_FILTERS);
+    break;
+  case 42: 
+    strcpy(Z_COLUMN,arg);
+    printf("Z_COLUMN: %s\n",Z_COLUMN);
+    break;      
+  case 43:
+    if (*arg=='n' || *arg=='N' || *arg=='0') USE_ZSPEC_FOR_REST = 0;
+    else if (*arg=='y' || *arg=='Y' || *arg=='1') USE_ZSPEC_FOR_REST = 1;
+    else {
+        fprintf(stderr,"\n USE_ZSPEC_FOR_REST:  bad value, %s\n",arg);
+        exit(1);
+    }
+    printf("USE_ZSPEC_FOR_REST: %c\n",*arg);
+    break;
+  case 44:
+    if (*arg=='n' || *arg=='N' || *arg=='0') MAGNITUDES = 0;
+    else if (*arg=='y' || *arg=='Y' || *arg=='1') MAGNITUDES = 1;
+      else {
+          fprintf(stderr,"\n MAGNITUDES:  bad value, %s\n",arg);
+          exit(1);
+      }
+    printf("MAGNITUDES: %c\n",*arg);
+    break;
+  case 45:
+    SCALE_2175_BUMP = atof(arg);
+    printf("SCALE_2175_BUMP: %lf\n",SCALE_2175_BUMP);
+    break;
+  case 46:
+    if (*arg=='n' || *arg=='N' || *arg=='0') {
+        READ_ZBIN = 0;
+        strcpy(ZBIN_FILE,"no");
+    } else if (*arg=='y' || *arg=='Y' || *arg=='1') {
+        READ_ZBIN = 1;
+        strcpy(ZBIN_FILE,"yes");
+    } else {
+        strcpy(ZBIN_FILE,arg);
+        READ_ZBIN = 1;
+        //fprintf(stderr,"\n READ_ZBIN:  bad value, %s\n",arg);
+        //exit(1);
+      }
+      printf("READ_ZBIN: %s %d\n",arg,READ_ZBIN);
+      break;
   default:   
     fprintf(stderr,"I shouldn't be here!!\n");
     fprintf(stderr,"%d -- %s\n",i,arg);
@@ -275,7 +320,7 @@ void getparams()
    struct param_data params[NKEY] = {
      // USE hyperz format as base
      //   {"AOVSED", 0, "NIL"},  // Vega SED
-     {"FILTERS_RES", 0 , "master.FILTER.RES","Filter transmission data"},            // 0 
+     {"FILTERS_RES", 0 , "FILTER.RES.v1.R300","Filter transmission data (http://www.astro.yale.edu/eazy/filters/index.html)"},            // 0 
      {"TEMPLATES_FILE", 0, "templates/eazy_v1.0.spectra.param","Template definition file"},       // 1 
      {"WAVELENGTH_FILE",0,"templates/lambda.def","Wavelength grid definition file"},    // 2
      {"TEMP_ERR_FILE",0,"templates/TEMPLATE_ERROR.eazy_v1.0","Template error definition file"},     // 3 
@@ -287,7 +332,7 @@ void getparams()
      {"OBS_SED_FILE", 0, "n","Write out observed SED/object, .obs_sed"},      // 9
      {"TEMP_SED_FILE",0,"n","Write out best template fit/object, .temp_sed"}, // 10
      {"POFZ_FILE",0,"n","Write out Pofz/object, .pz"},                        // 11
-     {"H0",0,"70.0"," Hubble constant"},                                      // 12
+     {"H0",0,"70.0","Hubble constant (km/s/Mpc)"},                                      // 12
      {"OMEGA_M",0,"0.3","Omega_matter"},                                      // 13
      {"OMEGA_L",0,"0.7","Omega_lambda"},                                      //14
      {"DUMP_TEMPLATE_CACHE",0,"n","Write binary template cache"},             // 15
@@ -302,31 +347,42 @@ void getparams()
      {"APPLY_IGM",0,"y","Apply Madau 1995 IGM absorption"},                   // 24
      {"FIX_ZSPEC",0,"n","Fix redshift to catalog zspec"},                     // 25
      {"APPLY_PRIOR",0,"y","Apply apparent magnitude prior"},                          // 26
-     {"PRIOR_FILE",0,"prior_K_zmax7.dat","File containing prior grid"},       // 27
+     {"PRIOR_FILE",0,"templates/prior_K_zmax7.dat","File containing prior grid"},       // 27
      {"PRIOR_ABZP",0,"25.0","AB zeropoint of fluxes in catalog.  Needed for calculating apparent mags!"},             // 28
      {"PRIOR_FILTER",0,"28","Filter from FILTER_RES corresponding to the columns in PRIOR_FILE"}, //29
      {"NMF_TOLERANCE",0,"1.e-4","Tolerance for non-negative combinations (TEMPLATE_COMBOS=a)"}, //30
      {"PRINT_ERRORS",0,"y","Print 68, 95 and 99% confidence intervals"}, //31
      {"VERBOSE_LOG",0,"y","Dump information from the run into [MAIN_OUTPUT_FILE].param"}, //32
-     {"SMOOTH_FILTERS",0,"y","Smooth filter curves with Gaussian"}, //33
+     {"SMOOTH_FILTERS",0,"n","Smooth filter curves with Gaussian"}, //33
      {"SMOOTH_SIGMA",0,"100.","Gaussian sigma (in Angstroms) to smooth filters"}, //34
-     {"CACHE_FILE",0,"tempfilt.dat","Template cache file (in OUTPUT_DIRECTORY)"}, //35
+     {"CACHE_FILE",0,"photz.tempfilt","Template cache file (in OUTPUT_DIRECTORY)"}, //35
      {"FILTER_FORMAT",0,"1","Format of FILTERS_RES file -- 0: energy-  1: photon-counting detector"}, //36
      {"GET_ZP_OFFSETS",0,"n","Look for zphot.zeropoint file and compute zeropoint offsets"}, //37
      {"ZP_OFFSET_TOL",0,"1.e-4","Tolerance for iterative fit for zeropoint offsets"}, //38
      {"CHI2_SCALE",0,"1.0","Scale ML Chi-squared values to improve confidence intervals"}, //39
-     {"BINARY_OUTPUT",0,"n","Save OBS_SED, TEMP_SED, PZ in binary format to read with e.g IDL"} //40
+     {"BINARY_OUTPUT",0,"y","Save OBS_SED, TEMP_SED, PZ in binary format to read with e.g IDL"}, //40
+     {"REST_FILTERS",0,"---","Comma-separated list of rest frame filters to compute"}, //41
+     {"Z_COLUMN",0,"z_peak","Redshift to use for rest-frame color calculation (z_a, z_p, z_m1, z_m2, z_peak)"}, //42
+     {"USE_ZSPEC_FOR_REST",0,"y","Use z_spec when available for rest-frame colors"}, //43
+     {"MAGNITUDES",0,"n","Catalog photometry in magnitudes rather than f_nu fluxes"}, //44
+     {"SCALE_2175_BUMP",0,"0.00","Scaling of 2175A bump.  Values 0.13 (0.27) absorb ~10 (20) % at peak."}, //45
+     {"READ_ZBIN",0,"n","Get redshifts from OUTPUT_DIRECTORY/MAIN_OUTPUT_FILE.zbin rather than fitting them."} //46
    };
 
   
     // delimeter/whitespace characters for token search  
-    char delim[]=" \n\t,";
+    char delim[]=" \n\t";
             
-    fp = fopen("zphot.param","r");
+    fp = fopen(zphot_param_file,"r");
     ///////// Generate zphot.param.default if zphot.param not found
     if (!(fp)) {
-        fprintf(stderr,
-            "<zphot.param> not found.  Generating <zphot.param.default>\n");
+        
+        if (strcmp(zphot_param_file,"zphot.param")) {
+            fprintf(stderr,
+                "<%s> not found.\nRun EAZY with no options and no zphot.param file to generate <zphot.param.default>.\n",zphot_param_file);            
+            exit(1);
+        } else 
+            fprintf(stderr,"<%s> not found.  Generating <zphot.param.default>\n",zphot_param_file);
         
         fp = fopen("zphot.param.default","w");
         fprintf(fp,"#### EAZY Default parameters\n\n");
@@ -349,6 +405,7 @@ void getparams()
         i=22; fprintf(fp,"%-20s %-18s # %s\n",params[i].name,params[i].default_value,params[i].comment); // TEMP_ERR_A2
         i=23; fprintf(fp,"%-20s %-18s # %s\n",params[i].name,params[i].default_value,params[i].comment); // SYS_ERR
         i=24; fprintf(fp,"%-20s %-18s # %s\n",params[i].name,params[i].default_value,params[i].comment); // APPLY_IGM
+        i=45; fprintf(fp,"%-20s %-18s # %s\n",params[i].name,params[i].default_value,params[i].comment); // SCALE_2175_BUMP
 
         i=15; fprintf(fp,"\n%-20s %-18s # %s\n",params[i].name,params[i].default_value,params[i].comment); // DUMP_TEMP 
         i=16; fprintf(fp,"%-20s %-18s # %s\n",params[i].name,params[i].default_value,params[i].comment); // USE_TEMP
@@ -356,6 +413,7 @@ void getparams()
         
         fprintf(fp,"\n## Input Files\n");
         i=4; fprintf(fp,"%-20s %-18s # %s\n",params[i].name,params[i].default_value,params[i].comment);  // CATALOG_FILE
+        i=44; fprintf(fp,"%-20s %-18s # %s\n",params[i].name,params[i].default_value,params[i].comment);  // MAGNITUDES
         i=5; fprintf(fp,"%-20s %-18s # %s\n",params[i].name,params[i].default_value,params[i].comment); // NOT_OBS_THRESHOLD
         i=6; fprintf(fp,"%-20s %-18s # %s\n",params[i].name,params[i].default_value,params[i].comment); // N_MIN_COLORS
 
@@ -386,6 +444,12 @@ void getparams()
         fprintf(fp,"\n## Zeropoint Offsets\n");
         i=37; fprintf(fp,"%-20s %-18s # %s\n",params[i].name,params[i].default_value,params[i].comment); // GET_ZP_OFFSETS
         i=38; fprintf(fp,"%-20s %-18s # %s\n",params[i].name,params[i].default_value,params[i].comment); // ZP_OFFSET_TOL
+
+        fprintf(fp,"\n## Rest-frame colors\n");
+        i=41; fprintf(fp,"%-20s %-18s # %s\n",params[i].name,params[i].default_value,params[i].comment); // REST_FILTERS
+        i=42; fprintf(fp,"%-20s %-18s # %s\n",params[i].name,params[i].default_value,params[i].comment); // Z_COLUMN
+        i=43; fprintf(fp,"%-20s %-18s # %s\n",params[i].name,params[i].default_value,params[i].comment); // USE_ZSPEC_FOR_REST
+        i=46; fprintf(fp,"%-20s %-18s # %s\n",params[i].name,params[i].default_value,params[i].comment); // READ_ZBIN
         
         fprintf(fp,"\n## Cosmology\n");
         i=12; fprintf(fp,"%-20s %-18s # %s\n",params[i].name,params[i].default_value,params[i].comment); // H0
@@ -449,7 +513,7 @@ void getparams()
 
 //////// put a pointer to the file in the arguments to 
 //////// the subroutine and dump verbose information from main/getphotz ?
-void printparams_logfile() 
+void printparams_logfile(FILE *fp) 
 {
     int i;
     //FILE *fp;
@@ -459,7 +523,7 @@ void printparams_logfile()
    struct param_data params[NKEY] = {
      // USE hyperz format as base
      //   {"AOVSED", 0, "NIL"},  // Vega SED
-     {"FILTERS_RES", 0 , "master.FILTER.RES","Filter transmission data"},            // 0 
+     {"FILTERS_RES", 0 , "FILTER.RES.v1.R300","Filter transmission data (http://www.astro.yale.edu/eazy/filters/index.html)"},            // 0 
      {"TEMPLATES_FILE", 0, "templates/eazy_v1.0.spectra.param","Template definition file"},       // 1 
      {"WAVELENGTH_FILE",0,"template/lambda.def","Wavelength grid definition file"},    // 2
      {"TEMP_ERR_FILE",0,"templates/TEMPLATE_ERROR.eazy_v1.0","Template error definition file"},     // 3 
@@ -471,7 +535,7 @@ void printparams_logfile()
      {"OBS_SED_FILE", 0, "n","Write out observed SED/object, .obs_sed"},      // 9
      {"TEMP_SED_FILE",0,"n","Write out best template fit/object, .temp_sed"}, // 10
      {"POFZ_FILE",0,"n","Write out Pofz/object, .pz"},                        // 11
-     {"H0",0,"70.0"," Hubble constant"},                                      // 12
+     {"H0",0,"70.0","Hubble constant (km/s/Mpc)"},                                      // 12
      {"OMEGA_M",0,"0.3","Omega_matter"},                                      // 13
      {"OMEGA_L",0,"0.7","Omega_lambda"},                                      //14
      {"DUMP_TEMPLATE_CACHE",0,"n","Write binary template cache"},             // 15
@@ -486,20 +550,26 @@ void printparams_logfile()
      {"APPLY_IGM",0,"y","Apply Madau 1995 IGM absorption"},                   // 24
      {"FIX_ZSPEC",0,"n","Fix redshift to catalog zspec"},                     // 25
      {"APPLY_PRIOR",0,"y","Apply apparent magnitude prior"},                          // 26
-     {"PRIOR_FILE",0,"prior_K_zmax7.dat","File containing prior grid"},       // 27
+     {"PRIOR_FILE",0,"templates/prior_K_zmax7.dat","File containing prior grid"},       // 27
      {"PRIOR_ABZP",0,"25.0","AB zeropoint of fluxes in catalog.  Needed for calculating apparent mags!"},             // 28
      {"PRIOR_FILTER",0,"28","Filter from FILTER_RES corresponding to the columns in PRIOR_FILE"}, //29
      {"NMF_TOLERANCE",0,"1.e-4","Tolerance for non-negative combinations (TEMPLATE_COMBOS=a)"}, //30
      {"PRINT_ERRORS",0,"y","Print 68, 95 and 99% confidence intervals"}, //31
      {"VERBOSE_LOG",0,"y","Dump information from the run into [MAIN_OUTPUT_FILE].param"}, //32
-     {"SMOOTH_FILTERS",0,"y","Smooth filter curves with Gaussian"}, //33
+     {"SMOOTH_FILTERS",0,"n","Smooth filter curves with Gaussian"}, //33
      {"SMOOTH_SIGMA",0,"100.","Gaussian sigma (in Angstroms) to smooth filters"}, //34
-     {"CACHE_FILE",0,"tempfilt.dat","Template cache file (in OUTPUT_DIRECTORY)"}, //35
+     {"CACHE_FILE",0,"photz.tempfilt","Template cache file (in OUTPUT_DIRECTORY)"}, //35
      {"FILTER_FORMAT",0,"1","Format of FILTERS_RES file -- 0: energy-  1: photon-counting detector"}, //36
      {"GET_ZP_OFFSETS",0,"n","Look for zphot.zeropoint file and compute zeropoint offsets"}, //37
      {"ZP_OFFSET_TOL",0,"1.e-4","Tolerance for iterative fit for zeropoint offsets"}, //38
      {"CHI2_SCALE",0,"1.0","Scale ML Chi-squared values to improve confidence intervals"}, //39
-     {"BINARY_OUTPUT",0,"n","Save OBS_SED, TEMP_SED, PZ in binary format to read with e.g IDL"} //40
+     {"BINARY_OUTPUT",0,"y","Save OBS_SED, TEMP_SED, PZ in binary format to read with e.g IDL"}, //40
+     {"REST_FILTERS",0,"---","Comma-separated list of rest frame filters to compute"}, //41
+     {"Z_COLUMN",0,"z_peak","Redshift to use for rest-frame color calculation (z_a, z_p, z_m1, z_m2, z_peak)"}, //42
+     {"USE_ZSPEC_FOR_REST",0,"y","Use z_spec when available for rest-frame colors"}, //43
+     {"MAGNITUDES",0,"n","Catalog photometry in magnitudes rather than f_nu fluxes"}, //44
+     {"SCALE_2175_BUMP",0,"0.00","Scaling of 2175A bump.  Values 0.13 (0.27) absorb ~10 (20) % at peak."}, //45
+     {"READ_ZBIN",0,"n","Get redshifts from OUTPUT_DIRECTORY/MAIN_OUTPUT_FILE.zbin rather than fitting them."} //46
    };
 
 
@@ -511,67 +581,75 @@ void printparams_logfile()
     fp = fopen(outparfile,"w");
     */
     
-    fprintf(fplog,"################   Run parameters (can feed this file back to EAZY)  ####################\n");
-    fprintf(fplog,"## Filters\n");
-      i=0; fprintf(fplog,"%-20s %-18s # %s\n",params[i].name,FILTERS_RES,params[i].comment); // FILTERS_RES
-      i=36; fprintf(fplog,"%-20s %-18i # %s\n",params[i].name,FILTER_FORMAT,params[i].comment); // FILTER_FORMAT
-      i=33; fprintf(fplog,"%-20s %-18i # %s\n",params[i].name,SMOOTH_FILTERS,params[i].comment); // SMOOTH_FILTERS
-      i=34; fprintf(fplog,"%-20s %-18.2f # %s\n",params[i].name,SMOOTH_SIGMA,params[i].comment); // SMOOTH_SIGMA
+    fprintf(fp,"################   Run parameters (can feed this file back to EAZY)  ####################\n");
+    fprintf(fp,"## Filters\n");
+      i=0; fprintf(fp,"%-20s %-18s # %s\n",params[i].name,FILTERS_RES,params[i].comment); // FILTERS_RES
+      i=36; fprintf(fp,"%-20s %-18i # %s\n",params[i].name,FILTER_FORMAT,params[i].comment); // FILTER_FORMAT
+      i=33; fprintf(fp,"%-20s %-18i # %s\n",params[i].name,SMOOTH_FILTERS,params[i].comment); // SMOOTH_FILTERS
+      i=34; fprintf(fp,"%-20s %-18.2f # %s\n",params[i].name,SMOOTH_SIGMA,params[i].comment); // SMOOTH_SIGMA
      
-    fprintf(fplog,"\n## Templates\n");
-      i=1; fprintf(fplog,"%-20s %-18s # %s\n",params[i].name,TEMPLATES_FILE,params[i].comment); // TEMPLATES_FILE
-      i=21; fprintf(fplog,"%-20s %-18i # %s\n",params[i].name,TEMPLATE_COMBOS,params[i].comment); // TEMPLATE_COMBOS
-      i=30; fprintf(fplog,"%-20s %-18.2e # %s\n",params[i].name,NMF_TOLERANCE,params[i].comment); // NMF_TOLERANCE
-      i=2; fprintf(fplog,"%-20s %-18s # %s\n",params[i].name,WAVELENGTH_FILE,params[i].comment); // WAVELENGTH_FILE
-      i=3; fprintf(fplog,"%-20s %-18s # %s\n",params[i].name,TEMP_ERR_FILE,params[i].comment); // TEMP_ERR_FILE
-      i=22; fprintf(fplog,"%-20s %-18.3f # %s\n",params[i].name,TEMP_ERR_A2,params[i].comment); // TEMP_ERR_A2
-      i=23; fprintf(fplog,"%-20s %-18.3f # %s\n",params[i].name,SYS_ERR,params[i].comment); // SYS_ERR
-      i=24; fprintf(fplog,"%-20s %-18i # %s\n",params[i].name,APPLY_IGM,params[i].comment); // APPLY_IGM
+    fprintf(fp,"\n## Templates\n");
+      i=1; fprintf(fp,"%-20s %-18s # %s\n",params[i].name,TEMPLATES_FILE,params[i].comment); // TEMPLATES_FILE
+      i=21; fprintf(fp,"%-20s %-18i # %s\n",params[i].name,TEMPLATE_COMBOS,params[i].comment); // TEMPLATE_COMBOS
+      i=30; fprintf(fp,"%-20s %-18.2e # %s\n",params[i].name,NMF_TOLERANCE,params[i].comment); // NMF_TOLERANCE
+      i=2; fprintf(fp,"%-20s %-18s # %s\n",params[i].name,WAVELENGTH_FILE,params[i].comment); // WAVELENGTH_FILE
+      i=3; fprintf(fp,"%-20s %-18s # %s\n",params[i].name,TEMP_ERR_FILE,params[i].comment); // TEMP_ERR_FILE
+      i=22; fprintf(fp,"%-20s %-18.3f # %s\n",params[i].name,TEMP_ERR_A2,params[i].comment); // TEMP_ERR_A2
+      i=23; fprintf(fp,"%-20s %-18.3f # %s\n",params[i].name,SYS_ERR,params[i].comment); // SYS_ERR
+      i=24; fprintf(fp,"%-20s %-18i # %s\n",params[i].name,APPLY_IGM,params[i].comment); // APPLY_IGM
+      i=45; fprintf(fp,"%-20s %-18.3f # %s\n",params[i].name,SCALE_2175_BUMP,params[i].comment); // SCALE_2175_BUMP
 
-      i=15; fprintf(fplog,"\n%-20s %-18i # %s\n",params[i].name,DUMP_TEMPLATE_CACHE,params[i].comment); // DUMP_TEMP 
-      i=16; fprintf(fplog,"%-20s %-18i # %s\n",params[i].name,USE_TEMPLATE_CACHE,params[i].comment); // USE_TEMP
-      i=35; fprintf(fplog,"%-20s %-18s # %s\n",params[i].name,CACHE_FILE,params[i].comment); // CACHE_FILE
+      i=15; fprintf(fp,"\n%-20s %-18i # %s\n",params[i].name,DUMP_TEMPLATE_CACHE,params[i].comment); // DUMP_TEMP 
+      i=16; fprintf(fp,"%-20s %-18i # %s\n",params[i].name,USE_TEMPLATE_CACHE,params[i].comment); // USE_TEMP
+      i=35; fprintf(fp,"%-20s %-18s # %s\n",params[i].name,CACHE_FILE,params[i].comment); // CACHE_FILE
     
-    fprintf(fplog,"\n## Input Files\n");
-      i=4; fprintf(fplog,"%-20s %-18s # %s\n",params[i].name,CATALOG_FILE,params[i].comment);  // CATALOG_FILE
-      i=5; fprintf(fplog,"%-20s %-18.3f # %s\n",params[i].name,NOT_OBS_THRESHOLD,params[i].comment); // NOT_OBS_THRESHOLD
-      i=6; fprintf(fplog,"%-20s %-18i # %s\n",params[i].name,N_MIN_COLORS,params[i].comment); // N_MIN_COLORS
+    fprintf(fp,"\n## Input Files\n");
+      i=4; fprintf(fp,"%-20s %-18s # %s\n",params[i].name,CATALOG_FILE,params[i].comment);  // CATALOG_FILE
+      i=44; fprintf(fp,"%-20s %-18i # %s\n",params[i].name,MAGNITUDES,params[i].comment);  // MAGNITUDES
+      i=5; fprintf(fp,"%-20s %-18.3f # %s\n",params[i].name,NOT_OBS_THRESHOLD,params[i].comment); // NOT_OBS_THRESHOLD
+      i=6; fprintf(fp,"%-20s %-18i # %s\n",params[i].name,N_MIN_COLORS,params[i].comment); // N_MIN_COLORS
 
-    fprintf(fplog,"\n## Output Files\n");
-      i=7; fprintf(fplog,"%-20s %-18s # %s\n",params[i].name,OUTPUT_DIRECTORY,params[i].comment); // OUTPUT_DIRECTORY
-      i=8; fprintf(fplog,"%-20s %-18s # %s\n",params[i].name,MAIN_OUTPUT_FILE,params[i].comment); // MAIN_OUTPUT_FILE
-      i=31; fprintf(fplog,"%-20s %-18i # %s\n",params[i].name,PRINT_ERRORS,params[i].comment); // PRINT_ERRORS
-      i=39; fprintf(fplog,"%-20s %-18.3f # %s\n",params[i].name,CHI2_SCALE,params[i].comment); // CHI2_SCALE
-      i=32; fprintf(fplog,"%-20s %-18i # %s\n",params[i].name,VERBOSE_LOG,params[i].comment); // VERBOSE_LOG
-      i=9; fprintf(fplog,"%-20s %-18i # %s\n",params[i].name,OBS_SED_FILE,params[i].comment); // OBS_SED_FILE
-      i=10; fprintf(fplog,"%-20s %-18i # %s\n",params[i].name,TEMP_SED_FILE,params[i].comment); // TEMP_SED_FILE
-      i=11; fprintf(fplog,"%-20s %-18i # %s\n",params[i].name,POFZ_FILE,params[i].comment); // POFZ_FILE
-      i=40; fprintf(fplog,"%-20s %-18i # %s\n",params[i].name,BINARY_OUTPUT,params[i].comment); // BINARY_OUTPUT
+    fprintf(fp,"\n## Output Files\n");
+      i=7; fprintf(fp,"%-20s %-18s # %s\n",params[i].name,OUTPUT_DIRECTORY,params[i].comment); // OUTPUT_DIRECTORY
+      i=8; fprintf(fp,"%-20s %-18s # %s\n",params[i].name,MAIN_OUTPUT_FILE,params[i].comment); // MAIN_OUTPUT_FILE
+      i=31; fprintf(fp,"%-20s %-18i # %s\n",params[i].name,PRINT_ERRORS,params[i].comment); // PRINT_ERRORS
+      i=39; fprintf(fp,"%-20s %-18.3f # %s\n",params[i].name,CHI2_SCALE,params[i].comment); // CHI2_SCALE
+      i=32; fprintf(fp,"%-20s %-18i # %s\n",params[i].name,VERBOSE_LOG,params[i].comment); // VERBOSE_LOG
+      i=9; fprintf(fp,"%-20s %-18i # %s\n",params[i].name,OBS_SED_FILE,params[i].comment); // OBS_SED_FILE
+      i=10; fprintf(fp,"%-20s %-18i # %s\n",params[i].name,TEMP_SED_FILE,params[i].comment); // TEMP_SED_FILE
+      i=11; fprintf(fp,"%-20s %-18i # %s\n",params[i].name,POFZ_FILE,params[i].comment); // POFZ_FILE
+      i=40; fprintf(fp,"%-20s %-18i # %s\n",params[i].name,BINARY_OUTPUT,params[i].comment); // BINARY_OUTPUT
 
-    fprintf(fplog,"\n## Redshift / Mag prior\n");
-      i=26; fprintf(fplog,"%-20s %-18i # %s\n",params[i].name,APPLY_PRIOR,params[i].comment); // APPLY_PRIOR
-      i=27; fprintf(fplog,"%-20s %-18s # %s\n",params[i].name,PRIOR_FILE,params[i].comment); // PRIOR_FILE
-      i=29; fprintf(fplog,"%-20s %-18i # %s\n",params[i].name,PRIOR_FILTER,params[i].comment); // PRIOR_FILTER
-      i=28; fprintf(fplog,"%-20s %-18.3f # %s\n",params[i].name,PRIOR_ABZP,params[i].comment); // PRIOR_ABZP
+    fprintf(fp,"\n## Redshift / Mag prior\n");
+      i=26; fprintf(fp,"%-20s %-18i # %s\n",params[i].name,APPLY_PRIOR,params[i].comment); // APPLY_PRIOR
+      i=27; fprintf(fp,"%-20s %-18s # %s\n",params[i].name,PRIOR_FILE,params[i].comment); // PRIOR_FILE
+      i=29; fprintf(fp,"%-20s %-18i # %s\n",params[i].name,PRIOR_FILTER,params[i].comment); // PRIOR_FILTER
+      i=28; fprintf(fp,"%-20s %-18.3f # %s\n",params[i].name,PRIOR_ABZP,params[i].comment); // PRIOR_ABZP
     
-    fprintf(fplog,"\n## Redshift Grid\n");
-      i=25; fprintf(fplog,"%-20s %-18i # %s\n",params[i].name,FIX_ZSPEC,params[i].comment); // FIX_ZSPEC
-      i=17; fprintf(fplog,"%-20s %-18.3f # %s\n",params[i].name,Z_MIN,params[i].comment); // Z_MIN
-      i=18; fprintf(fplog,"%-20s %-18.3f # %s\n",params[i].name,Z_MAX,params[i].comment); // Z_MAX
-      i=19; fprintf(fplog,"%-20s %-18.3f # %s\n",params[i].name,Z_STEP,params[i].comment); // Z_STEP
-      i=20; fprintf(fplog,"%-20s %-18i # %s\n",params[i].name,Z_STEP_TYPE,params[i].comment); // Z_STEP_TYPE
+    fprintf(fp,"\n## Redshift Grid\n");
+      i=25; fprintf(fp,"%-20s %-18i # %s\n",params[i].name,FIX_ZSPEC,params[i].comment); // FIX_ZSPEC
+      i=17; fprintf(fp,"%-20s %-18.3f # %s\n",params[i].name,Z_MIN,params[i].comment); // Z_MIN
+      i=18; fprintf(fp,"%-20s %-18.3f # %s\n",params[i].name,Z_MAX,params[i].comment); // Z_MAX
+      i=19; fprintf(fp,"%-20s %-18.3f # %s\n",params[i].name,Z_STEP,params[i].comment); // Z_STEP
+      i=20; fprintf(fp,"%-20s %-18i # %s\n",params[i].name,Z_STEP_TYPE,params[i].comment); // Z_STEP_TYPE
 
-    fprintf(fplog,"\n## Zeropoint Offsets\n");
-      i=37; fprintf(fplog,"%-20s %-18i # %s\n",params[i].name,GET_ZP_OFFSETS,params[i].comment); // GET_ZP_OFFSETS
-      i=38; fprintf(fplog,"%-20s %-18.3e # %s\n",params[i].name,ZP_OFFSET_TOL,params[i].comment); // ZP_OFFSET_TOL
+    fprintf(fp,"\n## Zeropoint Offsets\n");
+      i=37; fprintf(fp,"%-20s %-18i # %s\n",params[i].name,GET_ZP_OFFSETS,params[i].comment); // GET_ZP_OFFSETS
+      i=38; fprintf(fp,"%-20s %-18.3e # %s\n",params[i].name,ZP_OFFSET_TOL,params[i].comment); // ZP_OFFSET_TOL
 
-    fprintf(fplog,"\n## Cosmology\n");
-      i=12; fprintf(fplog,"%-20s %-18.3f # %s\n",params[i].name,H0,params[i].comment); // H0
-      i=13; fprintf(fplog,"%-20s %-18.3f # %s\n",params[i].name,OMEGA_M,params[i].comment); // OMEGA_M
-      i=14; fprintf(fplog,"%-20s %-18.3f # %s\n",params[i].name,OMEGA_L,params[i].comment); // OMEGA_L
+    fprintf(fp,"\n## Rest-frame colors\n");
+      i=41; fprintf(fp,"%-20s %-18s # %s\n",params[i].name,REST_FILTERS,params[i].comment); // REST_FILTERS
+      i=42; fprintf(fp,"%-20s %-18s # %s\n",params[i].name,Z_COLUMN,params[i].comment); // Z_COLUMN
+      i=43; fprintf(fp,"%-20s %-18i # %s\n",params[i].name,USE_ZSPEC_FOR_REST,params[i].comment); // USE_ZSPEC_FOR_REST
+      i=46; fprintf(fp,"%-20s %-18s # %s\n",params[i].name,ZBIN_FILE,params[i].comment); // READ_ZBIN
+
+    fprintf(fp,"\n## Cosmology\n");
+      i=12; fprintf(fp,"%-20s %-18.3f # %s\n",params[i].name,H0,params[i].comment); // H0
+      i=13; fprintf(fp,"%-20s %-18.3f # %s\n",params[i].name,OMEGA_M,params[i].comment); // OMEGA_M
+      i=14; fprintf(fp,"%-20s %-18.3f # %s\n",params[i].name,OMEGA_L,params[i].comment); // OMEGA_L
       
-    fprintf(fplog,"#\n####################################\n#\n");
+    fprintf(fp,"#\n####################################\n#\n");
     
-    //fclose(fplog);
+    //fclose(fp);
    
 }

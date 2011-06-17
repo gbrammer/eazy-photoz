@@ -15,14 +15,14 @@ double cosmotl(double z, double lambda)
   
 int getphotz(long iobj, double *pz1, int *idtemp1, double *atemp1, 
                          double *pz2, int *idtemp2a, int *idtemp2b, double *atemp2a, double *atemp2b,
-                         double *pzall, int **idtempall, double **coeffs, int *ntemp_all)
+                         double *pzall, int **idtempall, double **coeffs, int *ntemp_all, long fixidx)
 {
     void nonneg_fact(double **amatrix, double *bvector, double *coeffs_z, long NTEMP,
                  double toler);
 
     long i,j,k,NTEMP_I;
-    double chisum, age_univ, te;
-    static int ifirst=1, *okfilt, *oktemp;
+    double chisum, age_univ, te,ztest;
+    static int ifirst=1, *oktemp;
     static double tempsumfbest,*sigi2;
     static double **amatrix,*bvector,*coeffs_z;
     int itemp1,itemp2;
@@ -38,11 +38,12 @@ int getphotz(long iobj, double *pz1, int *idtemp1, double *atemp1,
     c2=0.;  
     if (ifirst) {
     
-        okfilt = malloc(sizeof(ifirst)*nusefilt);
-        if(okfilt == NULL) {
-            fprintf(stderr, "okfilt failed, out of memory\n");
-            exit(1);
-        }
+        ////// Take out and make it a global variable
+        // okfilt = malloc(sizeof(ifirst)*nusefilt);
+        // if(okfilt == NULL) {
+        //     fprintf(stderr, "okfilt failed, out of memory\n");
+        //     exit(1);
+        // }
         /* // Use in place
         tempsumfbest = malloc(sizeof(c1)*nusefilt);
         if(tempsumfbest == NULL) {
@@ -85,26 +86,22 @@ int getphotz(long iobj, double *pz1, int *idtemp1, double *atemp1,
         ifirst = 0;
     }  
 
-
-    //// select filters to use
-    for(i=0;i<nusefilt;++i) {
-        if (fnu[iobj][i] > NOT_OBS_THRESHOLD && efnu[iobj][i] > NOT_OBS_THRESHOLD)
-        {
-            okfilt[i] = 1;
-        } else {
-            okfilt[i] = 0;
-            //fprintf(stderr,"id, filt BAD %ld %ld\n",iobj,i);
-        }
-    }
-
     pzmin = 1e30;
     pzmin2 = 1e30;
 
     izspec=0;
-    if (FIX_ZSPEC) {
-        while ( (ztry[izspec] < zspec[iobj]) && (izspec < (NZ-1)) ) ++izspec;
-        
+    if (FIX_ZSPEC || fixidx >= 0) {
+        //while ( (ztry[izspec] < zspec[iobj]) && (izspec < (NZ-1)) ) ++izspec;
+ 
+        if (fixidx < 0) {
+            ztest=100;
+            for (iz=0;iz<NZ;++iz) if (fabs(ztry[iz]-zspec[iobj]) < ztest) {
+                ztest = fabs(ztry[iz]-zspec[iobj]);
+                izspec=iz;
+            }
+        } else izspec=fixidx; 
         NZ_use = izspec+1;
+        
     } else NZ_use = NZ;
         
     if (TEMPLATE_COMBOS <= 2) {
@@ -272,18 +269,6 @@ int getphotz(long iobj, double *pz1, int *idtemp1, double *atemp1,
     ////// Fit linear combinations of *all* templates
     ////// in SPECTRA_FILE using Sha, Saul & Lee algorithm
 
-      ////////// plot total error and integrated fluxes at *ALL* redshifts
-//      sprintf(templogfile,"%s/%ld.temp_log",OUTPUT_DIRECTORY,objid[iobj]);
-//      if (!(tlog = fopen(templogfile,"w"))) {
-//        fprintf(stderr,"Oops...can't open the template log file, %s\n",
-//            templogfile);
-//        exit(1);
-//      }
-      // fprintf(tlog,"# z ");
-      //for (i=0;i<nusefilt;++i) fprintf(tlog,"f%ld e%ld ",i+1,i+1);
-      //for (i=0;i<nusefilt;++i) if (okfilt[i]) fprintf(tlog,"t%ld ",i+1);
-      // fprintf(tlog,"\n");
-            
       for (iz=izspec;iz<NZ_use;++iz) {
 
         //// Check if filters fall off templates
@@ -318,21 +303,20 @@ int getphotz(long iobj, double *pz1, int *idtemp1, double *atemp1,
         // fprintf(tlog,"%7.3f ",ztry[iz]);
         
         /////  Set up sigma^2, now only use filters with detections
-        for (i=0;i<nusefilt;++i) {
+        for (i=0;i<nusefilt;++i) if (okfilt[i]) {
             te = temp_errf[iz][i]*TEMP_ERR_A2;  ////// Force individual temp_err_a = 1
             sigi2[i] = (SYS_ERR*SYS_ERR+te*te)
                              *fnu[iobj][i]*fnu[iobj][i];
             sigi2[i] += efnu[iobj][i]*efnu[iobj][i];
             // fprintf(tlog,"%13.5e %16.5e ",fnu[iobj][i],sigi2[i]);
         }
-    
-      
+         
         ///// "B" vector for template normalization
         for (i=0; i<NTEMP_I; ++i) {
             bvector[i] = 0.;
 
             for (j=0;j<nusefilt;++j) 
-              if (fnu[iobj][j] > 0 && efnu[iobj][j] > 0) 
+              if (fnu[iobj][j] > 0 && efnu[iobj][j] > 0 && okfilt[j])
                 bvector[i]-=fnu[iobj][j]*tempfilt[iz][oktemp[i]][j]/sigi2[j];
                     
              //printf("bvector %ld %e\n",itemp1,bvector[itemp1]);
@@ -379,7 +363,7 @@ int getphotz(long iobj, double *pz1, int *idtemp1, double *atemp1,
         *ntemp_all = NTEMP_I;
         for (i=0;i<NTEMP_I;++i) {
             idtempall[iz][i] = oktemp[i];
-            coeffs[iz][i] = coeffs_z[i];
+            coeffs[iz][oktemp[i]] = coeffs_z[i];
         }
       }
 //      fclose(tlog);
