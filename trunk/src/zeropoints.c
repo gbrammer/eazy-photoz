@@ -129,38 +129,38 @@ int zeropoints () {
             ////////// Unused arrays are not malloc-ed, is that OK
             getphotz(iobj, pz1, idtemp1, atemp1, 
                        pz2, idtemp2a, idtemp2b, atemp2a, atemp2b,
-                       pzall, idtempall, coeffs, &ntemp_all);
+                       pzall, idtempall, coeffs, &ntemp_all,-1);
             //////////////////////////////////////////////////////////////////////////////////////////
 
             switch (TEMPLATE_COMBOS) {
                 case 1:
                     izbest=0;
                     for (i=0;i<NZ;++i) {
-                        pzuse[i] = pz1[i];
-                        pzout[i] = pzuse[i];
-                        if (pz1[i]<pzuse[izbest]) izbest=i;
+                        chi2fit[i] = pz1[i];
+                        pzout[i] = chi2fit[i];
+                        if (pz1[i]<chi2fit[izbest]) izbest=i;
                         pz1[i]=1.e30;
                     }
                     break;
                 case 2:
                     izbest=0;
                     for (i=0;i<NZ;++i) {
-                        pzuse[i] = pz2[i];
-                        pzout[i] = pzuse[i];
-                        if (pz2[i]<pzuse[izbest]) izbest=i;
+                        chi2fit[i] = pz2[i];
+                        pzout[i] = chi2fit[i];
+                        if (pz2[i]<chi2fit[izbest]) izbest=i;
                         pz2[i]=1.e30;
                     }
                     break;
                 case 99:
                     izbest=0;
                     for (i=0;i<NZ;++i) {
-                        pzuse[i] = pzall[i];
-                        pzout[i] = pzuse[i];
-                        if (pzall[i]<pzuse[izbest]) izbest=i;
+                        chi2fit[i] = pzall[i];
+                        pzout[i] = chi2fit[i];
+                        if (pzall[i]<chi2fit[izbest]) izbest=i;
                         pzall[i]=1.e30;
                     }
             }
-            pzout[izbest] = exp(-0.5*pzuse[izbest]);
+            pzout[izbest] = exp(-0.5*chi2fit[izbest]);
        
             if (fnu[iobj][k] > 0. && efnu[iobj][k] > 0. && fnu[iobj][k]/efnu[iobj][k] > 0.003) { //// 0. rather than flux, err > NOT_OBS_THRESHOLD) 
                     

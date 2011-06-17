@@ -18,17 +18,17 @@ void pz_output(char *filename, long iobj)
         case 1:
             fprintf(pzp,"# z chi2 prior pz t1\n");
             for (iz=0;iz<NZ;++iz)  
-                fprintf(pzp," %lf %le %le %le %d\n",ztry[iz],pzuse[iz],priorkz[Kcolumn][iz],pzout[iz],idtemp1[iz]+1);
+                fprintf(pzp," %lf %le %le %le %d\n",ztry[iz],chi2fit[iz],priorkz[Kcolumn][iz],pzout[iz],idtemp1[iz]+1);
             break;
         case 2:
             fprintf(pzp,"# z chi2 prior pz t2a t2b\n");
             for (iz=0;iz<NZ;++iz)  
-                fprintf(pzp," %lf %le %le %le %d %d\n",ztry[iz],pzuse[iz],priorkz[Kcolumn][iz],pzout[iz],idtemp2a[iz]+1,idtemp2b[iz]+1);
+                fprintf(pzp," %lf %le %le %le %d %d\n",ztry[iz],chi2fit[iz],priorkz[Kcolumn][iz],pzout[iz],idtemp2a[iz]+1,idtemp2b[iz]+1);
             break;
         case 99:
             fprintf(pzp,"# z chi2 prior pz\n");
             for (iz=0;iz<NZ;++iz)  
-                fprintf(pzp," %lf %le %le %le\n",ztry[iz],pzuse[iz],priorkz[Kcolumn][iz],pzout[iz]);
+                fprintf(pzp," %lf %le %le %le\n",ztry[iz],chi2fit[iz],priorkz[Kcolumn][iz],pzout[iz]);
             break;
       }
     } else {
@@ -36,17 +36,17 @@ void pz_output(char *filename, long iobj)
         case 1:
             fprintf(pzp,"# z chi2 t1\n");
             for (iz=0;iz<NZ;++iz)  
-                fprintf(pzp," %lf %le %d\n",ztry[iz],pzuse[iz],idtemp1[iz]+1);
+                fprintf(pzp," %lf %le %d\n",ztry[iz],chi2fit[iz],idtemp1[iz]+1);
             break;
         case 2:
             fprintf(pzp,"# z chi2 t2a t2b\n");
             for (iz=0;iz<NZ;++iz)  
-                fprintf(pzp," %lf %le %d %d\n",ztry[iz],pzuse[iz],idtemp2a[iz]+1,idtemp2b[iz]+1);
+                fprintf(pzp," %lf %le %d %d\n",ztry[iz],chi2fit[iz],idtemp2a[iz]+1,idtemp2b[iz]+1);
             break;
         case 99:
             fprintf(pzp,"# z chi2 prior pz\n");
             for (iz=0;iz<NZ;++iz)  
-                fprintf(pzp," %lf %le\n",ztry[iz],pzuse[iz]);
+                fprintf(pzp," %lf %le\n",ztry[iz],chi2fit[iz]);
             break;
       }
     }        
@@ -187,13 +187,13 @@ void obs_sed_output(char *filename, long iobj, long izbest, long izprior)
     //////// Header line
     switch (TEMPLATE_COMBOS) {
         case 1:
-            fprintf(obp,"# lambda flux_cat err_full temp1_z ");
+            fprintf(obp,"# lambda flux_cat err_cat err_full temp1_z ");
             break;
         case 2:
-            fprintf(obp,"# lambda flux_cat err_full temp2_z ");
+            fprintf(obp,"# lambda flux_cat err_cat err_full temp2_z ");
             break;
         case 99:
-            fprintf(obp,"# lambda flux_cat err_full tempa_z ");
+            fprintf(obp,"# lambda flux_cat err_cat err_full tempa_z ");
             break;
     }
     if (APPLY_PRIOR && FIX_ZSPEC==0) switch (TEMPLATE_COMBOS) {
@@ -219,11 +219,11 @@ void obs_sed_output(char *filename, long iobj, long izbest, long izprior)
             
             switch (TEMPLATE_COMBOS) {
                 case 1:
-                    fprintf(obp,"%le %e %e %e ",lambdac[j],fnu[iobj][j],sigi,
+                    fprintf(obp,"%le %e %e %e %e ",lambdac[j],fnu[iobj][j],efnu[iobj][j],sigi,
                                                 atemp1[izbest]*tempfilt[izbest][idtemp1[izbest]][j]);
                     break;
                 case 2:
-                    fprintf(obp,"%le %e %e %e ",lambdac[j],fnu[iobj][j],sigi,
+                    fprintf(obp,"%le %e %e %e %e ",lambdac[j],fnu[iobj][j],efnu[iobj][j],sigi,
                                     atemp2a[izbest]*tempfilt[izbest][idtemp2a[izbest]][j]+
                                     atemp2b[izbest]*tempfilt[izbest][idtemp2b[izbest]][j]);
                     break;
@@ -232,7 +232,7 @@ void obs_sed_output(char *filename, long iobj, long izbest, long izprior)
                     for (itemp=0;itemp<ntemp_all;++itemp) {
                         sedtemp2[0] += coeffs[izbest][itemp]*tempfilt[izbest][idtempall[izbest][itemp]][j];
                     }
-                    fprintf(obp,"%le %e %e %e ",lambdac[j],fnu[iobj][j],sigi,sedtemp2[0]);
+                    fprintf(obp,"%le %e %e %e %e ",lambdac[j],fnu[iobj][j],efnu[iobj][j],sigi,sedtemp2[0]);
                     break;
             }
                     
