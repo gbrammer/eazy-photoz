@@ -1,5 +1,5 @@
 #include "defs.h"
-#define BUFFSIZE 4296
+#define BUFFSIZE 8192
 
 /*************************************
 *
