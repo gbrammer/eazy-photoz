@@ -230,3 +230,7 @@
 226  27274     85 MOIRCS/Ks_rot1707wedged120K.txt   +atm  lambda_c= 2.1577e+04  AB-Vega= 1.828
 227  27360    122 NOAO/k1001bp_jul04.txt  MOSAIC-U-2004+atm  lambda_c= 3.5929e+03  AB-Vega= 0.842
 228  27483    117 NOAO/k1001bp_jul04.txt  MOSAIC-U-2004  lambda_c= 3.5667e+03  AB-Vega= 0.882
+229  27601     74 LRIS/g_blue_transmission.dat   +atm  lambda_c= 4.7508e+03  AB-Vega=-0.105
+230  27676     74 LRIS/g_blue_transmission.dat     lambda_c= 4.7421e+03  AB-Vega=-0.106
+231  27751    252 LRIS/Rs_LRISred_transmission.dat   +atm  lambda_c= 6.8186e+03  AB-Vega= 0.247
+232  28004    252 LRIS/Rs_LRISred_transmission.dat     lambda_c= 6.8214e+03  AB-Vega= 0.250
