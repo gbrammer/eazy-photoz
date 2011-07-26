@@ -667,12 +667,12 @@ int main(int argc, char **argv) {
             fprintf(fp," %13.5e",q_z);
             
             z_peak[iobj] = zpeak_best;
-            fprintf(fp," %7.3f %7.3f",zpeak_best,zpeak_prob);
+            fprintf(fp," %7.4f %7.3f",zpeak_best,zpeak_prob);
             
             //// z_mc from Wittman (astro-ph:0905.0892).  Use cumulative probability, "pzsum", from get_errors()
             izmc=0;
             interpol(ran1(&RandSeed),&zmc,pzsum,ztry,NZ,&izmc);
-            fprintf(fp," %7.3f",zmc);
+            fprintf(fp," %7.4f",zmc);
             
             // find_zpvd (pzout, ipeakmax, &zpvd);
             // fprintf(fp," %7.3f",zpvd);
