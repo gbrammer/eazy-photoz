@@ -1,0 +1,22 @@
+# Template definition file
+#
+# No blank lines allowed (for now).
+#
+# Column definitions:
+#   1. Template number
+#   2. Template file name
+#   3. Lambda_conv (multiplicative factor to correct wavelength units)
+#   4. Age of template model in Gyr (0 means template is always used)
+#   5. Template error amplitude (for INDIVIDUAL template fits)
+#   6. Comma/space separated list of template numbers to be combined
+#      with current template if combined fits are enabled.
+#
+# Sample entry:
+# 1 [path_to_file]/template1.sed 1.0_lines 14.7 0.2 2,3,5
+1   templates/EAZY_v1.1_lines/eazy_v1.1_sed1.dat    1.0 0 1.0   2,3,4,5,6,7
+2   templates/EAZY_v1.1_lines/eazy_v1.1_sed2.dat    1.0 0 1.0   3,4,5,6,7
+3   templates/EAZY_v1.1_lines/eazy_v1.1_sed3.dat    1.0 0 1.0   4,5,6,7
+4   templates/EAZY_v1.1_lines/eazy_v1.1_sed4.dat    1.0 0 1.0   5,6,7
+5   templates/EAZY_v1.1_lines/eazy_v1.1_sed5.dat    1.0 0 1.0   6,7
+6   templates/EAZY_v1.1_lines/eazy_v1.1_sed6.dat    1.0 0 1.0   7
+7   templates/EAZY_v1.1_lines/eazy_v1.1_sed7.dat   1.0 0 1.0
