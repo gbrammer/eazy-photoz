@@ -1,0 +1,21 @@
+==========
+2010-12-31
+==========
+The first 6 templates are very similar to the eazy_v1.0_lines templates, but
+have the PEGASE emission lines *completely* removed and replaced with the Ilbert
+line prescription, wherein you estimate a SFR from the template "luminosity" at
+2800 A and then use the Kennicutt relations to add emission lines with fixed
+line ratios. Now included are Ha, Hb, OIII, OII, and Ly-alpha.
+
+The new last template is an evolved Maraston 2005 SSP (ma05_kr_z02_age10.1.dat),
+added because it was found that the reddest EAZY template didn't quite get red
+enough for massive old galaxies at z<1.
+
+The included lambda_v1.1.def file should be used with these templates because it
+provides sufficient resolution to resolve the narrow emission lines (dLambda
+isn't constant).
+
+*** Note that these templates are identical to those in the
+    "eazy_v1.0_lines_xx_lya.spectra.param" file, now renamed to help keep
+    track of which template set is the recommended version to use.
+
