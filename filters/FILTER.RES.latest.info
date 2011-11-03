@@ -234,3 +234,12 @@
 230  27676     74 LRIS/g_blue_transmission.dat     lambda_c= 4.7421e+03  AB-Vega=-0.106
 231  27751    252 LRIS/Rs_LRISred_transmission.dat   +atm  lambda_c= 6.8186e+03  AB-Vega= 0.247
 232  28004    252 LRIS/Rs_LRISred_transmission.dat     lambda_c= 6.8214e+03  AB-Vega= 0.250
+233  28257    133 hst/ACS_update_sep07/wfc_f435w_t81.dat  obs_AFTER_7-4-06+rebin-5A  lambda_c= 4.3189e+03  AB-Vega=-0.104
+234  28391    121 hst/ACS_update_sep07/wfc_f475w_t81.dat  obs_AFTER_7-4-06+rebin-5A  lambda_c= 4.7469e+03  AB-Vega=-0.100
+235  28513    118 hst/ACS_update_sep07/wfc_f555w_t81.dat  obs_AFTER_7-4-06+rebin-5A  lambda_c= 5.3610e+03  AB-Vega=-0.009
+236  28632    173 hst/ACS_update_sep07/wfc_f606w_t81.dat  obs_AFTER_7-4-06+rebin-5A  lambda_c= 5.9211e+03  AB-Vega= 0.083
+237  28806     88 hst/ACS_update_sep07/wfc_f625w_t81.dat  obs_AFTER_7-4-06+rebin-5A  lambda_c= 6.3114e+03  AB-Vega= 0.158
+238  28895     86 hst/ACS_update_sep07/wfc_f775w_t81.dat  obs_AFTER_7-4-06+rebin-5A  lambda_c= 7.6924e+03  AB-Vega= 0.384
+239  28982    117 hst/ACS_update_sep07/wfc_f814w_t81.dat  obs_AFTER_7-4-06+rebin-5A  lambda_c= 8.0570e+03  AB-Vega= 0.419
+240  29100    102 hst/ACS_update_sep07/wfc_f850lp_t81.dat  obs_AFTER_7-4-06+rebin-5A  lambda_c= 9.0331e+03  AB-Vega= 0.517
+241  29203    154 hst/wfc3/IR/f110w.dat     lambda_c= 1.1534e+04  AB-Vega= 0.755
