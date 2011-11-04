@@ -320,9 +320,9 @@ void getparams()
    struct param_data params[NKEY] = {
      // USE hyperz format as base
      //   {"AOVSED", 0, "NIL"},  // Vega SED
-     {"FILTERS_RES", 0 , "FILTER.RES.v1.R300","Filter transmission data (http://www.astro.yale.edu/eazy/filters/index.html)"},            // 0 
-     {"TEMPLATES_FILE", 0, "templates/eazy_v1.0.spectra.param","Template definition file"},       // 1 
-     {"WAVELENGTH_FILE",0,"templates/lambda.def","Wavelength grid definition file"},    // 2
+     {"FILTERS_RES", 0 , "FILTER.RES.latest","Filter transmission data"},            // 0 
+     {"TEMPLATES_FILE", 0, "templates/eazy_v1.1_lines.spectra.param","Template definition file"},       // 1 
+     {"WAVELENGTH_FILE",0,"templates/EAZY_v1.1_lines/lambda_v1.1.def","Wavelength grid definition file"},    // 2
      {"TEMP_ERR_FILE",0,"templates/TEMPLATE_ERROR.eazy_v1.0","Template error definition file"},     // 3 
      {"CATALOG_FILE", 0, "hdfn_fs99_eazy.cat","Catalog data file"},                      // 4
      {"NOT_OBS_THRESHOLD",0, "-90","Ignore flux point if <NOT_OBS_THRESH"},  // 5
@@ -342,7 +342,7 @@ void getparams()
      {"Z_STEP",0,"0.01","Redshift step size"},                                //19
      {"Z_STEP_TYPE",0,"1"," 0 = ZSTEP, 1 = Z_STEP*(1+z)"},                    //20
      {"TEMPLATE_COMBOS",0,"a","Template combination options: "},// 21
-     {"TEMP_ERR_A2",0,"1.00","Template error amplitude"}, // 22
+     {"TEMP_ERR_A2",0,"0.50","Template error amplitude"}, // 22
      {"SYS_ERR",0,"0.00","Systematic flux error (% of flux)"},                // 23
      {"APPLY_IGM",0,"y","Apply Madau 1995 IGM absorption"},                   // 24
      {"FIX_ZSPEC",0,"n","Fix redshift to catalog zspec"},                     // 25
@@ -358,7 +358,7 @@ void getparams()
      {"CACHE_FILE",0,"photz.tempfilt","Template cache file (in OUTPUT_DIRECTORY)"}, //35
      {"FILTER_FORMAT",0,"1","Format of FILTERS_RES file -- 0: energy-  1: photon-counting detector"}, //36
      {"GET_ZP_OFFSETS",0,"n","Look for zphot.zeropoint file and compute zeropoint offsets"}, //37
-     {"ZP_OFFSET_TOL",0,"1.e-4","Tolerance for iterative fit for zeropoint offsets"}, //38
+     {"ZP_OFFSET_TOL",0,"1.e-4","Tolerance for iterative fit for zeropoint offsets [not implemented]"}, //38
      {"CHI2_SCALE",0,"1.0","Scale ML Chi-squared values to improve confidence intervals"}, //39
      {"BINARY_OUTPUT",0,"y","Save OBS_SED, TEMP_SED, PZ in binary format to read with e.g IDL"}, //40
      {"REST_FILTERS",0,"---","Comma-separated list of rest frame filters to compute"}, //41
@@ -523,9 +523,9 @@ void printparams_logfile(FILE *fp)
    struct param_data params[NKEY] = {
      // USE hyperz format as base
      //   {"AOVSED", 0, "NIL"},  // Vega SED
-     {"FILTERS_RES", 0 , "FILTER.RES.v1.R300","Filter transmission data (http://www.astro.yale.edu/eazy/filters/index.html)"},            // 0 
-     {"TEMPLATES_FILE", 0, "templates/eazy_v1.0.spectra.param","Template definition file"},       // 1 
-     {"WAVELENGTH_FILE",0,"template/lambda.def","Wavelength grid definition file"},    // 2
+     {"FILTERS_RES", 0 , "FILTER.RES.latest","Filter transmission data"},            // 0 
+     {"TEMPLATES_FILE", 0, "templates/eazy_v1.1_lines.spectra.param","Template definition file"},       // 1 
+     {"WAVELENGTH_FILE",0,"template/EAZY_v1.1_lines/lambda_v1.1.def","Wavelength grid definition file"},    // 2
      {"TEMP_ERR_FILE",0,"templates/TEMPLATE_ERROR.eazy_v1.0","Template error definition file"},     // 3 
      {"CATALOG_FILE", 0, "hdfn_fs99_eazy.cat","Catalog data file"},                      // 4
      {"NOT_OBS_THRESHOLD",0, "-90","Ignore flux point if <NOT_OBS_THRESH"},  // 5
@@ -545,7 +545,7 @@ void printparams_logfile(FILE *fp)
      {"Z_STEP",0,"0.01","Redshift step size"},                                //19
      {"Z_STEP_TYPE",0,"1"," 0 = ZSTEP, 1 = Z_STEP*(1+z)"},                    //20
      {"TEMPLATE_COMBOS",0,"a","Template combination options: "},// 21
-     {"TEMP_ERR_A2",0,"1.00","Template error amplitude"}, // 22
+     {"TEMP_ERR_A2",0,"0.50","Template error amplitude"}, // 22
      {"SYS_ERR",0,"0.00","Systematic flux error (% of flux)"},                // 23
      {"APPLY_IGM",0,"y","Apply Madau 1995 IGM absorption"},                   // 24
      {"FIX_ZSPEC",0,"n","Fix redshift to catalog zspec"},                     // 25
@@ -561,7 +561,7 @@ void printparams_logfile(FILE *fp)
      {"CACHE_FILE",0,"photz.tempfilt","Template cache file (in OUTPUT_DIRECTORY)"}, //35
      {"FILTER_FORMAT",0,"1","Format of FILTERS_RES file -- 0: energy-  1: photon-counting detector"}, //36
      {"GET_ZP_OFFSETS",0,"n","Look for zphot.zeropoint file and compute zeropoint offsets"}, //37
-     {"ZP_OFFSET_TOL",0,"1.e-4","Tolerance for iterative fit for zeropoint offsets"}, //38
+     {"ZP_OFFSET_TOL",0,"1.e-4","Tolerance for iterative fit for zeropoint offsets [not implemented]"}, //38
      {"CHI2_SCALE",0,"1.0","Scale ML Chi-squared values to improve confidence intervals"}, //39
      {"BINARY_OUTPUT",0,"y","Save OBS_SED, TEMP_SED, PZ in binary format to read with e.g IDL"}, //40
      {"REST_FILTERS",0,"---","Comma-separated list of rest frame filters to compute"}, //41
