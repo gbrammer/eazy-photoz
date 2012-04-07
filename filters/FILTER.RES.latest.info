@@ -243,3 +243,9 @@
 239  28982    117 hst/ACS_update_sep07/wfc_f814w_t81.dat  obs_AFTER_7-4-06+rebin-5A  lambda_c= 8.0570e+03  AB-Vega= 0.419
 240  29100    102 hst/ACS_update_sep07/wfc_f850lp_t81.dat  obs_AFTER_7-4-06+rebin-5A  lambda_c= 9.0331e+03  AB-Vega= 0.517
 241  29203    154 hst/wfc3/IR/f110w.dat     lambda_c= 1.1534e+04  AB-Vega= 0.755
+242  29358    234 hst/wfc3/UVIS/f475x.dat     lambda_c= 4.9414e+03  AB-Vega=-0.051
+243  29593    253 hst/wfc3/UVIS/f600lp.dat     lambda_c= 7.4505e+03  AB-Vega= 0.321
+244  29847    117 WISE/RSR-W1.txt     lambda_c= 3.3682e+04  AB-Vega= 2.661
+245  29965     97 WISE/RSR-W2.txt     lambda_c= 4.6179e+04  AB-Vega= 3.301
+246  30063    446 WISE/RSR-W3.txt     lambda_c= 1.2073e+05  AB-Vega= 5.135
+247  30510    120 WISE/RSR-W4.txt     lambda_c= 2.2194e+05  AB-Vega= 6.610
