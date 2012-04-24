@@ -249,3 +249,15 @@
 245  29965     97 WISE/RSR-W2.txt     lambda_c= 4.6179e+04  AB-Vega= 3.301
 246  30063    446 WISE/RSR-W3.txt     lambda_c= 1.2073e+05  AB-Vega= 5.135
 247  30510    120 WISE/RSR-W4.txt     lambda_c= 2.2194e+05  AB-Vega= 6.610
+248  30631     69 FOURSTAR/J_cam_optics_sky.txt     lambda_c= 1.2405e+04  AB-Vega= 0.892
+249  30701     64 FOURSTAR/J1_cam_optics_sky.txt     lambda_c= 1.0540e+04  AB-Vega= 0.653
+250  30766     80 FOURSTAR/J2_cam_optics_sky.txt     lambda_c= 1.1448e+04  AB-Vega= 0.771
+251  30847     47 FOURSTAR/J3_cam_optics_sky.txt     lambda_c= 1.2802e+04  AB-Vega= 0.954
+252  30895     71 FOURSTAR/H_cam_optics_sky.txt     lambda_c= 1.6180e+04  AB-Vega= 1.333
+253  30967     42 FOURSTAR/Hlong_cam_optics_sky.txt     lambda_c= 1.7020e+04  AB-Vega= 1.412
+254  31010     48 FOURSTAR/Hshort_cam_optics_sky.txt     lambda_c= 1.5544e+04  AB-Vega= 1.274
+255  31059     62 FOURSTAR/Ks_cam_optics_sky.txt     lambda_c= 2.1538e+04  AB-Vega= 1.824
+256  31122    747 VISTA/Y_system+atmos.dat  at80K_forETC+trans_10_10  lambda_c= 1.0217e+04  AB-Vega= 0.596
+257  31870    550 VISTA/J_system+atmos.dat     lambda_c= 1.2527e+04  AB-Vega= 0.911
+258  32421     90 VISTA/H_system+atmos.dat     lambda_c= 1.6433e+04  AB-Vega= 1.355
+259  32512    186 VISTA/Ks_system+atmos.dat     lambda_c= 2.1503e+04  AB-Vega= 1.819
