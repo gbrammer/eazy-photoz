@@ -261,3 +261,4 @@
 257  31870    550 VISTA/J_system+atmos.dat     lambda_c= 1.2527e+04  AB-Vega= 0.911
 258  32421     90 VISTA/H_system+atmos.dat     lambda_c= 1.6433e+04  AB-Vega= 1.355
 259  32512    186 VISTA/Ks_system+atmos.dat     lambda_c= 2.1503e+04  AB-Vega= 1.819
+260  32699    242 ESO/VIMOS/R.dat  Avg.Q1-Q4  lambda_c= 6.4427e+03  AB-Vega= 0.182
