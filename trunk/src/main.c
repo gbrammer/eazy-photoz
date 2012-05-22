@@ -103,7 +103,7 @@ int **temp_combine;
 
 filt_data **pusefilt;
 
-int CHECK_ZP_OFFSETS;
+int GET_ZP_OFFSETS;
 double ZP_OFFSET_TOL;
 
 int *zpfilterid, zpcontinue, *filt_to_col;

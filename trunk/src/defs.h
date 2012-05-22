@@ -87,22 +87,22 @@ extern double SYS_ERR;
 extern double TEMP_ERR_A2;
 extern int APPLY_IGM;  
 extern int FIX_ZSPEC;  
-double SCALE_2175_BUMP;
+extern double SCALE_2175_BUMP;
 
 extern filt_data filt_thru;
 extern filt_data **pusefilt;
 
-int iz,*idtemp1,*idtemp2a,*idtemp2b,**idtempall,ntemp_all,ngoodfilters,ncols;
-double *pz1,*pz2,*pzall,*chi2fit,*pzout,*atemp1,*atemp2a,*atemp2b,**coeffs;
+extern int iz,*idtemp1,*idtemp2a,*idtemp2b,**idtempall,ntemp_all,ngoodfilters,ncols;
+extern double *pz1,*pz2,*pzall,*chi2fit,*pzout,*atemp1,*atemp2a,*atemp2b,**coeffs;
 
 ///// Compute zeropoint offsets
-int GET_ZP_OFFSETS;
-double ZP_OFFSET_TOL;
-int *zpfilterid, zpcontinue, *filt_to_col;
-double *zpfactor;
+extern int GET_ZP_OFFSETS;
+extern double ZP_OFFSET_TOL;
+extern int *zpfilterid, zpcontinue, *filt_to_col;
+extern double *zpfactor;
 
 ///// Rest-frame filters
-char REST_FILTERS[1024],Z_COLUMN[512];
+extern char REST_FILTERS[1024],Z_COLUMN[512];
 extern int USE_ZSPEC_FOR_REST;
 extern int READ_ZBIN, ZBIN_OPENED;
 
@@ -129,7 +129,7 @@ extern double *tnorm;
 extern int **temp_combine;
 extern double *ztry,*zspec,*comovingdist,*zcomove;
 
-double *z_a, *z_p, *z_m1, *z_m2, *z_peak;
+extern double *z_a, *z_p, *z_m1, *z_m2, *z_peak;
 
 void getparams();
 void printparams_logfile(); 
