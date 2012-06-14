@@ -262,3 +262,8 @@
 258  32421     90 VISTA/H_system+atmos.dat     lambda_c= 1.6433e+04  AB-Vega= 1.355
 259  32512    186 VISTA/Ks_system+atmos.dat     lambda_c= 2.1503e+04  AB-Vega= 1.819
 260  32699    242 ESO/VIMOS/R.dat  Avg.Q1-Q4  lambda_c= 6.4427e+03  AB-Vega= 0.182
+261  32942     67 UKIDSS/Table02_online.dat  Hewitt_WFCAM_Z  lambda_c= 8.8262e+03  AB-Vega= 0.508
+262  33010     68 UKIDSS/Table03_online.dat  Hewitt_WFCAM_Y  lambda_c= 1.0315e+04  AB-Vega= 0.610
+263  33079     75 UKIDSS/Table04_online.dat  Hewitt_WFCAM_J  lambda_c= 1.2502e+04  AB-Vega= 0.912
+264  33155    103 UKIDSS/Table05_online.dat  Hewitt_WFCAM_H  lambda_c= 1.6360e+04  AB-Vega= 1.348
+265  33259     83 UKIDSS/Table06_online.dat  Hewitt_WFCAM_K  lambda_c= 2.2060e+04  AB-Vega= 1.868
