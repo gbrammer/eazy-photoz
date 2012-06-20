@@ -105,6 +105,7 @@ extern double *zpfactor;
 extern char REST_FILTERS[1024],Z_COLUMN[512];
 extern int USE_ZSPEC_FOR_REST;
 extern int READ_ZBIN, ZBIN_OPENED;
+extern double RF_PADDING;
 
 extern int *filt_defnum;
 extern long nfilter;

@@ -43,7 +43,9 @@ void rest_frame_colors() {
     double *zuse,ztest,zrest;
     double comove, DM;
     double chi2_fit,temp_flux_filt1, temp_flux_filt2;
-
+    
+    dlc = RF_PADDING;
+    
     void interrest(long iobj, long izrest, int i_rf, double *interrest_flux, int *flag);
     // double irest_flux;
     // int irest_flag;
@@ -59,12 +61,12 @@ void rest_frame_colors() {
     if (nrestfilt == 1) {
         lcmin=lambdac[nusefilt];
         lcmax=lambdac[nusefilt];
-        dlc=1000;
+        // dlc=1000;
         sprintf(outparfile,"%s/%s.%d.rf.param",OUTPUT_DIRECTORY,MAIN_OUTPUT_FILE,filt_defnum[nusefilt]);
         sprintf(outrffile,"%s/%s.%d.rf",OUTPUT_DIRECTORY,MAIN_OUTPUT_FILE,filt_defnum[nusefilt]);
         sprintf(coeffile,"%s/%s.%d.coeff",OUTPUT_DIRECTORY,MAIN_OUTPUT_FILE,filt_defnum[nusefilt]);
     } else {
-        dlc=1000;
+        // dlc=1000;
         if (lambdac[nusefilt] > lambdac[nusefilt+1]) {
             lcmin=lambdac[nusefilt+1];
             lcmax=lambdac[nusefilt];
