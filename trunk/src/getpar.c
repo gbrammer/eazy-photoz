@@ -351,7 +351,7 @@ void getparams()
      {"APPLY_IGM",0,"y","Apply Madau 1995 IGM absorption"},                   // 24
      {"FIX_ZSPEC",0,"n","Fix redshift to catalog zspec"},                     // 25
      {"APPLY_PRIOR",0,"y","Apply apparent magnitude prior"},                          // 26
-     {"PRIOR_FILE",0,"templates/prior_K_zmax7.dat","File containing prior grid"},       // 27
+     {"PRIOR_FILE",0,"templates/prior_K_extend.dat","File containing prior grid"},       // 27
      {"PRIOR_ABZP",0,"25.0","AB zeropoint of fluxes in catalog.  Needed for calculating apparent mags!"},             // 28
      {"PRIOR_FILTER",0,"28","Filter from FILTER_RES corresponding to the columns in PRIOR_FILE"}, //29
      {"NMF_TOLERANCE",0,"1.e-4","Tolerance for non-negative combinations (TEMPLATE_COMBOS=a)"}, //30
@@ -556,7 +556,7 @@ void printparams_logfile(FILE *fp)
      {"APPLY_IGM",0,"y","Apply Madau 1995 IGM absorption"},                   // 24
      {"FIX_ZSPEC",0,"n","Fix redshift to catalog zspec"},                     // 25
      {"APPLY_PRIOR",0,"y","Apply apparent magnitude prior"},                          // 26
-     {"PRIOR_FILE",0,"templates/prior_K_zmax7.dat","File containing prior grid"},       // 27
+     {"PRIOR_FILE",0,"templates/prior_K_extend.dat","File containing prior grid"},       // 27
      {"PRIOR_ABZP",0,"25.0","AB zeropoint of fluxes in catalog.  Needed for calculating apparent mags!"},             // 28
      {"PRIOR_FILTER",0,"28","Filter from FILTER_RES corresponding to the columns in PRIOR_FILE"}, //29
      {"NMF_TOLERANCE",0,"1.e-4","Tolerance for non-negative combinations (TEMPLATE_COMBOS=a)"}, //30
