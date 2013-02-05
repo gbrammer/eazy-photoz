@@ -215,7 +215,7 @@ void interpolate_prior(double **priorkz_first, double **priorkz_out, double *pri
       //          printf("prior %ld %lf %lf\n",mag,ztry[iz],priorkz_out[mag][iz]);
             }
             //// Enforce minimum prior
-            if (priorkz_out[mag][iz] < 1.e-8) priorkz_out[mag][iz] = 1.e-8;
+            //if (priorkz_out[mag][iz] < 1.e-20) priorkz_out[mag][iz] = 1.e-20;
         }  
     }
     

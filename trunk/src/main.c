@@ -599,6 +599,15 @@ int main(int argc, char **argv) {
             } else {
                 apply_prior(priorkz,NZ,NK_prior,izbest,chi2fit,fnu[iobj][PRIOR_FILTER_IDX],&izprior,pzout);
                 klim_idx[iobj] = (int32_t) Kcolumn;
+                pztot=0.; 
+                for (i=1;i<NZ;++i) pztot+=pzout[i];
+                if ((pztot == 0) | isnan(pztot)) {
+                    printf("Sum p(z) = 0, check this object and the prior: ");
+                    pzout[0] = 1.;
+                    izprior = 0;
+                    chi2fit[0] = 1.e8;
+                    for (i=1;i<NZ;++i) pzout[i] = 0;
+                }
             }
             
             z_p[iobj] = ztry[izprior];
