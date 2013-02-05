@@ -470,9 +470,10 @@ int main(int argc, char **argv) {
       oneFiltGTzero=0;
       for(j=0;j<nusefilt;++j) {
           if (fnu[iobj][j] > NOT_OBS_THRESHOLD && efnu[iobj][j] > 0) {
-              if (fabs(fnu[iobj][j])/efnu[iobj][j] > 1) ++oneFiltGTzero;              
+              if ((fnu[iobj][j]/efnu[iobj][j]) > 1) ++oneFiltGTzero;              
               ++ngoodfilters;
               okfilt[j] = 1;
+              //printf("%lf %lf %lf\n", fnu[iobj][j],efnu[iobj][j],fnu[iobj][j]/efnu[iobj][j]);
           } else okfilt[j] = 0;
       }
       
