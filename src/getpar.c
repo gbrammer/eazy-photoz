@@ -7,7 +7,7 @@ struct param_data {
      char comment[1024];
      };
 
-#define NKEY 48
+#define NKEY 49
 
 void assign_par(int i, char *arg) {
   switch (i) {
@@ -302,6 +302,15 @@ void assign_par(int i, char *arg) {
     RF_PADDING = atof(arg);
     printf("RF_PADDING: %lf\n",RF_PADDING);
     break;
+  case 48:
+    if (*arg=='n' || *arg=='N' || *arg=='0') RF_ERRORS = 0;
+    else if (*arg=='y' || *arg=='Y' || *arg=='1') RF_ERRORS = 1;
+    else {
+        fprintf(stderr,"\n RF_ERRORS:  bad value, %s\n",arg);
+        exit(1);
+    }
+    printf("RF_ERRORS: %c\n",*arg);
+    break;
   default:   
     fprintf(stderr,"I shouldn't be here!!\n");
     fprintf(stderr,"%d -- %s\n",i,arg);
@@ -371,7 +380,8 @@ void getparams()
      {"MAGNITUDES",0,"n","Catalog photometry in magnitudes rather than f_nu fluxes"}, //44
      {"SCALE_2175_BUMP",0,"0.00","Scaling of 2175A bump.  Values 0.13 (0.27) absorb ~10 (20) % at peak."}, //45
      {"READ_ZBIN",0,"n","Get redshifts from OUTPUT_DIRECTORY/MAIN_OUTPUT_FILE.zbin rather than fitting them."}, //46
-     {"RF_PADDING",0,"1000.","Padding (Ang) for choosing observed filters around specified rest-frame pair."} //47
+     {"RF_PADDING",0,"1000.","Padding (Ang) for choosing observed filters around specified rest-frame pair."}, //47
+     {"RF_ERRORS",0,"n","Compute RF color errors from p(z)"} //48
    };
 
   
@@ -453,6 +463,7 @@ void getparams()
         fprintf(fp,"\n## Rest-frame colors\n");
         i=41; fprintf(fp,"%-20s %-18s # %s\n",params[i].name,params[i].default_value,params[i].comment); // REST_FILTERS
         i=47; fprintf(fp,"%-20s %-18s # %s\n",params[i].name,params[i].default_value,params[i].comment); // RF_PADDING
+        i=48; fprintf(fp,"%-20s %-18s # %s\n",params[i].name,params[i].default_value,params[i].comment); // RF_ERRORS
         i=42; fprintf(fp,"%-20s %-18s # %s\n",params[i].name,params[i].default_value,params[i].comment); // Z_COLUMN
         i=43; fprintf(fp,"%-20s %-18s # %s\n",params[i].name,params[i].default_value,params[i].comment); // USE_ZSPEC_FOR_REST
         i=46; fprintf(fp,"%-20s %-18s # %s\n",params[i].name,params[i].default_value,params[i].comment); // READ_ZBIN
@@ -646,6 +657,7 @@ void printparams_logfile(FILE *fp)
     fprintf(fp,"\n## Rest-frame colors\n");
       i=41; fprintf(fp,"%-20s %-18s # %s\n",params[i].name,REST_FILTERS,params[i].comment); // REST_FILTERS
       i=47; fprintf(fp,"%-20s %-18.0f # %s\n",params[i].name,RF_PADDING,params[i].comment); // RF_PADDING
+      i=48; fprintf(fp,"%-20s %-18i # %s\n",params[i].name,RF_ERRORS,params[i].comment); // RF_ERRORS
       i=42; fprintf(fp,"%-20s %-18s # %s\n",params[i].name,Z_COLUMN,params[i].comment); // Z_COLUMN
       i=43; fprintf(fp,"%-20s %-18i # %s\n",params[i].name,USE_ZSPEC_FOR_REST,params[i].comment); // USE_ZSPEC_FOR_REST
       i=46; fprintf(fp,"%-20s %-18s # %s\n",params[i].name,ZBIN_FILE,params[i].comment); // READ_ZBIN

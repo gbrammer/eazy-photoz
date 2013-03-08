@@ -13,6 +13,11 @@ void init_rf_file(FILE *fprf) {
     
     fprintf(fprf,"# id z DM nfilt_fit chi2_fit ");
     for (i=0;i<nrestfilt;++i) fprintf(fprf,"  L%d",filt_defnum[nusefilt+i]);
+    
+    if (RF_ERRORS & APPLY_PRIOR) {
+        fprintf(fprf, "  p16 p84 p025 p975");
+    }
+    
     fprintf(fprf,"\n#\n");
 
     for (i=0;i<nrestfilt;++i) fprintf(fprf,"# %d: %s, %13.5le\n",filt_defnum[nusefilt+i],pusefilt[nusefilt+i]->filtname,lambdac[nusefilt+i]);
@@ -52,7 +57,33 @@ void rest_frame_colors() {
     
     int32_t NOBJ32, NRESTFILT32, NTEMP32;
     FILE *fpcoeff;
+    
+    //// Full rest-frame color grid
+    char pz_file[1024];
+    FILE *pzf;    
+    int32_t pzdummy;
+    double *chi2_fit_full, *colors_z, color_blue, color_red, pztot;
+    double *colors_sort, *colors_cumprob, color_lo, color_hi;
+    
+    long NZ_prior, NK_prior, izbest, izprior, *colors_sort_idx, icolor;
         
+    //// Open ".pz" file for getting p(z)
+    if (RF_ERRORS & APPLY_PRIOR) {
+        sprintf(pz_file,"%s/%s.pz",OUTPUT_DIRECTORY,MAIN_OUTPUT_FILE);
+        pzf = fopen(pz_file,"r");
+        fread(&pzdummy,sizeof(int32_t),1,pzf); // NZ
+        fread(&pzdummy,sizeof(int32_t),1,pzf); // nobj
+        
+        chi2_fit_full = malloc(sizeof(double)*NZ);
+        colors_z = malloc(sizeof(double)*NZ);
+        colors_sort = malloc(sizeof(double)*NZ);
+        colors_cumprob = malloc(sizeof(double)*NZ);
+        colors_sort_idx = malloc(sizeof(long)*NZ);
+        
+        get_prior_file_size(&NZ_prior, &NK_prior);
+    
+    }
+    	
     /////////////////////////////////////////////////////////////////
     ////
     ////            New output param file for RF filters
@@ -282,9 +313,78 @@ void rest_frame_colors() {
             // interrest(iobj,izuse[iobj],1,&irest_flux, &irest_flag);
             // fprintf(fplog,"%14.5e",irest_flux);
         }
-        fprintf(fplog,"\n");
            
         if (BINARY_OUTPUT) fwrite(coeffs[izuse[iobj]],sizeof(double)*NTEMP_REST,1,fpcoeff);            
+        
+        //// Do fit for coefficients at *all* redshifts
+        if (RF_ERRORS & APPLY_PRIOR) {
+            
+            //// Read p(z) from the .pz file
+            fread(chi2_fit_full,sizeof(double)*NZ,1,pzf); // nobj
+            izbest = 0;
+            apply_prior(priorkz, NZ, NK_prior, izbest, chi2_fit_full, 
+                        fnu[iobj][PRIOR_FILTER_IDX], &izprior, pzout);
+
+            //// Normalization of p(z)
+            pztot = 0.; 
+            for (i=0; i<NZ; ++i) pztot += pzout[i];
+            //fprintf(stderr, "PZTOT: %.3f\n", pztot);
+            
+            //printf("ID: %s, zp=%.3f, %.3f\n", strfmt, ztry[izprior], z_p[iobj]);
+
+            if ((pztot == 0) | isnan(pztot)) {
+                fprintf(stderr, "\n[%s] Sum p(z) = 0, check this object and the prior\n", strfmt);
+                fprintf(fplog, " %.3f  %.3f", 0., 0.);
+                fprintf(fplog, " %.3f  %.3f\n", 0., 0.);
+                continue;
+            }
+                                
+            //// Get fit coefficients on the redshift grid
+            getzStatus = getphotz(iobj, pz1, idtemp1, atemp1, 
+                        pz2, idtemp2a, idtemp2b, atemp2a, atemp2b,
+                        pzall, idtempall, coeffs, &ntemp_all, -1);
+            
+            //// Compute the RF color on the redshift grid
+            for (i=0; i<NZ; ++i) {
+                color_blue=0.;
+                color_red=0.;
+                for (j=0;j<NTEMP_REST;++j) {
+                    color_blue += coeffs[i][j]*tempfilt_rest[0][j][nusefilt];
+                    color_red += coeffs[i][j]*tempfilt_rest[0][j][nusefilt+1];
+                }                        
+                colors_z[i] = -2.5*log10(color_blue/color_red);
+                colors_sort[i] = -2.5*log10(color_blue/color_red);
+            }
+            
+            //// Sort by colors
+            qsort (colors_sort, NZ, sizeof (double), compare_doubles);
+            for (i=0;i<NZ;++i) for (j=0;j<NZ;++j) if (colors_z[i] == colors_sort[j]) colors_sort_idx[j] = i;
+            
+            //// Cumulative probability from p(z) on sorted colors
+            colors_cumprob[0] = pzout[colors_sort_idx[0]]/pztot;
+            for (i=1;i<NZ;++i) colors_cumprob[i] = colors_cumprob[i-1]+pzout[colors_sort_idx[i]]/pztot;
+            
+            //for (i=0;i<NZ;++i) printf("%d  %.4f  %.4e\n", iobj, colors_sort[i], colors_cumprob[i]);
+            
+            //// Interpolate cumulative probability to get confidence intervals
+            icolor=0;
+            interpol(0.16, &color_lo, colors_cumprob, colors_sort, NZ, &icolor);
+            interpol(0.84, &color_hi, colors_cumprob, colors_sort, NZ, &icolor);
+            
+            fprintf(fplog, " %.3f  %.3f", color_lo, color_hi);
+            
+            icolor=0;
+            interpol(0.025, &color_lo, colors_cumprob, colors_sort, NZ, &icolor);
+            interpol(0.975, &color_hi, colors_cumprob, colors_sort, NZ, &icolor);
+            
+            fprintf(fplog, " %.3f  %.3f", color_lo, color_hi);
+            
+            // printf("\n\nColor: %.2f (%.2f  -- %.2f) / tot:%.2f\n\n", 
+            //        -2.5*log10(temp_flux_filt1/temp_flux_filt2), color_lo, 
+            //        color_hi, colors_cumprob[i-1]);
+        }
+        
+        fprintf(fplog,"\n");
         
     }
     
@@ -294,6 +394,11 @@ void rest_frame_colors() {
         fwrite(tnorm,sizeof(double)*NTEMP_REST,1,fpcoeff);
         fclose(fpcoeff);            
     }
+}
+
+/// Rest-frame colors with uncertainties, draw from p(z)
+void draw_rest_frame_colors() {
+
 }
 
 void interrest(long iobj, long izrest, int i_rf, double *interrest_flux, int *flag) {
@@ -421,4 +526,3 @@ void interrest(long iobj, long izrest, int i_rf, double *interrest_flux, int *fl
     }
     
 }
-
