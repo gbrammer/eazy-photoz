@@ -1,7 +1,8 @@
 #include "defs.h"
 
 //char EAZY_VERSION[] = "v1.1.11 (June 17, 2011)";
-char EAZY_VERSION[] = "$Rev$";
+// char EAZY_VERSION[] = "$Rev$";
+char EAZY_VERSION[] = "$Date:";
 // Last update: $Date$
 // $URL$
 // $Author$
