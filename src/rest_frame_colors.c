@@ -243,7 +243,13 @@ void rest_frame_colors() {
         
         if (ngoodfilters < N_MIN_COLORS || izuse[iobj] < 0) {
             fprintf(fplog,"%s %8.5f %6.2f %3d %13.5e",strfmt,zrest, -99.,-99,-99.);
+            
             for (i=0;i<nrestfilt;++i) fprintf(fplog,"%14.5e",-99.);
+            
+            if (RF_ERRORS & APPLY_PRIOR) {
+                fprintf(fplog, "  -99 -99 -99 -99");
+            }
+            
             fprintf(fplog,"\n");
             if (BINARY_OUTPUT) fwrite(coeffs[0],sizeof(double)*NTEMP_REST,1,fpcoeff);            
             continue; //// next object
