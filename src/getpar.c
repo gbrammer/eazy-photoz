@@ -586,7 +586,9 @@ void printparams_logfile(FILE *fp)
      {"USE_ZSPEC_FOR_REST",0,"y","Use z_spec when available for rest-frame colors"}, //43
      {"MAGNITUDES",0,"n","Catalog photometry in magnitudes rather than f_nu fluxes"}, //44
      {"SCALE_2175_BUMP",0,"0.00","Scaling of 2175A bump.  Values 0.13 (0.27) absorb ~10 (20) % at peak."}, //45
-     {"READ_ZBIN",0,"n","Get redshifts from OUTPUT_DIRECTORY/MAIN_OUTPUT_FILE.zbin rather than fitting them."} //46
+     {"READ_ZBIN",0,"n","Get redshifts from OUTPUT_DIRECTORY/MAIN_OUTPUT_FILE.zbin rather than fitting them."}, //46
+     {"RF_PADDING",0,"1000.","Padding (Ang) for choosing observed filters around specified rest-frame pair."}, //47
+     {"RF_ERRORS",0,"n","Compute RF color errors from p(z)"} //48
    };
 
 
