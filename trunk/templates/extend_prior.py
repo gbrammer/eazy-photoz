@@ -1,5 +1,6 @@
 import numpy as np
 import scipy
+import matplotlib.pyplot as plt
 
 """
 Use the prior coeff file to extrapoate the eazy prior to arbitrarily high redshift and faint magnitudes.
@@ -56,7 +57,7 @@ def go(mags=(15,30.1,0.5), redshifts=(0.01, 12, 0.01), coeff_file='prior_K_zmax7
     
     fp = open(outfile,'w')
     fp.write(header+'\n')
-    np.savetxt(fp, out_matrix, fmt='%6.3f')
+    np.savetxt(fp, out_matrix, fmt='%6.3e')
     fp.close()
     
     
