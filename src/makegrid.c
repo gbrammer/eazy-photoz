@@ -216,7 +216,7 @@ void get_column_defs(char *buff) {
         strcpy(col_data[i],arg);
     }
         
-    translate_columns(col_data,ncol);
+    translate_columns(); //col_data,ncol);
      
     if (GET_ZP_OFFSETS) read_zeropoint_file();
     

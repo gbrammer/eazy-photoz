@@ -224,7 +224,10 @@ void rest_frame_colors() {
           if ((iobj % (nobj/10))==0) fprintf(stderr,">");
 
         zrest = zuse[iobj];
-
+        
+        //// Read p(z) from the .pz file
+        if (RF_ERRORS & APPLY_PRIOR) fread(chi2_fit_full,sizeof(double)*NZ,1,pzf);
+        
         strcpy(strfmt,objid[iobj]);
         i=0; while (strfmt[i] != '\0') ++i;
         --i; while (i<=idsize && i < 62) strfmt[++i] = ' '; // max size of objid: IDBUFF=64
@@ -325,15 +328,17 @@ void rest_frame_colors() {
         //// Do fit for coefficients at *all* redshifts
         if (RF_ERRORS & APPLY_PRIOR) {
             
-            //// Read p(z) from the .pz file
-            fread(chi2_fit_full,sizeof(double)*NZ,1,pzf); // nobj
             izbest = 0;
             apply_prior(priorkz, NZ, NK_prior, izbest, chi2_fit_full, 
                         fnu[iobj][PRIOR_FILTER_IDX], &izprior, pzout);
 
-            //// Normalization of p(z)
+            //// Normalization of p(z), make pzout = pzout * dz so can sum directly
             pztot = 0.; 
-            for (i=0; i<NZ; ++i) pztot += pzout[i];
+            pzout[0] *= 0;
+            for (i=1; i<NZ; ++i) {
+                pzout[i] *= ztry[i]-ztry[i-1];
+                pztot += pzout[i];
+            }
             //fprintf(stderr, "PZTOT: %.3f\n", pztot);
             
             //printf("ID: %s, zp=%.3f, %.3f\n", strfmt, ztry[izprior], z_p[iobj]);
@@ -356,10 +361,16 @@ void rest_frame_colors() {
                 color_red=0.;
                 for (j=0;j<NTEMP_REST;++j) {
                     color_blue += coeffs[i][j]*tempfilt_rest[0][j][nusefilt];
-                    color_red += coeffs[i][j]*tempfilt_rest[0][j][nusefilt+1];
+                    if (nrestfilt == 2) {
+                        color_red += coeffs[i][j]*tempfilt_rest[0][j][nusefilt+1];
+                    } else {
+                        color_red = 1.;
+                    }
                 }                        
-                colors_z[i] = -2.5*log10(color_blue/color_red);
-                colors_sort[i] = -2.5*log10(color_blue/color_red);
+                //colors_z[i] = -2.5*log10(color_blue/color_red);
+                //colors_sort[i] = -2.5*log10(color_blue/color_red);
+                colors_z[i] = (color_blue/color_red);
+                colors_sort[i] = (color_blue/color_red);
             }
             
             //// Sort by colors
