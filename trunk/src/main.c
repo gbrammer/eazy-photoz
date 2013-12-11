@@ -7,7 +7,7 @@ char EAZY_VERSION[] = "$Date$";
 // $URL$
 // $Author$
 
-// dummy string to update version x
+// dummy string to update version xx
 
 double CHI2_SCALE;
 long RandSeed=-1;
