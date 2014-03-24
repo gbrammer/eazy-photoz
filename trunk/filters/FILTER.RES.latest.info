@@ -263,7 +263,13 @@
   263 UKIDSS/Table04_online.dat Hewitt_WFCAM_J lambda_c= 1.2502e+04 AB-Vega= 0.912
   264 UKIDSS/Table05_online.dat Hewitt_WFCAM_H lambda_c= 1.6360e+04 AB-Vega= 1.348
   265 UKIDSS/Table06_online.dat Hewitt_WFCAM_K lambda_c= 2.2060e+04 AB-Vega= 1.868
-  266 VLT/hawki_y_ETC.dat +atm  lambda_c= 1.0207e+04 AB-Vega=0.597
-  267 VLT/hawki_j_ETC.dat +atm  lambda_c= 1.2574e+04 AB-Vega=0.925
-  268 VLT/hawki_h_ETC.dat +atm  lambda_c= 1.6193e+04 AB-Vega=1.337
-  269 VLT/hawki_k_ETC.dat +atm  lambda_c= 2.1524e+04 AB-Vega=1.826
+  266 VLT/hawki_y_ETC.dat +atm lambda_c= 1.0207e+04 AB-Vega=0.597
+  267 VLT/hawki_j_ETC.dat +atm lambda_c= 1.2574e+04 AB-Vega=0.925
+  268 VLT/hawki_h_ETC.dat +atm lambda_c= 1.6193e+04 AB-Vega=1.337
+  269 VLT/hawki_k_ETC.dat +atm lambda_c= 2.1524e+04 AB-Vega=1.826
+  270 RestUV/Tophat_1400_200.dat lambda_c= 1.3985e+03 AB-Vega=2.519
+  271 RestUV/Tophat_1700_200.dat lambda_c= 1.6989e+03 AB-Vega=1.916
+  272 RestUV/Tophat_2200_200.dat lambda_c= 2.1993e+03 AB-Vega=1.691
+  273 RestUV/Tophat_2700_200.dat lambda_c= 2.6994e+03 AB-Vega=1.504
+  274 RestUV/Tophat_2800_200.dat lambda_c= 2.7996e+03 AB-Vega=1.465
+  275 RestUV/Tophat_5500_200.dat lambda_c= 5.5002e+03 AB-Vega=0.010
