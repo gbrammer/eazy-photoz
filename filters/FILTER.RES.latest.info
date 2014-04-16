@@ -273,3 +273,12 @@
   273 RestUV/Tophat_2700_200.dat lambda_c= 2.6994e+03 AB-Vega=1.504
   274 RestUV/Tophat_2800_200.dat lambda_c= 2.7996e+03 AB-Vega=1.465
   275 RestUV/Tophat_5500_200.dat lambda_c= 5.5002e+03 AB-Vega=0.010
+  276 VLT/VST.OCam.B.dat ETC_A-D_withADC lambda_c= 4.4458e+03 AB-Vega=-0.116
+  277 VLT/VST.OCam.V.dat ETC_A-D_withADC lambda_c= 5.5013e+03 AB-Vega=0.008
+  278 VLT/VST.OCam.sdss.u.dat ETCwithADC lambda_c= 3.6482e+03 AB-Vega=0.845
+  279 VLT/VST.OCam.sdss.g.dat ETCwithADC lambda_c= 4.7745e+03 AB-Vega=-0.097
+  280 VLT/VST.OCam.sdss.r.dat ETCwithADC lambda_c= 6.2899e+03 AB-Vega=0.159
+  281 VLT/VST.OCam.sdss.i.dat ETCwithADC lambda_c= 7.5021e+03 AB-Vega=0.356
+  282 VLT/VST.OCam.sdss.z.dat ETCwithADC lambda_c= 8.8424e+03 AB-Vega=0.517
+  283 Subaru/suprime_Ic.dat lambda_c= 7.9605e+03 AB-Vega=0.432
+  284 Subaru/suprime_FDCCD_z.res lambda_c= 9.0963e+03 AB-Vega=0.516
