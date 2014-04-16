@@ -282,3 +282,4 @@
   282 VLT/VST.OCam.sdss.z.dat ETCwithADC lambda_c= 8.8424e+03 AB-Vega=0.517
   283 Subaru/suprime_Ic.dat lambda_c= 7.9605e+03 AB-Vega=0.432
   284 Subaru/suprime_FDCCD_z.res lambda_c= 9.0963e+03 AB-Vega=0.516
+  285 Subaru/suprime_Rc.dat lambda_c= 6.5054e+03 AB-Vega=0.203
