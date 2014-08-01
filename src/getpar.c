@@ -334,7 +334,7 @@ void getparams()
      // USE hyperz format as base
      //   {"AOVSED", 0, "NIL"},  // Vega SED
      {"FILTERS_RES", 0 , "FILTER.RES.latest","Filter transmission data"},            // 0 
-     {"TEMPLATES_FILE", 0, "templates/eazy_v1.1_lines.spectra.param","Template definition file"},       // 1 
+     {"TEMPLATES_FILE", 0, "templates/eazy_v1.2_dusty.spectra.param","Template definition file"},       // 1 
      {"WAVELENGTH_FILE",0,"templates/EAZY_v1.1_lines/lambda_v1.1.def","Wavelength grid definition file"},    // 2
      {"TEMP_ERR_FILE",0,"templates/TEMPLATE_ERROR.eazy_v1.0","Template error definition file"},     // 3 
      {"CATALOG_FILE", 0, "hdfn_fs99_eazy.cat","Catalog data file"},                      // 4
@@ -541,7 +541,7 @@ void printparams_logfile(FILE *fp)
      // USE hyperz format as base
      //   {"AOVSED", 0, "NIL"},  // Vega SED
      {"FILTERS_RES", 0 , "FILTER.RES.latest","Filter transmission data"},            // 0 
-     {"TEMPLATES_FILE", 0, "templates/eazy_v1.1_lines.spectra.param","Template definition file"},       // 1 
+     {"TEMPLATES_FILE", 0, "templates/eazy_v1.2_dusty.spectra.param","Template definition file"},       // 1 
      {"WAVELENGTH_FILE",0,"template/EAZY_v1.1_lines/lambda_v1.1.def","Wavelength grid definition file"},    // 2
      {"TEMP_ERR_FILE",0,"templates/TEMPLATE_ERROR.eazy_v1.0","Template error definition file"},     // 3 
      {"CATALOG_FILE", 0, "hdfn_fs99_eazy.cat","Catalog data file"},                      // 4
