@@ -710,7 +710,7 @@ int main(int argc, char **argv) {
         fprintf(fp,"\n");
         
         if (POFZ_FILE && FIX_ZSPEC==0 && BINARY_OUTPUT==0 && !READ_ZBIN) {
-            sprintf(outfilename,"%s/%s.pz",OUTPUT_DIRECTORY,objid[iobj]);
+            sprintf(outfilename,"%s/%s_%s.pz", OUTPUT_DIRECTORY, MAIN_OUTPUT_FILE, objid[iobj]);
             pz_output(outfilename,iobj);    
         }
 
@@ -744,7 +744,7 @@ int main(int argc, char **argv) {
 
 
 		if (TEMP_SED_FILE && BINARY_OUTPUT==0 && !READ_ZBIN) {
-            sprintf(outfilename,"%s/%s.temp_sed",OUTPUT_DIRECTORY,objid[iobj]);
+            sprintf(outfilename, "%s/%s_%s.temp_sed", OUTPUT_DIRECTORY, MAIN_OUTPUT_FILE, objid[iobj]);
             temp_sed_output(outfilename,iobj,izbest,izprior);
 ////            temp_sed_output(outfilename,iobj,iz_zm1,iz_zm2);
         }
@@ -752,7 +752,7 @@ int main(int argc, char **argv) {
         izsave[iobj] = izprior;
         
 	    if (OBS_SED_FILE && BINARY_OUTPUT==0 && !READ_ZBIN) {
-			sprintf(outfilename,"%s/%s.obs_sed",OUTPUT_DIRECTORY,objid[iobj]);
+			sprintf(outfilename, "%s/%s_%s.obs_sed", OUTPUT_DIRECTORY, MAIN_OUTPUT_FILE, objid[iobj]);
             obs_sed_output(outfilename,iobj,izbest,izprior);
 ////            obs_sed_output(outfilename,iobj,iz_zm1,iz_zm2);
    	    }
