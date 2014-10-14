@@ -283,3 +283,8 @@
   283 Subaru/suprime_Ic.dat lambda_c= 7.9605e+03 AB-Vega=0.432 w95=1428.3
   284 Subaru/suprime_FDCCD_z.res lambda_c= 9.0963e+03 AB-Vega=0.516 w95=1424.0
   285 Subaru/suprime_Rc.dat lambda_c= 6.5054e+03 AB-Vega=0.203 w95=1192.2
+  286 IMACS/sloan_u_blue01.data lambda_c= 3.6280e+03 AB-Vega=0.954
+  287 IMACS/sloan_g_blue01.data lambda_c= 4.7553e+03 AB-Vega=-0.100
+  288 IMACS/sloan_r_red01.data lambda_c= 6.5012e+03 AB-Vega=0.205
+  289 IMACS/sloan_i_red01.data lambda_c= 7.7230e+03 AB-Vega=0.392
+  290 IMACS/sloan_z_red01.data lambda_c= 9.7105e+03 AB-Vega=0.570
