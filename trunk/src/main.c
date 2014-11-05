@@ -496,7 +496,7 @@ int main(int argc, char **argv) {
           //     fprintf(fpasciicoeff,"\n");
           // }
           
-          for (j=0;j<NZ;++j) pzout[i] = 0;
+          for (j=0;j<NZ;++j) pzout[j] = 0;
           for (j=0;j<NTEMP;++j) coeffs[0][j] = 0;
           if (BINARY_OUTPUT && !READ_ZBIN) {
               fwrite(pzout,sizeof(double),NZ,pzf);
