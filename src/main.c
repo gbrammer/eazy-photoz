@@ -2,7 +2,7 @@
 
 //char EAZY_VERSION[] = "v1.1.11 (June 17, 2011)";
 // char EAZY_VERSION[] = "$Rev$";
-char EAZY_VERSION[] = "$Date$";
+char EAZY_VERSION[] = "2015-04-20";
 // Last update: $Date$
 // $URL$
 // $Author$
