@@ -316,6 +316,7 @@ int getphotz(long iobj, double *pz1, int *idtemp1, double *atemp1,
             bvector[i] = 0.;
 
             for (j=0;j<nusefilt;++j) 
+              // should be if (okfilt[j]) ??
               if (fnu[iobj][j] > 0 && efnu[iobj][j] > 0 && okfilt[j])
                 bvector[i]-=fnu[iobj][j]*tempfilt[iz][oktemp[i]][j]/sigi2[j];
                     
@@ -335,7 +336,12 @@ int getphotz(long iobj, double *pz1, int *idtemp1, double *atemp1,
                 ///printf("am[%ld,%ld]=%e\n",i,j,amatrix[i][j]);
                   
             }
-            coeffs_z[i] = 1.;
+            //coeffs_z[i] = 1.;
+            if (bvector[i] < 0) {
+                coeffs_z[i] = 1.;
+            } else {
+                coeffs_z[i] = 0.;
+            }
         }
       
         ///////////// Calculate template normlizations /////////////////    

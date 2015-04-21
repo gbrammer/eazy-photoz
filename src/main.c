@@ -590,10 +590,10 @@ int main(int argc, char **argv) {
             if (fnu[iobj][PRIOR_FILTER_IDX] < NOT_OBS_THRESHOLD || efnu[iobj][PRIOR_FILTER_IDX] < NOT_OBS_THRESHOLD) {
                 izprior = izbest;     ///// Do nothing and prior result will be the same as first result
                 ///// but we still need to convert chi-sq ("chi2fit") to likelihoods ("pzout")
-                pzout[0] = exp(-0.5*(chi2fit[0]-chi2fit[izbest])/CHI2_SCALE)*(1+ztry[0]);   
+                pzout[0] = exp(-0.5*(chi2fit[0]-chi2fit[izbest])/CHI2_SCALE); //*(1+ztry[0]);   
                 pztot = 0;
                 for (i=1;i<NZ;++i) {
-                    pzout[i] = exp(-0.5*(chi2fit[i]-chi2fit[izbest])/CHI2_SCALE)*(1+ztry[i]);
+                    pzout[i] = exp(-0.5*(chi2fit[i]-chi2fit[izbest])/CHI2_SCALE); //*(1+ztry[i]);
                     pztot+=(ztry[i]-ztry[i-1])*(pzout[i]+pzout[i-1]);  
                 }
                 for (i=1;i<NZ;++i) pzout[i] /= pztot/2.;
@@ -601,6 +601,7 @@ int main(int argc, char **argv) {
                 //fprintf(stderr,"%ld Bad K\n",iobj);
                 
             } else {
+                //printf("\n\nAPPLY PRIOR!\n\n");
                 apply_prior(priorkz,NZ,NK_prior,izbest,chi2fit,fnu[iobj][PRIOR_FILTER_IDX],&izprior,pzout);
                 klim_idx[iobj] = (int32_t) Kcolumn;
                 pztot=0.; 
@@ -640,10 +641,10 @@ int main(int argc, char **argv) {
             }
         } else {        	
         	//for (i=0;i<NZ;++i) pzout[i] = exp(-0.5*(chi2fit[i]-chi2fit[izbest])/CHI2_SCALE);
-            pzout[0] = exp(-0.5*(chi2fit[0]-chi2fit[izbest])/CHI2_SCALE)*(1+ztry[0]);   
+            pzout[0] = exp(-0.5*(chi2fit[0]-chi2fit[izbest])/CHI2_SCALE); //*(1+ztry[0]);   
             pztot = 0;
             for (i=1;i<NZ;++i) {
-                pzout[i] = exp(-0.5*(chi2fit[i]-chi2fit[izbest])/CHI2_SCALE)*(1+ztry[i]);
+                pzout[i] = exp(-0.5*(chi2fit[i]-chi2fit[izbest])/CHI2_SCALE); //*(1+ztry[i]);
                 pztot+=(ztry[i]-ztry[i-1])*(pzout[i]+pzout[i-1]);  
             }
             for (i=1;i<NZ;++i) pzout[i] /=pztot/2.;
@@ -877,12 +878,24 @@ void best_peak (double *pofz, double *zpeak_best, double *zpeak_prob, long *ipea
     double thresh=1.e-2,pmax;
     long ipeak;
     
+    double z_best, z_prob;
+    long imax;
+    
+    //double psum, psum_i;
+    
+    // psum=0.;
+    // for (i=1;i<NZ;++i) {
+    //     psum_i = (ztry[i]-ztry[i-1])*(pofz[i]+pofz[i-1]); 
+    //     psum+=psum_i; 
+    //     printf("psum: %.4lf %.4lf\n",ztry[i], psum/2.);
+    // }
+    
     pmax=0.;
     for (i=0;i<NZ;++i) if (pofz[i] > pmax) pmax = pofz[i];
     if (thresh > pmax) thresh = 0.1 * pmax;
     
-    *zpeak_prob = -1;
-    *zpeak_best = -1;
+    z_prob = -1;
+    z_best = -1;
     step=0;
     ipeak=0;
     while (step < NZ) {
@@ -902,13 +915,19 @@ void best_peak (double *pofz, double *zpeak_best, double *zpeak_prob, long *ipea
             ++step;
         }
         prob_i /= 2.; //// Trapezoid rule
-        if (prob_i > *zpeak_prob) {
-            *zpeak_best  = zpeak_i / 2. / prob_i; 
-            *zpeak_prob = prob_i;
-            *ipeakmax = ipeak;
+        //printf("\n\n z_peak: %ld %.4lf %.4lf    %.4lf %.4lf  %.3lf\n",step, z_best, z_prob, zpeak_i/2./prob_i, prob_i, psum/2.);
+        if (prob_i > z_prob) {
+            z_best = zpeak_i / 2. / prob_i; 
+            z_prob = prob_i*1.;
+            imax = ipeak*1;
         }
         if (step == NZ-1) ++step;
     }   
+    
+    *zpeak_best = z_best;
+    *zpeak_prob = z_prob;
+    *ipeakmax = imax;
+    
     // step=0;test=0;
     // for (step=1;step<NZ;++step) test+=(ztry[step]-ztry[step-1])*(pofz[step]+pofz[step-1]);
     // fprintf(stderr,"TEST: %lf\n",test);

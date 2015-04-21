@@ -274,9 +274,9 @@ void apply_prior(double **priorkz, long nzp, long nkp, long first_best,
       } else {
                 Kbinlo = Kcolumn-1;
                 Kbinhi = Kcolumn;
-                factor_lo = kmag-klim[Kbinlo];
-                factor_hi = klim[Kbinhi]-kmag;
+                factor_lo = klim[Kbinhi]-kmag;
                 factor_lo/=(klim[Kbinhi]-klim[Kbinlo]);
+                factor_hi = kmag-klim[Kbinlo];
                 factor_hi/=(klim[Kbinhi]-klim[Kbinlo]);
       }
       //printf("interp prior: %lf %lf %lf\n",klim[Kbinlo],kmag,klim[Kbinhi]);
@@ -298,15 +298,14 @@ void apply_prior(double **priorkz, long nzp, long nkp, long first_best,
       //pzout[0] = exp(-0.5*(chi2[0]-chi2[*bestz])/CHI2_SCALE)*(priorkz[Kbinlo][0]*factor_lo+priorkz[Kbinhi][0]*factor_hi);
       
       ///////// Multiply by probabilities by (1+z)
-      pzout[0] *= (1+ztry[0]);
+      //pzout[0] *= (1+ztry[0]);
       
       maxprob = pzout[0];
       
       for (i=1;i<NZ;++i) {
         //pzout[i] = exp(-0.5*(chi2[i]-chi2[*bestz])/CHI2_SCALE)*priorkz[Kcolumn][i];
         pzout[i] = exp(-0.5*(chi2[i]-chi2[first_best])/CHI2_SCALE)*(priorkz[Kbinlo][i]*factor_lo+priorkz[Kbinhi][i]*factor_hi);
-        pzout[i] *= (1+ztry[i]);
-
+        //pzout[i] *= (1+ztry[i]);
       }
            
       // tweak_z16_gauss(pzout);
