@@ -1,7 +1,7 @@
 # EAZY
 *(Exported from code.google.com/p/eazy-photoz, April 20, 2015.)*
 
-EAZY is a photometric redshift code designed to produce high-quality redshifts for situations where complete spectroscopic calibration samples are not available. Details of the algorithm and tests of the code on public multi-wavelength photometric datasets are presented by Brammer, [van Dokkum & Coppi (2008)](http://adsabs.harvard.edu/abs/2008ApJ...686.1503B).
+EAZY is a photometric redshift code designed to produce high-quality redshifts for situations where complete spectroscopic calibration samples are not available. Details of the algorithm and tests of the code on public multi-wavelength photometric datasets are presented by [Brammer, van Dokkum & Coppi (2008)](http://adsabs.harvard.edu/abs/2008ApJ...686.1503B).
 
 Please include a citation to "Brammer, van Dokkum & Coppi, 2008, ApJ, 686, 1503" in the bibliography of any published work that makes use of EAZY.
 
