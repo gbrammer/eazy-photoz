@@ -1,13 +1,6 @@
 #include "defs.h"
 
-//char EAZY_VERSION[] = "v1.1.11 (June 17, 2011)";
-// char EAZY_VERSION[] = "$Rev$";
-char EAZY_VERSION[] = "2015-04-20";
-// Last update: $Date$
-// $URL$
-// $Author$
-
-// dummy string to update version xx
+char EAZY_VERSION[] = "2015-04-29";
 
 double CHI2_SCALE;
 long RandSeed=-1;

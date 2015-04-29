@@ -1610,7 +1610,12 @@ void getigmfactors (double ztarg, double *daz, double *dbz)
         d=exp(-(a+b+c));
         // *dbz += d;
         madau_sum = 0.;
-        for (i=1;i<16;++i) madau_sum += aa[i]*pow(dl/ll[i],3.46);
+        //for (i=0;i<16;++i) madau_sum += aa[i]*pow(dl/ll[i],3.46);
+        for (i=0;i<16;++i) {
+            if (ll[i]*(1+ztarg) > dl) {
+                madau_sum += aa[i]*pow(dl/ll[i],3.46);
+            }
+        }
         *dbz += exp(-1*madau_sum);
     }
 
