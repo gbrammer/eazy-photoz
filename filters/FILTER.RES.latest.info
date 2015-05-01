@@ -288,3 +288,5 @@
   288 IMACS/sloan_r_red01.data lambda_c= 6.5012e+03 AB-Vega=0.205
   289 IMACS/sloan_i_red01.data lambda_c= 7.7230e+03 AB-Vega=0.392
   290 IMACS/sloan_z_red01.data lambda_c= 9.7105e+03 AB-Vega=0.570
+  291 ESO/WFI-V89_843.raw +atm  lambda_c= 5.3758e+03 AB-Vega=-0.014
+  292 ESO/WFI-Rc162_844.raw +atm  lambda_c= 6.4938e+03 AB-Vega=0.193
