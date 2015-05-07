@@ -133,6 +133,15 @@ extern double *ztry,*zspec,*comovingdist,*zcomove;
 
 extern double *z_a, *z_p, *z_m1, *z_m2, *z_peak;
 
+//// IGM parametrization from Inoue et al. 2014
+extern double *lam1, *ALAF1, *ALAF2, *ALAF3, *ADLA1, *ADLA2;
+extern int NA;
+void read_Inoue_coeffs();
+double tLSLAF();
+double tLCLAF();
+double tLSDLA();
+double tLCDLA();
+
 void getparams();
 void printparams_logfile(); 
 

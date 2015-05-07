@@ -1683,8 +1683,8 @@ void fulligm(double *igm_corr, double z) {
     xc = 912.*xm/912.;
     tau_limit = 0.25*pow(xc,3)*(pow(xm,0.46)-pow(xc,0.46))+
                  9.4*pow(xc,1.5)*(pow(xm,0.18)-pow(xc,0.18))+
-                 0.7*pow(xc,3)*(pow(xc,-1.32)-pow(xm,-1.32))-
-                 0.023*(pow(xm,1.68)-pow(xc,1.68));
+                 0.7*pow(xc,3)*(pow(xc,-1.32)-pow(xc,-1.32))-
+                 0.023*(pow(xc,1.68)-pow(xc,1.68));
     
     //// loop through for lyman limit
     ilam = 0;
@@ -1692,8 +1692,8 @@ void fulligm(double *igm_corr, double z) {
         xc = templ[ilam]*xm/912.;
         tau[ilam] = 0.25*pow(xc,3)*(pow(xm,0.46)-pow(xc,0.46))+
                      9.4*pow(xc,1.5)*(pow(xm,0.18)-pow(xc,0.18))+
-                     0.7*pow(xc,3)*(pow(xc,-1.32)-pow(xm,-1.32))-
-                     0.023*(pow(xm,1.68)-pow(xc,1.68)) + tau_line-tau_limit;
+                     0.7*pow(xc,3)*(pow(xc,-1.32)-pow(xc,-1.32))-
+                     0.023*(pow(xc,1.68)-pow(xc,1.68)) + tau_line-tau_limit;
         igm_corr[ilam] = exp(-1.*tau[ilam]);
         ++ilam;
     }                  
@@ -1716,6 +1716,7 @@ void makegrid(double **tempfin, double ***tempfiltout, int ntemp_in_file, int zp
     double  filtsum, tempsum;
     double flamtofnu, ztryi;
     double dw;
+    //double tau;
     
     double *igm_corr,*templz,*convert_detector;
     double *sedz, *filt_int; 
@@ -1886,7 +1887,11 @@ void makegrid(double **tempfin, double ***tempfiltout, int ntemp_in_file, int zp
                       
                 if ((templ[j]>=1026.0)&&(templ[j]<1216.0))
                     igm_corr[j] = 1.0 - dasum[i];
-                                
+                
+                //// Use Inoue et al. 2014 parameterization
+                //tau = tLSLAF(ztryi, templz[j]) + tLCLAF(ztryi, templz[j]) + tLSDLA(ztryi, templz[j]) + tLCDLA(ztryi, templz[j]);                
+                //igm_corr[j] = exp(-tau);
+                
                 igm_corr[j] *= flamtofnu;
       
             } /// NTEMPL
@@ -2302,6 +2307,9 @@ void init() {
         getigmfactors(ztry[i],&dasum[i],&dbsum[i]);
         // printf("igm: %lf %le %le\n",ztry[i],dasum[i],dbsum[i]);
     }
+    //printf("\n\nINOUE\n\n");
+    //read_Inoue_coeffs();
+    //printf("%f  %e %e %e    %e %e\n", lam1[10], ALAF1[10], ALAF2[10], ALAF3[10], ADLA1[10], ADLA2[10]);
 
     /////////////
     //// Templates for photo-zs

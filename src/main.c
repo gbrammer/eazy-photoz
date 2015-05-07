@@ -48,6 +48,10 @@ int BINARY_OUTPUT;
 
 int PRINT_ERRORS;
 
+//// IGM parametrization from Inoue et al. 2014
+double *lam1, *ALAF1, *ALAF2, *ALAF3, *ADLA1, *ADLA2;
+int NA;
+
 // cosmology
 double H0;
 double OMEGA_M;
