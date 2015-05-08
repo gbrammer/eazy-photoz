@@ -1,6 +1,6 @@
 #include "defs.h"
 
-char EAZY_VERSION[] = "2015-04-29";
+char EAZY_VERSION[] = "2015-05-08";
 
 double CHI2_SCALE;
 long RandSeed=-1;
