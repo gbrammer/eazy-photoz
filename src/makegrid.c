@@ -1560,7 +1560,7 @@ void getigmfactors (double ztarg, double *daz, double *dbz)
     
     //// Extend further down lyman series
     int i;
-    double ll[16],aa[16],madau_sum;
+    double ll[16], aa[16], madau_sum, tau;
     ll[0] = 1216.0; aa[0] =   3.6e-03;
     ll[1] = 1026.0; aa[1] =   1.7e-03;
     ll[2] = 972.8; aa[2] =   1.2e-03;
@@ -1588,20 +1588,32 @@ void getigmfactors (double ztarg, double *daz, double *dbz)
         return;
     }
     
-    lam1 =  (1050.0*(1+ztarg)+0.5);
-    lam2 =  (1170.0*(1+ztarg)+0.5);
+    //// Limits from Madau 1995
+    // lam1 =  (1050.0*(1+ztarg)+0.5);
+    // lam2 =  (1170.0*(1+ztarg)+0.5);
+
+    // Use actual limits used later in the implementation
+    lam1 =  (1026.0*(1+ztarg)+0.5);
+    lam2 =  (1216.0*(1+ztarg)+0.5);
     
     *daz = 0.0;
     for (dl=lam1;dl<=lam2; dl+=1/4.) {
-        a = exp(-a2*pow((dl/l2),3.46));
+        tau = a2*pow((dl/l2),3.46);
+        //tau *= 1.8; // fudge factor for more IGM absorption
+        a = exp(-tau);
         *daz += a;
     }
     *daz = 1.0-*daz/((lam2-lam1)*4.);
-
-    lam1  = (920.0*(1+ztarg)+0.5);
-    lam1  = (915.0*(1+ztarg)+0.5);
-    lam2 =  (1015.0*(1+ztarg)+0.5);
-  
+    
+    //// Limits from Madau 1995
+    // lam1  = (920.0*(1+ztarg)+0.5);
+    // lam1  = (915.0*(1+ztarg)+0.5);
+    // lam2 =  (1015.0*(1+ztarg)+0.5);
+    
+    // Use actual limits used later in the implementation
+    lam1 =  (912.0*(1+ztarg)+0.5);
+    lam2 =  (1026.0*(1+ztarg)+0.5);
+    
     *dbz = 0;
     for (dl=lam1;dl<=lam2; dl+=1/4.)  {
         a=a3*pow(dl/l3,3.46);
@@ -1609,14 +1621,15 @@ void getigmfactors (double ztarg, double *daz, double *dbz)
         c=a5*pow(dl/l5, 3.46);
         d=exp(-(a+b+c));
         // *dbz += d;
-        madau_sum = 0.;
-        //for (i=0;i<16;++i) madau_sum += aa[i]*pow(dl/ll[i],3.46);
+        tau = 0.;
+        //for (i=0;i<16;++i) tau += aa[i]*pow(dl/ll[i],3.46);
         for (i=0;i<16;++i) {
             if (ll[i]*(1+ztarg) > dl) {
-                madau_sum += aa[i]*pow(dl/ll[i],3.46);
+                tau += aa[i]*pow(dl/ll[i],3.46);
             }
         }
-        *dbz += exp(-1*madau_sum);
+        //tau *= 1.8; // fudge factor for more IGM absorption
+        *dbz += exp(-1*tau);
     }
 
     *dbz = 1.0-*dbz/((lam2-lam1)*4.);
@@ -1716,7 +1729,7 @@ void makegrid(double **tempfin, double ***tempfiltout, int ntemp_in_file, int zp
     double  filtsum, tempsum;
     double flamtofnu, ztryi;
     double dw;
-    //double tau;
+    double tau;
     
     double *igm_corr,*templz,*convert_detector;
     double *sedz, *filt_int; 
@@ -1878,7 +1891,7 @@ void makegrid(double **tempfin, double ***tempfiltout, int ntemp_in_file, int zp
                 //flamtofnu = 1.;
                                 
                 if ((templ[j]>=912.0)&&(templ[j]<1026.0)) 
-                    igm_corr[j] = 1.0-dbsum[i];
+                    igm_corr[j] = 1.0 - dbsum[i];
                 else 
                     igm_corr[j] = 1.0;
                 
@@ -1891,7 +1904,11 @@ void makegrid(double **tempfin, double ***tempfiltout, int ntemp_in_file, int zp
                 //// Use Inoue et al. 2014 parameterization
                 //tau = tLSLAF(ztryi, templz[j]) + tLCLAF(ztryi, templz[j]) + tLSDLA(ztryi, templz[j]) + tLCDLA(ztryi, templz[j]);                
                 //igm_corr[j] = exp(-tau);
-                
+                if ((templ[j]<912.0)) {
+                    tau = tLCLAF(ztryi, templz[j]) + tLCDLA(ztryi, templz[j]);                
+                    igm_corr[j] = exp(-tau);
+                }
+                    
                 igm_corr[j] *= flamtofnu;
       
             } /// NTEMPL
@@ -2305,11 +2322,11 @@ void init() {
     }
     for (i=0;i<NZ;++i) {
         getigmfactors(ztry[i],&dasum[i],&dbsum[i]);
-        // printf("igm: %lf %le %le\n",ztry[i],dasum[i],dbsum[i]);
+        //printf("igm: %lf %le %le\n",ztry[i],dasum[i],dbsum[i]);
     }
-    //printf("\n\nINOUE\n\n");
-    //read_Inoue_coeffs();
-    //printf("%f  %e %e %e    %e %e\n", lam1[10], ALAF1[10], ALAF2[10], ALAF3[10], ADLA1[10], ADLA2[10]);
+    printf("\n\nREAD INOUE(2014)");
+    read_Inoue_coeffs();
+    printf("[10] %f  %e %e %e    %e %e\n\n", lam1[10], ALAF1[10], ALAF2[10], ALAF3[10], ADLA1[10], ADLA2[10]);
 
     /////////////
     //// Templates for photo-zs
