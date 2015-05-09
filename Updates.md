@@ -1,6 +1,6 @@
 # EAZY updates
 
-## May 9, 2015
+#### May 9, 2015
 
 o Add template error function derived from zFOURGE catalogs.  Note: should be used with ```TEMP_ERR_A2=1.0```.
 
