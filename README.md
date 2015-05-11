@@ -12,7 +12,12 @@ For a summary of recent changes see also [Updates.md](https://github.com/gbramme
 In the terminal:
 
 ```bash
+### If you have the Github SSH key enabled
 git clone git@github.com:gbrammer/eazy-photoz.git eazy-photoz
+
+### Otherwise just use https
+git clone https://github.com/gbrammer/eazy-photoz.git eazy-photoz
+
 cd eazy-photoz/src
 make
 ```
