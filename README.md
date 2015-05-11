@@ -24,6 +24,13 @@ mkdir OUTPUT
 ../src/eazy -p zphot.param.default
 ```
 
+To get updates to the repository committed since you checked out the code:
+
+```bash
+cd [path-to-eazy-photoz]
+git pull
+```
+
 #### Python helpers
 
 Some scripts to interact with the EAZY input/outputs are available in the [threedhst](https://github.com/gbrammer/threedhst) module, specifically [eazyPy](https://github.com/gbrammer/threedhst/blob/master/eazyPy.py).
