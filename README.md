@@ -5,6 +5,8 @@ EAZY is a photometric redshift code designed to produce high-quality redshifts f
 
 Please include a citation to "Brammer, van Dokkum & Coppi, 2008, ApJ, 686, 1503" in the bibliography of any published work that makes use of EAZY.
 
+For a summary of recent changes see also [Updates.md](https://github.com/gbrammer/eazy-photoz/blob/master/Updates.md).
+
 #### Installation and download
 
 In the terminal:
