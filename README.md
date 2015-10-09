@@ -5,12 +5,19 @@ EAZY is a photometric redshift code designed to produce high-quality redshifts f
 
 Please include a citation to "Brammer, van Dokkum & Coppi, 2008, ApJ, 686, 1503" in the bibliography of any published work that makes use of EAZY.
 
+For a summary of recent changes see also [Updates.md](https://github.com/gbrammer/eazy-photoz/blob/master/Updates.md).
+
 #### Installation and download
 
 In the terminal:
 
 ```bash
+### If you have the Github SSH key enabled
 git clone git@github.com:gbrammer/eazy-photoz.git eazy-photoz
+
+### Otherwise just use https
+git clone https://github.com/gbrammer/eazy-photoz.git eazy-photoz
+
 cd eazy-photoz/src
 make
 ```
@@ -22,6 +29,13 @@ cd ../inputs
 mkdir OUTPUT
 ../src/eazy # generates param file
 ../src/eazy -p zphot.param.default
+```
+
+To get updates to the repository committed since you checked out the code:
+
+```bash
+cd [path-to-eazy-photoz]
+git pull
 ```
 
 #### Python helpers
