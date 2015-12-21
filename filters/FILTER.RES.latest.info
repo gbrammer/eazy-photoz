@@ -296,3 +296,11 @@
   296 DECam/DECam_i.txt lambda_c= 7.8067e+03 AB-Vega=0.406
   297 DECam/DECam_z.txt lambda_c= 9.1585e+03 AB-Vega=0.517
   298 DECam/DECam_Y.txt lambda_c= 9.8668e+03 AB-Vega=0.564
+  299 MOSFIRE/mosfire_Y.txt lambda_c= 1.0474e+04 AB-Vega=0.640
+  300 MOSFIRE/mosfire_J.txt lambda_c= 1.2517e+04 AB-Vega=0.913
+  301 MOSFIRE/mosfire_H.txt lambda_c= 1.6340e+04 AB-Vega=1.347
+  302 MOSFIRE/mosfire_Ks.txt lambda_c= 2.1468e+04 AB-Vega=1.821
+  303 MOSFIRE/J2_center_corr.txt lambda_c= 1.1816e+04 AB-Vega=0.815
+  304 MOSFIRE/J3_center_corr.txt lambda_c= 1.2881e+04 AB-Vega=0.969
+  305 MOSFIRE/H1_center_corr.txt lambda_c= 1.5558e+04 AB-Vega=1.279
+  306 MOSFIRE/H2_center_corr.txt lambda_c= 1.7089e+04 AB-Vega=1.423
