@@ -14,4 +14,5 @@ o DECam: http://www.ctio.noao.edu/noao/content/dark-energy-camera-decam
 
 o MOSFIRE: http://www2.keck.hawaii.edu/inst/mosfire/filters.html
 
+o VLT filters with "+atm" in the comment include a Paranal sky transmission model computed at airmass=1.1 (https://www.eso.org/observing/etc/bin/simu/skycalc)
 
