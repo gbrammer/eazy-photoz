@@ -55,6 +55,8 @@ extern int N_MIN_COLORS;
 extern int MAGNITUDES;
 extern char WAVELENGTH_FILE[1024];
 extern char TEMP_ERR_FILE[1024];
+extern char LAF_FILE[1024];
+extern char DLA_FILE[1024];
 
 //// Output
 extern char OUTPUT_DIRECTORY[1024];

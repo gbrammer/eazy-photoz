@@ -7,7 +7,7 @@ struct param_data {
      char comment[1024];
      };
 
-#define NKEY 49
+#define NKEY 51
 
 void assign_par(int i, char *arg) {
   switch (i) {
@@ -311,7 +311,15 @@ void assign_par(int i, char *arg) {
     }
     printf("RF_ERRORS: %c\n",*arg);
     break;
-  default:   
+  case 49:
+    strcpy(LAF_FILE,arg);
+    printf("LAF_FILE: %s\n",LAF_FILE);
+    break;
+  case 50:
+    strcpy(DLA_FILE,arg);
+    printf("DLA_FILE: %s\n",DLA_FILE);
+    break;
+  default:
     fprintf(stderr,"I shouldn't be here!!\n");
     fprintf(stderr,"%d -- %s\n",i,arg);
     exit(1);
@@ -381,13 +389,15 @@ void getparams()
      {"SCALE_2175_BUMP",0,"0.00","Scaling of 2175A bump.  Values 0.13 (0.27) absorb ~10 (20) % at peak."}, //45
      {"READ_ZBIN",0,"n","Get redshifts from OUTPUT_DIRECTORY/MAIN_OUTPUT_FILE.zbin rather than fitting them."}, //46
      {"RF_PADDING",0,"1000.","Padding (Ang) for choosing observed filters around specified rest-frame pair."}, //47
-     {"RF_ERRORS",0,"n","Compute RF color errors from p(z)"} //48
+     {"RF_ERRORS",0,"n","Compute RF color errors from p(z)"}, //48
+     {"LAF_FILE",0,"templates/LAFcoeff.txt","File containing the Lyman alpha forest data from Inoue"}, //49
+     {"DLA_FILE",0,"templates/DLAcoeff.txt","File containing the damped Lyman absorber data from Inoue"} //50
    };
 
-  
-    // delimeter/whitespace characters for token search  
+
+    // delimeter/whitespace characters for token search
     char delim[]=" \n\t";
-            
+
     fp = fopen(zphot_param_file,"r");
     ///////// Generate zphot.param.default if zphot.param not found
     if (!(fp)) {
@@ -420,6 +430,8 @@ void getparams()
         i=22; fprintf(fp,"%-20s %-18s # %s\n",params[i].name,params[i].default_value,params[i].comment); // TEMP_ERR_A2
         i=23; fprintf(fp,"%-20s %-18s # %s\n",params[i].name,params[i].default_value,params[i].comment); // SYS_ERR
         i=24; fprintf(fp,"%-20s %-18s # %s\n",params[i].name,params[i].default_value,params[i].comment); // APPLY_IGM
+        i=49; fprintf(fp,"%-20s %-18s # %s\n",params[i].name,params[i].default_value,params[i].comment); // LAF_FILE
+        i=50; fprintf(fp,"%-20s %-18s # %s\n",params[i].name,params[i].default_value,params[i].comment); // DLA_FILE
         i=45; fprintf(fp,"%-20s %-18s # %s\n",params[i].name,params[i].default_value,params[i].comment); // SCALE_2175_BUMP
 
         i=15; fprintf(fp,"\n%-20s %-18s # %s\n",params[i].name,params[i].default_value,params[i].comment); // DUMP_TEMP 
@@ -588,7 +600,9 @@ void printparams_logfile(FILE *fp)
      {"SCALE_2175_BUMP",0,"0.00","Scaling of 2175A bump.  Values 0.13 (0.27) absorb ~10 (20) % at peak."}, //45
      {"READ_ZBIN",0,"n","Get redshifts from OUTPUT_DIRECTORY/MAIN_OUTPUT_FILE.zbin rather than fitting them."}, //46
      {"RF_PADDING",0,"1000.","Padding (Ang) for choosing observed filters around specified rest-frame pair."}, //47
-     {"RF_ERRORS",0,"n","Compute RF color errors from p(z)"} //48
+     {"RF_ERRORS",0,"n","Compute RF color errors from p(z)"}, //48
+     {"LAF_FILE",0,"templates/LAFcoeff.txt","File containing the Lyman alpha forest data from Inoue"}, //49
+     {"DLA_FILE",0,"templates/DLAcoeff.txt","File containing the damped Lyman absorber data from Inoue"} //50
    };
 
 
@@ -616,6 +630,8 @@ void printparams_logfile(FILE *fp)
       i=22; fprintf(fp,"%-20s %-18.3f # %s\n",params[i].name,TEMP_ERR_A2,params[i].comment); // TEMP_ERR_A2
       i=23; fprintf(fp,"%-20s %-18.3f # %s\n",params[i].name,SYS_ERR,params[i].comment); // SYS_ERR
       i=24; fprintf(fp,"%-20s %-18i # %s\n",params[i].name,APPLY_IGM,params[i].comment); // APPLY_IGM
+      i=49; fprintf(fp,"%-20s %-18s # %s\n",params[i].name,LAF_FILE,params[i].comment); // LAF_FILE
+      i=50; fprintf(fp,"%-20s %-18s # %s\n",params[i].name,DLA_FILE,params[i].comment); // DLA_FILE
       i=45; fprintf(fp,"%-20s %-18.3f # %s\n",params[i].name,SCALE_2175_BUMP,params[i].comment); // SCALE_2175_BUMP
 
       i=15; fprintf(fp,"\n%-20s %-18i # %s\n",params[i].name,DUMP_TEMPLATE_CACHE,params[i].comment); // DUMP_TEMP 
