@@ -304,3 +304,4 @@
   304 MOSFIRE/J3_center_corr.txt lambda_c= 1.2881e+04 AB-Vega=0.969
   305 MOSFIRE/H1_center_corr.txt lambda_c= 1.5558e+04 AB-Vega=1.279
   306 MOSFIRE/H2_center_corr.txt lambda_c= 1.7089e+04 AB-Vega=1.423
+  307 HST/wfpc2,1,f675w,f675w,a2d7.dat lambda_c= 6.7175e+03 AB-Vega=0.246
