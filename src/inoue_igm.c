@@ -31,13 +31,13 @@ void read_Inoue_coeffs() {
     ALAF3 = malloc(sizeof(double)*NA);    
     ADLA1 = malloc(sizeof(double)*NA);    
     ADLA2 = malloc(sizeof(double)*NA);    
-    
-    if (!(tlaf = fopen("templates/LAFcoeff.txt","r"))) {
+
+    if (!(tlaf = fopen(LAF_FILE,"r"))) {
         fprintf(stderr,"  Can't open the LAF file!  Bad name?\n");
         exit(1);
     }
-    
-    if (!(tdla = fopen("templates/DLAcoeff.txt","r"))) {
+
+    if (!(tdla = fopen(DLA_FILE,"r"))) {
         fprintf(stderr,"  Can't open the DLA file!  Bad name?\n");
         exit(1);
     }
