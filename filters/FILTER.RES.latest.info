@@ -305,3 +305,9 @@
   305 MOSFIRE/H1_center_corr.txt lambda_c= 1.5558e+04 AB-Vega=1.279
   306 MOSFIRE/H2_center_corr.txt lambda_c= 1.7089e+04 AB-Vega=1.423
   307 HST/wfpc2,1,f675w,f675w,a2d7.dat lambda_c= 6.7175e+03 AB-Vega=0.246
+ 308 niriss-f090w primary_area=244789.2cm2 ABZP=28.2710 pivot=0.9009um
+ 309 niriss-f115w primary_area=244789.2cm2 ABZP=28.3295 pivot=1.1495um
+ 310 niriss-f150w primary_area=244789.2cm2 ABZP=28.1836 pivot=1.4929um
+ 311 niriss-f200w primary_area=244789.2cm2 ABZP=28.2602 pivot=1.9926um
+ 312 niriss-f140m primary_area=244789.2cm2 ABZP=27.3944 pivot=1.4035um
+ 313 niriss-f158m primary_area=244789.2cm2 ABZP=27.4494 pivot=1.5857um
