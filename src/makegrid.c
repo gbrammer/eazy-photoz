@@ -1724,7 +1724,7 @@ void fulligm(double *igm_corr, double z) {
 void makegrid(double **tempfin, double ***tempfiltout, int ntemp_in_file, int zph_templates) {
 
     char tempcache[1024], tempcache_info[1024],temp_file[1024];
-    long i,j,k,ktemp, ifilt,NFILT;
+    long i,j,k,kfilt,ksed,ktemp, ifilt,NFILT;
     int **falls_off, **falls_off_lowz;
     double  filtsum, tempsum;
     double flamtofnu, ztryi;
@@ -1732,7 +1732,7 @@ void makegrid(double **tempfin, double ***tempfiltout, int ntemp_in_file, int zp
     double tau;
     
     double *igm_corr,*templz,*convert_detector;
-    double *sedz, *filt_int; 
+    double *sedz, *filt_int, *sed_int, *lam_int;
 
     FILE *fp, *tf;
   
@@ -1839,6 +1839,18 @@ void makegrid(double **tempfin, double ***tempfiltout, int ntemp_in_file, int zp
       filt_int = malloc(sizeof(double)*NTEMPLMAX);
       if(filt_int == NULL) {
         fprintf(stderr, "filt_int: out of memory\n");
+        exit(1);
+      }
+
+      sed_int = malloc(sizeof(double)*NTEMPLMAX);
+      if(sed_int == NULL) {
+        fprintf(stderr, "sed_int: out of memory\n");
+        exit(1);
+      }
+
+      lam_int = malloc(sizeof(double)*NTEMPLMAX);
+      if(lam_int == NULL) {
+        fprintf(stderr, "lam_int: out of memory\n");
         exit(1);
       }
       
@@ -1967,8 +1979,17 @@ void makegrid(double **tempfin, double ***tempfiltout, int ntemp_in_file, int zp
                 }
                 
                 ////// Everything OK, start interpolation                
-                k=0;
-                interpol(templz[j],&filt_int[j],pusefilt[ifilt]->plambda,pusefilt[ifilt]->pthrough,NFILT,&k);
+                kfilt=0;
+                ksed=0;
+                j=0;
+                interpol(pusefilt[ifilt]->plambda[kfilt],&sed_int[j],templz,sedz,NTEMPL,&ksed);
+                filt_int[j] = pusefilt[ifilt]->pthrough[kfilt];
+                lam_int[j] = pusefilt[ifilt]->plambda[kfilt];
+                if (FILTER_FORMAT == 1) {
+                    convert_detector[j] = 1./lam_int[j];
+                } else {
+                    convert_detector[j] = 1./(lam_int[j]*lam_int[j]);
+                }
                 
                 // if (i==0 && ifilt==nusefilt && ktemp==0) {
                 //     printf("ztryi %lf\n",ztryi);
@@ -1978,20 +1999,39 @@ void makegrid(double **tempfin, double ***tempfiltout, int ntemp_in_file, int zp
                 filtsum = 0.0;
                 tempsum = 0.0;
                 ++j;
-                while (templz[j] <= pusefilt[ifilt]->plambda[NFILT-1] && j < NTEMPL) {
-                    interpol(templz[j],&filt_int[j],pusefilt[ifilt]->plambda,pusefilt[ifilt]->pthrough,NFILT,&k);
+                while (kfilt < NFILT-1 && ksed < NTEMPL-1 && j < NTEMPLMAX) {
+                    if (pusefilt[ifilt]->plambda[kfilt+1] < templz[ksed+1]) {
+                        // Next point is from filter
+                        ++kfilt;
+                        interpol(pusefilt[ifilt]->plambda[kfilt],&sed_int[j],templz,sedz,NTEMPL,&ksed);
+                        filt_int[j] = pusefilt[ifilt]->pthrough[kfilt];
+                        lam_int[j] = pusefilt[ifilt]->plambda[kfilt];
+                    } else {
+                        // Next point is from template
+                        ++ksed;
+                        interpol(templz[ksed],&filt_int[j],pusefilt[ifilt]->plambda,pusefilt[ifilt]->pthrough,NFILT,&kfilt);
+                        sed_int[j] = sedz[ksed];
+                        lam_int[j] = templz[ksed];
+                    }
+
+                    if (FILTER_FORMAT == 1) {
+                        convert_detector[j] = 1./lam_int[j];
+                    } else {
+                        convert_detector[j] = 1./(lam_int[j]*lam_int[j]);
+                    }
+                    
                     // if (i==0 && ifilt==8 && ktemp == 0) printf("HERE       %lf %lf %lf %lf\n",templz[j],pusefilt[ifilt]->plambda[k],pusefilt[ifilt]->pthrough[k],filt_int[j]);
                     //if (i==25 && ifilt==0 && ktemp==0) printf("Filter: %lf %lf\n",templz[j],filt_int[j]);
 
-                    // dw = 1./templz[j-1] - 1./templz[j];    ///// Integrate in dnu
-                    dw = templz[j]-templz[j-1];            ///// Integrate in dlambda                   
-                    tempsum += dw*(filt_int[j]*sedz[j]*convert_detector[j]+filt_int[j-1]*sedz[j-1]*convert_detector[j-1]);
+                    // dw = 1./lam_int[j-1] - 1./lam_int[j];    ///// Integrate in dnu
+                    dw = lam_int[j]-lam_int[j-1];            ///// Integrate in dlambda                 
+                    tempsum += dw*(filt_int[j]*sed_int[j]*convert_detector[j]+filt_int[j-1]*sed_int[j-1]*convert_detector[j-1]);
                     filtsum += dw*(filt_int[j]*convert_detector[j]+filt_int[j-1]*convert_detector[j-1]);
 
                     //// Following Maiz-Appellaniz (2006)
-                    // dw = templz[j]-templz[j-1];            ///// Integrate in dlambda                   
-                    // tempsum += dw*(filt_int[j]*sedz[j]*convert_detector[j]*templz[j]+filt_int[j-1]*sedz[j-1]*convert_detector[j-1]*templz[j-1])*1.e-10;
-                    // filtsum += dw*(filt_int[j]*convert_detector[j]/templz[j]+filt_int[j-1]*convert_detector[j-1]/templz[j-1])*9.e16;
+                    // dw = lam_int[j]-lam_int[j-1];            ///// Integrate in dlambda                   
+                    // tempsum += dw*(filt_int[j]*sed_int[j]*convert_detector[j]*lam_int[j]+filt_int[j-1]*sed_int[j-1]*convert_detector[j-1]*lam_int[j-1])*1.e-10;
+                    // filtsum += dw*(filt_int[j]*convert_detector[j]/lam_int[j]+filt_int[j-1]*convert_detector[j-1]/lam_int[j-1])*9.e16;
                 
                     ++j;
                     
@@ -2019,6 +2059,8 @@ void makegrid(double **tempfin, double ***tempfiltout, int ntemp_in_file, int zp
     free(templz);
     free(sedz);
     free(filt_int);
+    free(sed_int);
+    free(lam_int);
     free(falls_off);
     free(falls_off_lowz);
     
