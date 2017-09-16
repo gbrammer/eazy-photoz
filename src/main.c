@@ -226,6 +226,12 @@ int main(int argc, char **argv) {
         APPLY_PRIOR=0;
         PRINT_ERRORS=0;
     }
+
+    /////// Make sure BINARY_OUTPUT is set if computing RF color errors
+    if (RF_ERRORS && BINARY_OUTPUT==0)  {
+        fprintf(stderr,"RF_ERRORS set, forcing BINARY_OUTPUT=1 ...\n");
+        BINARY_OUTPUT=1;
+    }
     
     /////// Initialize Prior
     if (APPLY_PRIOR && FIX_ZSPEC==0) {
