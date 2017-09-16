@@ -228,7 +228,7 @@ int main(int argc, char **argv) {
     }
 
     /////// Make sure BINARY_OUTPUT is set if computing RF color errors
-    if (RF_ERRORS && BINARY_OUTPUT==0)  {
+    if (RF_ERRORS && BINARY_OUTPUT==0 && READ_ZBIN==0)  {
         fprintf(stderr,"RF_ERRORS set, forcing BINARY_OUTPUT=1 ...\n");
         BINARY_OUTPUT=1;
     }
