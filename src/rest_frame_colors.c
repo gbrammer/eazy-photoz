@@ -14,7 +14,7 @@ void init_rf_file(FILE *fprf) {
     fprintf(fprf,"# id z DM nfilt_fit chi2_fit ");
     for (i=0;i<nrestfilt;++i) fprintf(fprf,"  L%d",filt_defnum[nusefilt+i]);
     
-    if (RF_ERRORS & APPLY_PRIOR) {
+    if (RF_ERRORS) {
         fprintf(fprf, "  p16 p84 p025 p975");
     }
     
@@ -68,7 +68,7 @@ void rest_frame_colors() {
     long NZ_prior, NK_prior, izbest, izprior, *colors_sort_idx, icolor;
         
     //// Open ".pz" file for getting p(z)
-    if (RF_ERRORS & APPLY_PRIOR) {
+    if (RF_ERRORS) {
         sprintf(pz_file,"%s/%s.pz",OUTPUT_DIRECTORY,MAIN_OUTPUT_FILE);
         pzf = fopen(pz_file,"r");
         fread(&pzdummy,sizeof(int32_t),1,pzf); // NZ
@@ -80,10 +80,12 @@ void rest_frame_colors() {
         colors_cumprob = malloc(sizeof(double)*NZ);
         colors_sort_idx = malloc(sizeof(long)*NZ);
         
-        get_prior_file_size(&NZ_prior, &NK_prior);
+        if (APPLY_PRIOR) {
+            get_prior_file_size(&NZ_prior, &NK_prior);
+        }
     
     }
-    	
+
     /////////////////////////////////////////////////////////////////
     ////
     ////            New output param file for RF filters
@@ -226,7 +228,7 @@ void rest_frame_colors() {
         zrest = zuse[iobj];
         
         //// Read p(z) from the .pz file
-        if (RF_ERRORS & APPLY_PRIOR) fread(chi2_fit_full,sizeof(double)*NZ,1,pzf);
+        if (RF_ERRORS) fread(chi2_fit_full,sizeof(double)*NZ,1,pzf);
         
         strcpy(strfmt,objid[iobj]);
         i=0; while (strfmt[i] != '\0') ++i;
@@ -249,7 +251,7 @@ void rest_frame_colors() {
             
             for (i=0;i<nrestfilt;++i) fprintf(fplog,"%14.5e",-99.);
             
-            if (RF_ERRORS & APPLY_PRIOR) {
+            if (RF_ERRORS) {
                 fprintf(fplog, "  -99 -99 -99 -99");
             }
             
@@ -326,12 +328,14 @@ void rest_frame_colors() {
         if (BINARY_OUTPUT) fwrite(coeffs[izuse[iobj]],sizeof(double)*NTEMP_REST,1,fpcoeff);            
         
         //// Do fit for coefficients at *all* redshifts
-        if (RF_ERRORS & APPLY_PRIOR) {
+        if (RF_ERRORS) {
             
-            izbest = 0;
-            apply_prior(priorkz, NZ, NK_prior, izbest, chi2_fit_full, 
-                        fnu[iobj][PRIOR_FILTER_IDX], &izprior, pzout);
-
+            if (APPLY_PRIOR) {
+                izbest = 0;
+                apply_prior(priorkz, NZ, NK_prior, izbest, chi2_fit_full,
+                            fnu[iobj][PRIOR_FILTER_IDX], &izprior, pzout);
+            }
+            
             //// Normalization of p(z), make pzout = pzout * dz so can sum directly
             pztot = 0.; 
             pzout[0] *= 0;
