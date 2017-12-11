@@ -330,10 +330,14 @@ void rest_frame_colors() {
         //// Do fit for coefficients at *all* redshifts
         if (RF_ERRORS) {
             
+            izbest = 0;
             if (APPLY_PRIOR) {
-                izbest = 0;
                 apply_prior(priorkz, NZ, NK_prior, izbest, chi2_fit_full,
                             fnu[iobj][PRIOR_FILTER_IDX], &izprior, pzout);
+            } else {
+                for (i=0;i<NZ;++i) {
+                    pzout[i] = exp(-0.5*(chi2_fit_full[i]-chi2_fit_full[izbest])/CHI2_SCALE);
+                }
             }
             
             //// Normalization of p(z), make pzout = pzout * dz so can sum directly
