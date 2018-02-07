@@ -294,8 +294,7 @@ void apply_prior(double **priorkz, long nzp, long nkp, long first_best,
       //// one and won't have problems with the probabilities being too small.
       //// 'pzout' is a probability, 'chi2' is chisq
       norm = 0;
-      pzout[0] = exp(-0.5*(chi2[0]-chi2[first_best])/CHI2_SCALE)*(priorkz[Kbinlo][i]*factor_lo+priorkz[Kbinhi][i]*factor_hi);
-      //pzout[0] = exp(-0.5*(chi2[0]-chi2[*bestz])/CHI2_SCALE)*(priorkz[Kbinlo][0]*factor_lo+priorkz[Kbinhi][0]*factor_hi);
+      pzout[0] = exp(-0.5*(chi2[0]-chi2[first_best])/CHI2_SCALE)*(priorkz[Kbinlo][0]*factor_lo+priorkz[Kbinhi][0]*factor_hi);
       
       ///////// Multiply by probabilities by (1+z)
       //pzout[0] *= (1+ztry[0]);
