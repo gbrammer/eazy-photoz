@@ -65,14 +65,14 @@ def go(mags=(15,30.1,0.5), redshifts=(0.01, 12, 0.01), coeff_file='prior_K_zmax7
     
     plt.legend(ncol=3, loc='upper right')
     
-    header = '# z '
+    header = 'z '
     for m in mag_grid: 
         header += '%6.1f' %(m)
     
-    fp = open(outfile,'w')
-    fp.write(header+'\n')
-    np.savetxt(fp, out_matrix, fmt='%6.3e')
-    fp.close()
+    # fp = open(outfile,'w')
+    # fp.write(header+'\n')
+    # np.savetxt(fp, out_matrix, fmt='%6.3e')#['%6.3e']*out_matrix.shape[1])
+    # fp.close()
     
-    
+    np.savetxt(outfile, out_matrix, fmt='%6.3e', header=header)
     

@@ -300,7 +300,7 @@ void rest_frame_colors() {
             
         ///// Number of filters with reasonable weights in the fit
         nfilt_weight = 0;
-        for (i=0;i<nusefilt;++i) if (temp_errf[izuse[iobj]][i] < 0.1) ++nfilt_weight;
+        for (i=0;i<nusefilt;++i) if (temp_errf[izuse[iobj]][i] < 0.1 && fnu[iobj][i] > NOT_OBS_THRESHOLD && efnu[iobj][i] > 0) ++nfilt_weight;
                         
         fprintf(fplog,"%s %8.5f %6.2f %3d %13.5e",strfmt,zrest, DM,nfilt_weight,chi2_fit);
 
