@@ -58,7 +58,7 @@ def go(mags=(15,30.1,0.5), redshifts=(0.01, 12, 0.01), coeff_file='prior_K_zmax7
     out_matrix[:,0] = z_grid
     
     for i in range(NM):
-        pz = z_grid**gamma_grid[i] * np.exp(-(z_grid/z0_grid[i])**(gamma_grid[i]))
+        pz = z_grid**gamma_grid[i] * np.exp(-(z_grid/z0_grid[i])**gamma_grid[i])
         pz /= np.trapz(pz, z_grid)
         plt.plot(z_grid, pz, label=mag_grid[i])
         out_matrix[:,i+1] = pz
