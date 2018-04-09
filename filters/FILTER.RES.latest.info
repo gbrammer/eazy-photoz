@@ -329,4 +329,6 @@
   329 herschel/pacs/100 lambda_c= 1.02007e+06
   330 herschel/pacs/160 lambda_c= 1.65356e+06
   331 herschel/spire/200 lambda_c= 2.50429e+06
-  
+  332 herschel/spire/350 lambda_c= 3.51368e+06  
+  333 herschel/spire/500 lambda_c= 5.07844e+06
+ 
