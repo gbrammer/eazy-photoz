@@ -305,18 +305,28 @@
   305 MOSFIRE/H1_center_corr.txt lambda_c= 1.5558e+04 AB-Vega=1.279
   306 MOSFIRE/H2_center_corr.txt lambda_c= 1.7089e+04 AB-Vega=1.423
   307 HST/wfpc2,1,f675w,f675w,a2d7.dat lambda_c= 6.7175e+03 AB-Vega=0.246
- 308 niriss-f090w primary_area=244789.2cm2 ABZP=28.2710 pivot=0.9009um
- 309 niriss-f115w primary_area=244789.2cm2 ABZP=28.3295 pivot=1.1495um
- 310 niriss-f150w primary_area=244789.2cm2 ABZP=28.1836 pivot=1.4929um
- 311 niriss-f200w primary_area=244789.2cm2 ABZP=28.2602 pivot=1.9926um
- 312 niriss-f140m primary_area=244789.2cm2 ABZP=27.3944 pivot=1.4035um
- 313 niriss-f158m primary_area=244789.2cm2 ABZP=27.4494 pivot=1.5857um
- 314 g_HSC.txt http://cosmos.astro.caltech.edu/page/filterset  lambda_c=4798.2 AB-Vega=-0.089
- 315 r_HSC.txt http://cosmos.astro.caltech.edu/page/filterset  lambda_c=6218.4 AB-Vega=0.223
- 316 i_HSC.txt http://cosmos.astro.caltech.edu/page/filterset  lambda_c=7727.0 AB-Vega=0.468
- 317 z_HSC.txt http://cosmos.astro.caltech.edu/page/filterset  lambda_c=8908.2 AB-Vega=0.522
- 318 y_HSC.txt http://cosmos.astro.caltech.edu/page/filterset  lambda_c=9775.1 AB-Vega=0.740
- 319 NB816_HSC.txt https://www.subarutelescope.org/Observing/Instruments/HSC/sensitivity.html  lambda_c=8176.7 AB-Vega=0.476
- 320 NB921_HSC.txt https://www.subarutelescope.org/Observing/Instruments/HSC/sensitivity.html  lambda_c=9213.2 AB-Vega=0.647
- 321 VISTA-NB118 atm  lambda_c= 1.1909e+04  AB-Vega=1.037
- 322 COSMOS/SUBARU_filter_NB711.txt     lambda_c=7.1201e+03  AB-Vega=0.874
+  308 niriss-f090w primary_area=244789.2cm2 ABZP=28.2710 pivot=0.9009um
+  309 niriss-f115w primary_area=244789.2cm2 ABZP=28.3295 pivot=1.1495um
+  310 niriss-f150w primary_area=244789.2cm2 ABZP=28.1836 pivot=1.4929um
+  311 niriss-f200w primary_area=244789.2cm2 ABZP=28.2602 pivot=1.9926um
+  312 niriss-f140m primary_area=244789.2cm2 ABZP=27.3944 pivot=1.4035um
+  313 niriss-f158m primary_area=244789.2cm2 ABZP=27.4494 pivot=1.5857um
+  314 g_HSC.txt http://cosmos.astro.caltech.edu/page/filterset  lambda_c=4798.2 AB-Vega=-0.089
+  315 r_HSC.txt http://cosmos.astro.caltech.edu/page/filterset  lambda_c=6218.4 AB-Vega=0.223
+  316 i_HSC.txt http://cosmos.astro.caltech.edu/page/filterset  lambda_c=7727.0 AB-Vega=0.468
+  317 z_HSC.txt http://cosmos.astro.caltech.edu/page/filterset  lambda_c=8908.2 AB-Vega=0.522
+  318 y_HSC.txt http://cosmos.astro.caltech.edu/page/filterset  lambda_c=9775.1 AB-Vega=0.740
+  319 NB816_HSC.txt https://www.subarutelescope.org/Observing/Instruments/HSC/sensitivity.html  lambda_c=8176.7 AB-Vega=0.476
+  320 NB921_HSC.txt https://www.subarutelescope.org/Observing/Instruments/HSC/sensitivity.html  lambda_c=9213.2 AB-Vega=0.647
+  321 VISTA-NB118 atm  lambda_c= 1.1909e+04  AB-Vega=1.037
+  322 COSMOS/SUBARU_filter_NB711.txt     lambda_c=7.1201e+03  AB-Vega=0.874
+  323 scuba2/450 lambda_c= 4496191.778981589
+  324 scuba2/850 lambda_c= 8543544.971510125
+  325 mips/24 lambda_c= 2.37589e+05
+  326 mips/70 lambda_c= 7.19852e+05
+  327 mips/160 lambda_c= 1.56427e+06
+  328 herschel/pacs/70 lambda_c= 7.15415e+05
+  329 herschel/pacs/100 lambda_c= 1.02007e+06
+  330 herschel/pacs/160 lambda_c= 1.65356e+06
+  331 herschel/spire/200 lambda_c= 2.50429e+06
+  
