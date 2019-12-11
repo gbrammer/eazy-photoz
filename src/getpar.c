@@ -143,6 +143,7 @@ void assign_par(int i, char *arg) {
   case 24:
     if (*arg=='n' || *arg=='N' || *arg=='0') APPLY_IGM = 0;
     else if (*arg=='y' || *arg=='Y' || *arg=='1') APPLY_IGM = 1;
+    else if (*arg=='2' || *arg=='x') APPLY_IGM = 2;
     else {
       fprintf(stderr,"\n APPLY_IGM:  bad value, %s\n",arg);
       exit(1);
@@ -365,7 +366,7 @@ void getparams()
      {"TEMPLATE_COMBOS",0,"a","Template combination options: "},// 21
      {"TEMP_ERR_A2",0,"0.50","Template error amplitude"}, // 22
      {"SYS_ERR",0,"0.00","Systematic flux error (% of flux)"},                // 23
-     {"APPLY_IGM",0,"y","Apply Madau 1995 IGM absorption"},                   // 24
+     {"APPLY_IGM",0,"y","Apply IGM absorption (1/y=Inoue2014, 2/x=Madau1995)"},                   // 24
      {"FIX_ZSPEC",0,"n","Fix redshift to catalog zspec"},                     // 25
      {"APPLY_PRIOR",0,"y","Apply apparent magnitude prior"},                          // 26
      {"PRIOR_FILE",0,"templates/prior_K_extend.dat","File containing prior grid"},       // 27
@@ -390,8 +391,8 @@ void getparams()
      {"READ_ZBIN",0,"n","Get redshifts from OUTPUT_DIRECTORY/MAIN_OUTPUT_FILE.zbin rather than fitting them."}, //46
      {"RF_PADDING",0,"1000.","Padding (Ang) for choosing observed filters around specified rest-frame pair."}, //47
      {"RF_ERRORS",0,"n","Compute RF color errors from p(z)"}, //48
-     {"LAF_FILE",0,"templates/LAFcoeff.txt","File containing the Lyman alpha forest data from Inoue"}, //49
-     {"DLA_FILE",0,"templates/DLAcoeff.txt","File containing the damped Lyman absorber data from Inoue"} //50
+     {"LAF_FILE",0,"templates/LAFcoeff.txt","File containing the Lyman alpha forest data from Inoue(2014)"}, //49
+     {"DLA_FILE",0,"templates/DLAcoeff.txt","File containing the damped Lyman absorber data from Inoue(2014)"} //50
    };
 
 
@@ -576,7 +577,7 @@ void printparams_logfile(FILE *fp)
      {"TEMPLATE_COMBOS",0,"a","Template combination options: "},// 21
      {"TEMP_ERR_A2",0,"0.50","Template error amplitude"}, // 22
      {"SYS_ERR",0,"0.00","Systematic flux error (% of flux)"},                // 23
-     {"APPLY_IGM",0,"y","Apply Madau 1995 IGM absorption"},                   // 24
+     {"APPLY_IGM",0,"y","Apply IGM absorption (1/y=Inoue2014, 2/x=Madau1995)"},                   // 24
      {"FIX_ZSPEC",0,"n","Fix redshift to catalog zspec"},                     // 25
      {"APPLY_PRIOR",0,"y","Apply apparent magnitude prior"},                          // 26
      {"PRIOR_FILE",0,"templates/prior_K_extend.dat","File containing prior grid"},       // 27
@@ -601,8 +602,8 @@ void printparams_logfile(FILE *fp)
      {"READ_ZBIN",0,"n","Get redshifts from OUTPUT_DIRECTORY/MAIN_OUTPUT_FILE.zbin rather than fitting them."}, //46
      {"RF_PADDING",0,"1000.","Padding (Ang) for choosing observed filters around specified rest-frame pair."}, //47
      {"RF_ERRORS",0,"n","Compute RF color errors from p(z)"}, //48
-     {"LAF_FILE",0,"templates/LAFcoeff.txt","File containing the Lyman alpha forest data from Inoue"}, //49
-     {"DLA_FILE",0,"templates/DLAcoeff.txt","File containing the damped Lyman absorber data from Inoue"} //50
+     {"LAF_FILE",0,"templates/LAFcoeff.txt","File containing the Lyman alpha forest data from Inoue(2014)"}, //49
+     {"DLA_FILE",0,"templates/DLAcoeff.txt","File containing the damped Lyman absorber data from Inoue(2014)"} //50
    };
 
 

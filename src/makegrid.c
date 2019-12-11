@@ -1892,7 +1892,7 @@ void makegrid(double **tempfin, double ***tempfiltout, int ntemp_in_file, int zp
 
             ///// Full Madau, to Lyman limit
             //fulligm(igm_corr,ztryi);
-           
+            
             for (j=0;j<NTEMPL;++j) {
 
                 //// Again, force z=0 for the first entry of the rest-frame template grid
@@ -1902,26 +1902,32 @@ void makegrid(double **tempfin, double ***tempfiltout, int ntemp_in_file, int zp
                 //// integrate in f_lambda
                 //flamtofnu = 1.;
                 
-                //// Madau 1995 IGM prescription
+                if (APPLY_IGM > 1) {
+                    //// Madau 1995 IGM prescription
                 
-                // if ((templ[j]>=912.0)&&(templ[j]<1026.0)) 
-                //     igm_corr[j] = 1.0 - dbsum[i];
-                // else 
-                //     igm_corr[j] = 1.0;
-                // 
-                // //// lyman limit
-                // if ((templ[j]<912.0)) igm_corr[j] = 0. ;
-                //       
-                // if ((templ[j]>=1026.0)&&(templ[j]<1216.0))
-                //     igm_corr[j] = 1.0 - dasum[i];
+                    if ((templ[j]>=912.0)&&(templ[j]<1026.0)) 
+                        igm_corr[j] = 1.0 - dbsum[i];
+                    else 
+                        igm_corr[j] = 1.0;
+                    
+                    //// lyman limit
+                    if ((templ[j]<912.0)) igm_corr[j] = 0. ;
+                          
+                    if ((templ[j]>=1026.0)&&(templ[j]<1216.0))
+                        igm_corr[j] = 1.0 - dasum[i];
                 
-                //// Use Inoue et al. 2014 parameterization                
-                if ((templ[j]<1216.0)) {
-                    tau = tLSLAF(ztryi,templz[j]) + tLCLAF(ztryi,templz[j]);
-                    tau += tLSDLA(ztryi,templz[j]) + tLCDLA(ztryi,templz[j]);                
-                    igm_corr[j] = exp(-tau);                    
-                } else igm_corr[j] = 1.;
-                
+                } else {
+                    //// Use Inoue et al. 2014 parameterization                
+                    if ((templ[j]<1216.0)) {
+                        tau = tLSLAF(ztryi,templz[j]);
+                        tau += tLCLAF(ztryi,templz[j]);
+                        tau += tLSDLA(ztryi,templz[j]);
+                        tau += tLCDLA(ztryi,templz[j]);                
+                        igm_corr[j] = exp(-tau);                    
+                    } else {
+                        igm_corr[j] = 1.;
+                    }
+                }
                 // if ((templ[j]<912.0)) {
                 //     tau = tLCLAF(ztryi, templz[j]) + tLCDLA(ztryi, templz[j]);                
                 //     igm_corr[j] = exp(-tau);
@@ -2372,10 +2378,14 @@ void init() {
         getigmfactors(ztry[i],&dasum[i],&dbsum[i]);
         //printf("igm: %lf %le %le\n",ztry[i],dasum[i],dbsum[i]);
     }
-    printf("\n\nREAD INOUE(2014)");
-    read_Inoue_coeffs();
-    printf("[10] %f  %e %e %e    %e %e\n\n", lam1[10], ALAF1[10], ALAF2[10], ALAF3[10], ADLA1[10], ADLA2[10]);
-
+    if (APPLY_IGM == 1) {
+        fprintf(stdout, "\nREAD INOUE(2014) IGM coefficients.\n\n");
+        read_Inoue_coeffs();
+        printf("[10] %f  %e %e %e    %e %e\n\n", lam1[10], ALAF1[10], ALAF2[10], ALAF3[10], ADLA1[10], ADLA2[10]);
+    } else {
+        fprintf(stdout, "\nUse Madau (1995) IGM prescription.\n\n");
+    }
+    
     /////////////
     //// Templates for photo-zs
     /////////////
