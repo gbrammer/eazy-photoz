@@ -1560,7 +1560,7 @@ void getigmfactors (double ztarg, double *daz, double *dbz)
     
     //// Extend further down lyman series
     int i;
-    double ll[16], aa[16], madau_sum, tau;
+    double ll[16], aa[16], tau;
     ll[0] = 1216.0; aa[0] =   3.6e-03;
     ll[1] = 1026.0; aa[1] =   1.7e-03;
     ll[2] = 972.8; aa[2] =   1.2e-03;
@@ -1901,25 +1901,31 @@ void makegrid(double **tempfin, double ***tempfiltout, int ntemp_in_file, int zp
                 
                 //// integrate in f_lambda
                 //flamtofnu = 1.;
-                                
-                if ((templ[j]>=912.0)&&(templ[j]<1026.0)) 
-                    igm_corr[j] = 1.0 - dbsum[i];
-                else 
-                    igm_corr[j] = 1.0;
                 
-                //// lyman limit
-                if ((templ[j]<912.0)) igm_corr[j] = 0. ;
-                      
-                if ((templ[j]>=1026.0)&&(templ[j]<1216.0))
-                    igm_corr[j] = 1.0 - dasum[i];
+                //// Madau 1995 IGM prescription
                 
-                //// Use Inoue et al. 2014 parameterization
-                //tau = tLSLAF(ztryi, templz[j]) + tLCLAF(ztryi, templz[j]) + tLSDLA(ztryi, templz[j]) + tLCDLA(ztryi, templz[j]);                
-                //igm_corr[j] = exp(-tau);
-                if ((templ[j]<912.0)) {
-                    tau = tLCLAF(ztryi, templz[j]) + tLCDLA(ztryi, templz[j]);                
-                    igm_corr[j] = exp(-tau);
-                }
+                // if ((templ[j]>=912.0)&&(templ[j]<1026.0)) 
+                //     igm_corr[j] = 1.0 - dbsum[i];
+                // else 
+                //     igm_corr[j] = 1.0;
+                // 
+                // //// lyman limit
+                // if ((templ[j]<912.0)) igm_corr[j] = 0. ;
+                //       
+                // if ((templ[j]>=1026.0)&&(templ[j]<1216.0))
+                //     igm_corr[j] = 1.0 - dasum[i];
+                
+                //// Use Inoue et al. 2014 parameterization                
+                if ((templ[j]<1216.0)) {
+                    tau = tLSLAF(ztryi,templz[j]) + tLCLAF(ztryi,templz[j]);
+                    tau += tLSDLA(ztryi,templz[j]) + tLCDLA(ztryi,templz[j]);                
+                    igm_corr[j] = exp(-tau);                    
+                } else igm_corr[j] = 1.;
+                
+                // if ((templ[j]<912.0)) {
+                //     tau = tLCLAF(ztryi, templz[j]) + tLCDLA(ztryi, templz[j]);                
+                //     igm_corr[j] = exp(-tau);
+                // }
                     
                 igm_corr[j] *= flamtofnu;
       
