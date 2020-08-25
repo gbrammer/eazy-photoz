@@ -1,4 +1,4 @@
-# wave flam
+# wave flux
 #  wave: A, flux: flam 
 # normalized to unit energy
 9.10000e+01 1.39144e-57

@@ -1,6 +1,21 @@
 """
 Fit Georgios' templates with the models from 
 https://www.ias.u-psud.fr/DUSTEM/grids.html
+
+
+http://georgiosmagdis.pbworks.com/w/page/59019974/SED%20Templates
+
+U1 :0-0.025
+U2: 0.05-0.275
+U3: 0.3-0.6250
+U4:0.65 -0.975
+U5: 1.0-1.30
+U6: 1.325-1.725
+U7: 1.75-2.25
+U8: 2.27-3.0
+(9 z > 3)
+(10 GN20 starburst)
+
 """
 
 def fit_gm():
