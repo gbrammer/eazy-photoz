@@ -401,3 +401,4 @@
   401   650 jwst_miri_f1800w v20171115151044 lambda_c= 1.7970e+05
   402   650 jwst_miri_f2100w v20171115151044 lambda_c= 2.0801e+05
   403   650 jwst_miri_f2550w v20171115151044 lambda_c= 2.5230e+05
+  404   264 wfc3,ir,f139m lambda_c= 1.38376e+04
