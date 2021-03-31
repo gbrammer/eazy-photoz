@@ -1,2 +1,3 @@
 inputs/OUTPUT*
 inputs/zphot.param*
+*__pycache__*
