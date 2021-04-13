@@ -1,5 +1,6 @@
 
-:warning: This code is largely superseded by the [eazy-py module](https://github.com/gbrammer/eazy-py), though the template and filter files are still stored here. 
+:warning: :warning: 
+This code is largely superseded by the [eazy-py module](https://github.com/gbrammer/eazy-py), though the template and filter throughput files are still stored here. 
 
 # EAZY
 *(Exported from code.google.com/p/eazy-photoz, April 20, 2015.)*
