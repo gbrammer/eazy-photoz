@@ -405,3 +405,5 @@
   405   533 hst/wfc3,uvis2,f621m lambda_c= 6.21894e+03
   406   605 Gemini F2 K-blue 4.3mm H20 & 1.5am mirrors + QE lambda_c= 2.0742e+04 AB-Vega= 1.767 w95=2294.5
   407   605 Gemini F2 K-red  4.3mm H20 & 1.5am mirrors + QE lambda_c= 2.3046e+04 AB-Vega= 1.959 w95=2593.2
+  408   421 CFHT-megaprime-u9301-Betoule2013 lambda_c= 3.8097e+03 AB-Vega= 0.361
+  409   106 CFHT-megaprime-u9302-atmos+inst lambda_c= 3.6410e+03 AB-Vega= 0.705
