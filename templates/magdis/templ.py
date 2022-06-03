@@ -21,6 +21,7 @@ U8: 2.27-3.0
 def fit_gm():
     import numpy as np
     import matplotlib.pyplot as plt
+    from scipy.optimize import nnls
     
     lnorm = 20
     
