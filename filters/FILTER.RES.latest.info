@@ -407,3 +407,7 @@
   407   605 Gemini F2 K-red  4.3mm H20 & 1.5am mirrors + QE lambda_c= 2.3046e+04 AB-Vega= 1.959 w95=2593.2
   408   421 CFHT-megaprime-u9301-Betoule2013 lambda_c= 3.8097e+03 AB-Vega= 0.361
   409   106 CFHT-megaprime-u9302-atmos+inst lambda_c= 3.6410e+03 AB-Vega= 0.705
+410 551  Euclid_VIS.vis.dat lambda_c= 7.10338e+03 SPV02-from-SVO-service-03.06.22
+411 317  Euclid_NISP.Y.dat lambda_c= 1.08311e+04 SPV02-from-SVO-service-03.06.22
+412 452  Euclid_NISP.J.dat lambda_c= 1.36354e+04 SPV02-from-SVO-service-03.06.22
+413 568  Euclid_NISP.H.dat lambda_c= 1.76796e+04 SPV02-from-SVO-service-03.06.22
