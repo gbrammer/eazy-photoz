@@ -411,3 +411,6 @@
 411 317  Euclid_NISP.Y.dat lambda_c= 1.08311e+04 SPV02-from-SVO-service-03.06.22
 412 452  Euclid_NISP.J.dat lambda_c= 1.36354e+04 SPV02-from-SVO-service-03.06.22
 413 568  Euclid_NISP.H.dat lambda_c= 1.76796e+04 SPV02-from-SVO-service-03.06.22
+414 501  synthetic_u lambda_c= 2900. from-Antwi-Danso-2022-arXiv-2207.07170
+415 501  synthetic_g lambda_c= 4500. from-Antwi-Danso-2022-arXiv-2207.07170
+416 1101 synthetic_i lambda_c= 7500. from-Antwi-Danso-2022-arXiv-2207.07170
