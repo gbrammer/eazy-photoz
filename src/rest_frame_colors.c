@@ -396,13 +396,13 @@ void rest_frame_colors() {
             interpol(0.16, &color_lo, colors_cumprob, colors_sort, NZ, &icolor);
             interpol(0.84, &color_hi, colors_cumprob, colors_sort, NZ, &icolor);
             
-            fprintf(fplog, " %.3f  %.3f", color_lo, color_hi);
+            fprintf(fplog, " %13.5e  %13.5e", color_lo, color_hi);
             
             icolor=0;
             interpol(0.025, &color_lo, colors_cumprob, colors_sort, NZ, &icolor);
             interpol(0.975, &color_hi, colors_cumprob, colors_sort, NZ, &icolor);
             
-            fprintf(fplog, " %.3f  %.3f", color_lo, color_hi);
+            fprintf(fplog, " %13.5e  %13.5e", color_lo, color_hi);
             
             // printf("\n\nColor: %.2f (%.2f  -- %.2f) / tot:%.2f\n\n", 
             //        -2.5*log10(temp_flux_filt1/temp_flux_filt2), color_lo, 
