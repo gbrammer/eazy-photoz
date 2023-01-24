@@ -1,3 +1,6 @@
 inputs/OUTPUT*
 inputs/zphot.param*
 *__pycache__*
+
+templates/CarnallTemplates/
+templates/xspline_templates/
