@@ -15,3 +15,9 @@ This template is interpreted as a stellar mass / SFR of zero when computing
 those parameters with eazy, so be wary of those numbers for sources where it
 dominates the best-fit.
 
+`j0647agn+torus.fits` is a template generated to replicate the remarkable NIRSpec prism spectrum
+of the z=4.50 source shown below (M. Killi, in prep), which is fairly flat in the rest UV,
+has strong Ly&alpha;, [OIII] and H&alpha; emission lines, and a red continuum, perhaps consistent
+with an obscured AGN torus.  The spectrum is from GO-1433 (D. Coe) in the MACS0647 lensing cluster field.
+
+<img src=https://github.com/gbrammer/eazy-photoz/blob/master/templates/sfhz/macsj0647-v1_prism-clear_1433_1045.fnu.png width=60%/>
