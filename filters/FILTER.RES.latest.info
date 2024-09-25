@@ -416,3 +416,9 @@
 416 1101 synthetic_i lambda_c= 7500. from-Antwi-Danso-2022-arXiv-2207.07170
 417 1019 jwst_nirspec_f110w_trans.fits lambda_c= 1.15576e+04 JDox-Jan-2023
 418 270  jwst_nirspec_f140x_trans.fits lambda_c= 1.38014e+04 JDox-Jan-2023
+419 8501 lsst_total_u.dat lambda_c= 3.71646e+03 from-https://github.com/lsst/throughputs
+420 8501 lsst_total_g.dat lambda_c= 4.78699e+03 from-https://github.com/lsst/throughputs
+421 8501 lsst_total_r.dat lambda_c= 6.20755e+03 from-https://github.com/lsst/throughputs
+422 8501 lsst_total_i.dat lambda_c= 7.54891e+03 from-https://github.com/lsst/throughputs
+423 8501 lsst_total_z.dat lambda_c= 8.67379e+03 from-https://github.com/lsst/throughputs
+424 8501 lsst_total_y.dat lambda_c= 9.74625e+03 from-https://github.com/lsst/throughputs
