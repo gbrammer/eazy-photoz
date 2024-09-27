@@ -1,0 +1,15 @@
+1 templates/sfhz/corr_sfhz_13_bin0_av0.01.fits 1.0
+5 templates/sfhz/corr_sfhz_13_bin1_av0.01.fits 1.0
+9 templates/sfhz/corr_sfhz_13_bin2_av0.01.fits 1.0
+12 templates/sfhz/corr_sfhz_13_bin3_av0.01.fits 1.0
+2 templates/sfhz/corr_sfhz_13_bin0_av0.25.fits 1.0
+6 templates/sfhz/corr_sfhz_13_bin1_av0.25.fits 1.0
+3 templates/sfhz/corr_sfhz_13_bin0_av0.50.fits 1.0
+7 templates/sfhz/corr_sfhz_13_bin1_av0.50.fits 1.0
+10 templates/sfhz/corr_sfhz_13_bin2_av0.50.fits 1.0
+13 templates/sfhz/corr_sfhz_13_bin3_av0.50.fits 1.0
+4 templates/sfhz/corr_sfhz_13_bin0_av1.00.fits 1.0
+8 templates/sfhz/corr_sfhz_13_bin1_av1.00.fits 1.0
+11 templates/sfhz/corr_sfhz_13_bin2_av1.00.fits 1.0
+14 templates/sfhz/fsps_4590.fits 1.0
+15 templates/sfhz/j0647agn+torus.fits 1.0
