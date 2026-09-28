@@ -422,3 +422,11 @@
 422 8501 lsst_total_i.dat lambda_c= 7.54891e+03 from-https://github.com/lsst/throughputs
 423 8501 lsst_total_z.dat lambda_c= 8.67379e+03 from-https://github.com/lsst/throughputs
 424 8501 lsst_total_y.dat lambda_c= 9.74625e+03 from-https://github.com/lsst/throughputs
+425 314 roman_f062_sci02 lambda_c= 6.2803e+03 AB-Vega= 0.134 w95=2607.4  v20240301
+426 254 roman_f087_sci02 lambda_c= 8.7428e+03 AB-Vega= 0.493 w95=2093.3  v20240301
+427 302 roman_f106_sci02 lambda_c= 1.0634e+04 AB-Vega= 0.655 w95=2520.7  v20240301
+428 359 roman_f129_sci02 lambda_c= 1.2869e+04 AB-Vega= 0.945 w95=3087.7  v20240301
+429 444 roman_f158_sci02 lambda_c= 1.5836e+04 AB-Vega= 1.288 w95=3781.6  v20240301
+430 376 roman_f184_sci02 lambda_c= 1.8420e+04 AB-Vega= 1.550 w95=3052.4  v20240301
+431 1114 roman_f146_sci02 lambda_c= 1.4366e+04 AB-Vega= 0.943 w95=10131.2  v20240301
+432 404 roman_f213_sci02 lambda_c= 2.1356e+04 AB-Vega= 1.812 w95=3319.8  v20240301
